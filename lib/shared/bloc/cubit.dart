@@ -6,6 +6,7 @@ import 'package:gdg_organizers_app/screens/settings_screen.dart';
 import 'package:gdg_organizers_app/shared/bloc/states.dart';
 
 import '../../screens/tasks_screen.dart';
+import '../components/task_widget.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
@@ -23,7 +24,7 @@ class AppCubit extends Cubit<AppStates> {
   List<String> appBarTitles = [
     'Home',
     'Tasks',
-    'UpComming Events',
+    'UpComing Events',
     'Settings',
   ];
   void changeIndex(int index) {
