@@ -10,6 +10,17 @@ final kBoxDecorationForTask = BoxDecoration(
   ]),
 );
 const kBoxDecorationForEvents = BoxDecoration(
+  boxShadow: [
+    BoxShadow(
+      color: Color(0xff4dea4334),
+      blurRadius: 4,
+      spreadRadius: 5.0,
+      offset: Offset(
+        0,
+        3.0,
+      ),
+    )
+  ],
   gradient: LinearGradient(colors: [
     Color(0xFF0D9D58),
     Color(0xFF4285F4),
