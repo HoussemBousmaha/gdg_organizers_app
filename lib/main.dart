@@ -22,7 +22,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
+          primaryColor: Color(0xFF4285F4),
           fontFamily: 'OpenSans',
+          scaffoldBackgroundColor: Colors.white,
         ),
         debugShowCheckedModeBanner: false,
         home: LayoutScreen(),

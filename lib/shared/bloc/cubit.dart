@@ -19,6 +19,13 @@ class AppCubit extends Cubit<AppStates> {
     EventsScreen(),
     SettingsScreen(),
   ];
+
+  List<String> appBarTitles = [
+    'Home',
+    'Tasks',
+    'UpComming Events',
+    'Settings',
+  ];
   void changeIndex(int index) {
     currentIndex = index;
     emit(AppBottomNavBarChangeState());
