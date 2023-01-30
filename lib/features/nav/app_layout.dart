@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:gdg_organizers_app/shared/bloc/cubit.dart';
-import 'package:gdg_organizers_app/shared/bloc/states.dart';
+import 'package:gdg_organizers_app/features/nav/bloc/cubit.dart';
+import 'package:gdg_organizers_app/features/nav/bloc/states.dart';
 
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-import '../shared/icon_broken.dart';
+import '../../constants/icon_broken.dart';
 
 class LayoutScreen extends StatelessWidget {
   const LayoutScreen({Key? key}) : super(key: key);
@@ -14,10 +14,10 @@ class LayoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var isDialOpen = ValueNotifier<bool>(false);
-    return BlocConsumer<AppCubit, AppStates>(
+    return BlocConsumer<NavigationCubit, NavigationStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        AppCubit appCubit = AppCubit.get(context);
+        NavigationCubit appCubit = NavigationCubit.get(context);
         return WillPopScope(
           onWillPop: () async {
             if (isDialOpen.value) {
