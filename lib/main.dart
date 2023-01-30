@@ -4,6 +4,8 @@ import 'package:gdg_organizers_app/features/nav/app_layout.dart';
 import 'package:gdg_organizers_app/logic/bloc_observer.dart';
 import 'package:gdg_organizers_app/features/nav/bloc/cubit.dart';
 
+import 'models/user/user.dart';
+
 void main() {
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
@@ -14,6 +16,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
