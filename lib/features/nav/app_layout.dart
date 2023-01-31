@@ -94,6 +94,8 @@ class LayoutScreen extends StatelessWidget {
                 const SizedBox(
                   width: 10,
                 ),
+                
+
               ],
             ),
             body: appCubit.screens[appCubit.currentIndex],

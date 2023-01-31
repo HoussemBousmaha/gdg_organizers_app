@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gdg_organizers_app/constants/theme.dart';
+import 'package:gdg_organizers_app/features/auth/screens/authscreen.dart';
 import 'package:gdg_organizers_app/features/nav/app_layout.dart';
 import 'package:gdg_organizers_app/logic/bloc_observer.dart';
 import 'package:gdg_organizers_app/features/nav/bloc/cubit.dart';
@@ -16,7 +18,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -24,13 +25,9 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        theme: ThemeData(
-          primaryColor: Color(0xFF4285F4),
-          fontFamily: 'OpenSans',
-          scaffoldBackgroundColor: Colors.white,
-        ),
+        theme: AppTheme.light(),
         debugShowCheckedModeBanner: false,
-        home: LayoutScreen(),
+        home: AuthScreen(),
       ),
     );
   }
