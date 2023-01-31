@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../const.dart';
+import '../../../constants/const.dart';
 
 class EventWidget extends StatelessWidget {
   const EventWidget({Key? key}) : super(key: key);
