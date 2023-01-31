@@ -384,34 +384,93 @@ class CustomCircularLoader extends CustomPainter {
   final AnimationController controller;
   final Animation<double> animation;
   var pi = math.pi;
+  var _epsilon = 0.000001;
+
   @override
   void paint(Canvas canvas, Size size) {
     final rect = Offset.zero & size;
     final gradient = SweepGradient(
-      tileMode: TileMode.decal,
-      startAngle: -20,
-      endAngle: 2 * pi,
-      colors: const [
-        Color(0xffEAEFF5),
+      // tileMode: TileMode.clamp,
+      startAngle: 0,
+      endAngle: pi + (2 * pi),
+      colors: [
         kBlue,
+        kBlue.withOpacity(0.9),
+        kBlue.withOpacity(0.8),
+        kBlue.withOpacity(0.7),
+        kBlue.withOpacity(0.6),
+        kBlue.withOpacity(0.5),
+        kBlue.withOpacity(0.3),
+        kBlue.withOpacity(0.2),
+        kBlue.withOpacity(0.2),
+        kBlue.withOpacity(0.1),
+        Color(0xffEAEFF5),
       ],
       stops: const [
+        0.0,
+        0.1,
         0.2,
-        1,
-          
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0,
       ],
-      transform: GradientRotation(2 * pi * animation.value),
+      transform: GradientRotation(((2 * pi) - _epsilon) * animation.value),
     );
-    const _epsilon = 0.001;
+    final backgroundGradient = SweepGradient(
+        tileMode: TileMode.decal,
+        startAngle: 0,
+        endAngle: 2 * pi,
+        colors: [
+          Color(0xffEAEFF5),
+          kBlue.withOpacity(0.1),
+          kBlue.withOpacity(0.2),
+          kBlue.withOpacity(0.4),
+          kBlue.withOpacity(0.5),
+          kBlue.withOpacity(0.6),
+          kBlue.withOpacity(0.7),
+          kBlue.withOpacity(0.8),
+          kBlue.withOpacity(0.9),
+        ],
+        stops: const [
+          0.0,
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+        ],
+        transform: GradientRotation(((2 * pi)) * animation.value));
+    final backgroundPaint = Paint()
+      ..shader = backgroundGradient.createShader(rect)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 4
+      ..strokeCap = StrokeCap.round;
     final paint = Paint()
-      ..shader = gradient.createShader(rect)
       ..strokeWidth = 4
       ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round;
+      ..shader = gradient.createShader(rect)
+      ..strokeCap = StrokeCap.round
+      ..color = kBlue
+      ..strokeJoin = StrokeJoin.round;
     canvas.drawArc(
       rect,
       0,
-      pi * 2 * animation.value + _epsilon,
+      pi * 2,
+      false,
+      backgroundPaint,
+    );
+    canvas.drawArc(
+      rect,
+      animation.value * 2 * pi,
+      0.72,
       false,
       paint,
     );
