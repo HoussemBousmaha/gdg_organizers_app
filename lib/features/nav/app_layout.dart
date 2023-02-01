@@ -7,6 +7,7 @@ import 'package:gdg_organizers_app/features/nav/bloc/states.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import '../../constants/icon_broken.dart';
+import '../../shared/widgets/bug_description.dart';
 import '../../shared/widgets/logout_pop_up.dart';
 
 class LayoutScreen extends StatelessWidget {
@@ -74,9 +75,9 @@ class LayoutScreen extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (context) {
-                        return AlertDialog(
+                        return const AlertDialog(
                           contentPadding: EdgeInsets.zero,
-                          content: LogoutPopUp(),
+                          content: BugDescription(),
                         );
                       },
                     );
