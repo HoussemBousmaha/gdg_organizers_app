@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gdg_organizers_app/features/events/widgets/event_widget.dart';
 
-import '../tasks/widgets/task_widget.dart';
-import '../../constants/const.dart';
-import '../../constants/icon_broken.dart';
-
 class EventsScreen extends StatelessWidget {
   const EventsScreen({Key? key}) : super(key: key);
 

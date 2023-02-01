@@ -7,6 +7,7 @@ import 'package:gdg_organizers_app/features/nav/bloc/states.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import '../../constants/icon_broken.dart';
+import '../../shared/widgets/logout_pop_up.dart';
 
 class LayoutScreen extends StatelessWidget {
   const LayoutScreen({Key? key}) : super(key: key);
@@ -69,7 +70,17 @@ class LayoutScreen extends StatelessWidget {
               ),
               actions: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          contentPadding: EdgeInsets.zero,
+                          content: LogoutPopUp(),
+                        );
+                      },
+                    );
+                  },
                   child: CircleAvatar(
                     backgroundColor: Color(0xFF4285F4),
                     child: Icon(
@@ -94,8 +105,6 @@ class LayoutScreen extends StatelessWidget {
                 const SizedBox(
                   width: 10,
                 ),
-                
-
               ],
             ),
             body: appCubit.screens[appCubit.currentIndex],
