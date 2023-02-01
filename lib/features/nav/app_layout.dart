@@ -8,6 +8,7 @@ import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import '../../constants/icon_broken.dart';
 import '../../shared/widgets/bug_description.dart';
+import '../../shared/widgets/feedback.dart';
 import '../../shared/widgets/logout_pop_up.dart';
 
 class LayoutScreen extends StatelessWidget {
@@ -77,7 +78,7 @@ class LayoutScreen extends StatelessWidget {
                       builder: (context) {
                         return const AlertDialog(
                           contentPadding: EdgeInsets.zero,
-                          content: BugDescription(),
+                          content: FeedBackWidget(),
                         );
                       },
                     );
