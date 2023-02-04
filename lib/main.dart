@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: AppTheme.light(),
         debugShowCheckedModeBanner: false,
-        home: Loading(),
+        home: LayoutScreen(),
       ),
     );
   }
