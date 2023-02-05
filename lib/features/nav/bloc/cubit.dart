@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gdg_organizers_app/features/events/events_screen.dart';
 import 'package:gdg_organizers_app/features/home/home_screen.dart';
-import 'package:gdg_organizers_app/features/settings/settings_screen.dart';
+import 'package:gdg_organizers_app/features/settings/screens/settings_screen.dart';
 import 'package:gdg_organizers_app/features/nav/bloc/states.dart';
 
 import '../../tasks/tasks_screen.dart';

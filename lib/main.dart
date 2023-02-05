@@ -4,10 +4,13 @@ import 'package:gdg_organizers_app/constants/theme.dart';
 import 'package:gdg_organizers_app/features/auth/cubit/animation_cubit.dart';
 import 'package:gdg_organizers_app/features/auth/screens/authscreen.dart';
 import 'package:gdg_organizers_app/features/nav/app_layout.dart';
+import 'package:gdg_organizers_app/features/settings/screens/editprofilescreen.dart';
 import 'package:gdg_organizers_app/logic/bloc_observer.dart';
 import 'package:gdg_organizers_app/features/nav/bloc/cubit.dart';
+import 'package:gdg_organizers_app/shared/widgets/customAppBar.dart';
 
 import 'features/home/loading.dart';
+import 'logic/imagecubit.dart';
 import 'models/user/user.dart';
 
 void main() {
@@ -24,14 +27,17 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => NavigationCubit(),
-          
         ),
-        BlocProvider(create: (_) => AnimationCubit())
+        BlocProvider(create: (_) => AnimationCubit()),
+        BlocProvider(create: (context) => ImageCubit())
       ],
       child: MaterialApp(
+        routes: {
+          '/editprofile': (_) => const EditProfile(),
+        },
         theme: AppTheme.light(),
         debugShowCheckedModeBanner: false,
-        home: LayoutScreen(),
+        home: const LayoutScreen(),
       ),
     );
   }

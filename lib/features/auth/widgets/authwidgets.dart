@@ -124,16 +124,16 @@ class SVG extends StatelessWidget {
 }
 
 class CustomLoader extends StatefulWidget {
-  const CustomLoader({super.key});
+  const CustomLoader({super.key,  this.size = 20});
+ final double size ; 
 
   @override
   _CustomLoaderState createState() => _CustomLoaderState();
 }
-
 class _CustomLoaderState extends State<CustomLoader>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-
+  double get size => widget.size;
   @override
   void initState() {
     super.initState();
@@ -154,8 +154,8 @@ class _CustomLoaderState extends State<CustomLoader>
     return AnimatedBuilder(
       animation: _controller,
       builder: (_, child) => SizedBox(
-          height: 20,
-          width: 20,
+          height: size,
+          width: size,
           child: CustomPaint(
             painter: CustomCircularLoader(controller: _controller),
           )),
