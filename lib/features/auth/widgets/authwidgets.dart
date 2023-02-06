@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'dart:math' as math ;
+import 'dart:math' as math;
 
-import '../../../constants/const.dart'; 
+import '../../../constants/const.dart';
+
 class Authpic extends StatelessWidget {
   const Authpic({
     super.key,
@@ -124,12 +125,13 @@ class SVG extends StatelessWidget {
 }
 
 class CustomLoader extends StatefulWidget {
-  const CustomLoader({super.key,  this.size = 20});
- final double size ; 
+  const CustomLoader({super.key, this.size = 20});
+  final double size;
 
   @override
   _CustomLoaderState createState() => _CustomLoaderState();
 }
+
 class _CustomLoaderState extends State<CustomLoader>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
@@ -239,10 +241,10 @@ class CustomCircularLoader extends CustomPainter {
     final backgroundPaint = Paint()
       ..shader = backgroundGradient.createShader(rect)
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 4
+      ..strokeWidth = size.width / 5
       ..strokeCap = StrokeCap.round;
     final paint = Paint()
-      ..strokeWidth = 4
+      ..strokeWidth = size.width / 5
       ..style = PaintingStyle.stroke
       ..shader = gradient.createShader(rect)
       ..strokeCap = StrokeCap.round

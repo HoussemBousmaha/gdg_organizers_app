@@ -13,7 +13,7 @@ class EditProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar:  CustomAppBar(
+        appBar: CustomAppBar(
           currentIndex: 4,
           title: 'Settings',
         ),
@@ -77,13 +77,15 @@ class TextFieldTitle extends StatelessWidget {
   const TextFieldTitle({
     super.key,
     required this.title,
+    this.padding = 6,
   });
   final String title;
+  final double padding ;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
+      padding:  EdgeInsets.symmetric(vertical: padding),
       child: Text(title,
           style: const TextStyle(
               fontSize: 16, fontWeight: FontWeight.w500, color: Colors.black)),
@@ -93,19 +95,33 @@ class TextFieldTitle extends StatelessWidget {
 
 class EditUserTextField extends StatelessWidget {
   const EditUserTextField(
-      {super.key, required this.initialValue, required this.keyboardType});
-  final String initialValue;
+      {super.key,
+      this.initialValue,
+      required this.keyboardType,
+      this.data,
+      this.validator,
+      this.mapKey,
+      this.hintText});
+  final String? initialValue;
+  final String? hintText;
   final TextInputType keyboardType;
+  final Map<String, String>? data;
+  final String? Function(String?)? validator;
+  final String? mapKey;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       initialValue: initialValue,
       autocorrect: false,
+      validator: validator,
+      onSaved: (newValue) => data![mapKey!] = newValue!,
       keyboardType: keyboardType,
-      decoration: const InputDecoration(
-        contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-        border: OutlineInputBorder(
+      decoration: InputDecoration(
+        hintText: hintText,
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        border: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.black, width: 5),
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
@@ -115,8 +131,19 @@ class EditUserTextField extends StatelessWidget {
 }
 
 class PasswordTextField extends StatelessWidget {
-  const PasswordTextField({super.key, this.initialValue});
+  const PasswordTextField(
+      {super.key,
+      this.initialValue,
+      this.data,
+      this.validator,
+      this.mapKey,
+      this.hintText});
   final String? initialValue;
+  final String? hintText;
+  final Map<String, String>? data;
+  final String? Function(String?)? validator;
+  final String? mapKey;
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -127,8 +154,11 @@ class PasswordTextField extends StatelessWidget {
             autocorrect: false,
             obscureText: state,
             initialValue: initialValue,
+            onSaved: (newValue) => data!['password'] = newValue!,
+            validator: validatePassword,
             enableSuggestions: false,
             decoration: InputDecoration(
+              hintText: hintText,
               errorBorder: const OutlineInputBorder(
                 borderSide: BorderSide(
                   color: Colors.red,

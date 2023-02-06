@@ -15,9 +15,9 @@ class _GdgLogoState extends State<GdgLogo> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _controller =
-        AnimationController(vsync: this, duration: const Duration(seconds: 2))
-          ..repeat(reverse: false);
+    _controller = AnimationController(
+        vsync: this, duration: const Duration(seconds: 1, milliseconds: 500))
+      ..repeat(reverse: false);
   }
 
   @override
@@ -28,9 +28,8 @@ class _GdgLogoState extends State<GdgLogo> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        height: size,
-        width: size,
+    return SizedBox.fromSize(
+        size: Size(size, size),
         child: GdgLogoAnimation(
           controller: _controller,
         ));
@@ -83,11 +82,10 @@ class GdgLogoPainter extends CustomPainter {
 
     // this is points of the logo path  (x1,y2) (x2,y1) (x3,y2) (x4,y1) , dont change it
     // the first line is the background line and the second line is the color line
-    // gdg for once  for ever :)  
-    final double x1 = width * 1.9;
-    final double x2 = width * 0.9;
-    final double x3 = -width * 0.9;
-    final double x4 = 0.1 * width;
+    final double x1 = width * 1.7;
+    final double x2 = width * 0.7;
+    final double x3 = -width * 1.1;
+    final double x4 = -0.1 * width;
     final double y2 = height * 0.5;
     final double y1 = height;
     canvas.drawLine(Offset(x1, y2), Offset(x2, y1), paint);

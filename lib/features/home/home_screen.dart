@@ -1,4 +1,7 @@
+
 import 'package:flutter/material.dart';
+
+import '../../constants/const.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -6,7 +9,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('HomeScreen'),
+      child: TextButton(
+        child: Text('Home Screen'),
+        onPressed: ()  {
+        },
+      ),
     );
   }
 }

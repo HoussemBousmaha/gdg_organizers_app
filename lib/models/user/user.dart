@@ -10,11 +10,9 @@ class User with _$User {
     required String firstname ,
     required String lastname , 
     required String email , 
-    @Default(0000) int? phone ,
+    String? phone ,
     String? id , 
-    String? token ,
     String? password ,
-    String? fcmtoken,
     String? image,
 
 

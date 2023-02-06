@@ -39,7 +39,6 @@ dependencies:
   salomon_bottom_bar: ^3.3.1
   bloc: ^8.1.0
   flutter_bloc: ^8.1.1
-  dio: ^4.0.6
   shared_preferences: ^2.0.15
   flutter_speed_dial: ^6.2.0
   flutter_svg: ^1.1.6
@@ -48,6 +47,8 @@ dependencies:
   flutter_rating_stars: ^1.0.3+4
   cached_network_image: ^3.2.3
   image_picker: ^0.8.6+1
+  http: ^0.13.5
+  flutter_secure_storage: ^7.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

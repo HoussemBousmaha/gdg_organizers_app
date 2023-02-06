@@ -56,4 +56,34 @@ const kCornerRadius = 25.0;
 const kCornerInputRadius = 20.0;
 const kCornerButtonRadius = 8.0;
 
-    //
+
+const String uri = 'http://192.168.93.38:8080/api';
+
+
+
+String? validateEmail(String? value) {
+  String pattern =
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+  RegExp regex = RegExp(pattern);
+  if (value == null || value.isEmpty || !regex.hasMatch(value)) {
+    return 'Enter Valid Email';
+  } else {
+    return null;
+  }
+}
+
+
+  String? validatePassword(String? value) {
+    if (value == null) {
+      return 'Please enter password';
+    } else
+    if (value.isEmpty) {
+      return 'Please enter password';
+    } else {
+      if (value.length < 10) {
+        return 'Password  must be of 10 character';
+      } else {
+        return null;
+      }
+    }
+  }

@@ -23,11 +23,9 @@ mixin _$User {
   String get firstname => throw _privateConstructorUsedError;
   String get lastname => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
-  int? get phone => throw _privateConstructorUsedError;
+  String? get phone => throw _privateConstructorUsedError;
   String? get id => throw _privateConstructorUsedError;
-  String? get token => throw _privateConstructorUsedError;
   String? get password => throw _privateConstructorUsedError;
-  String? get fcmtoken => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,11 +42,9 @@ abstract class $UserCopyWith<$Res> {
       {String firstname,
       String lastname,
       String email,
-      int? phone,
+      String? phone,
       String? id,
-      String? token,
       String? password,
-      String? fcmtoken,
       String? image});
 }
 
@@ -70,9 +66,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? email = null,
     Object? phone = freezed,
     Object? id = freezed,
-    Object? token = freezed,
     Object? password = freezed,
-    Object? fcmtoken = freezed,
     Object? image = freezed,
   }) {
     return _then(_value.copyWith(
@@ -91,22 +85,14 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      token: freezed == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String?,
       password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as String?,
-      fcmtoken: freezed == fcmtoken
-          ? _value.fcmtoken
-          : fcmtoken // ignore: cast_nullable_to_non_nullable
               as String?,
       image: freezed == image
           ? _value.image
@@ -126,11 +112,9 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       {String firstname,
       String lastname,
       String email,
-      int? phone,
+      String? phone,
       String? id,
-      String? token,
       String? password,
-      String? fcmtoken,
       String? image});
 }
 
@@ -148,9 +132,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? email = null,
     Object? phone = freezed,
     Object? id = freezed,
-    Object? token = freezed,
     Object? password = freezed,
-    Object? fcmtoken = freezed,
     Object? image = freezed,
   }) {
     return _then(_$_User(
@@ -169,22 +151,14 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
       phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      token: freezed == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String?,
       password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as String?,
-      fcmtoken: freezed == fcmtoken
-          ? _value.fcmtoken
-          : fcmtoken // ignore: cast_nullable_to_non_nullable
               as String?,
       image: freezed == image
           ? _value.image
@@ -201,11 +175,9 @@ class _$_User implements _User {
       {required this.firstname,
       required this.lastname,
       required this.email,
-      this.phone = 0000,
+      this.phone,
       this.id,
-      this.token,
       this.password,
-      this.fcmtoken,
       this.image});
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
@@ -217,22 +189,17 @@ class _$_User implements _User {
   @override
   final String email;
   @override
-  @JsonKey()
-  final int? phone;
+  final String? phone;
   @override
   final String? id;
   @override
-  final String? token;
-  @override
   final String? password;
-  @override
-  final String? fcmtoken;
   @override
   final String? image;
 
   @override
   String toString() {
-    return 'User(firstname: $firstname, lastname: $lastname, email: $email, phone: $phone, id: $id, token: $token, password: $password, fcmtoken: $fcmtoken, image: $image)';
+    return 'User(firstname: $firstname, lastname: $lastname, email: $email, phone: $phone, id: $id, password: $password, image: $image)';
   }
 
   @override
@@ -247,18 +214,15 @@ class _$_User implements _User {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.token, token) || other.token == token) &&
             (identical(other.password, password) ||
                 other.password == password) &&
-            (identical(other.fcmtoken, fcmtoken) ||
-                other.fcmtoken == fcmtoken) &&
             (identical(other.image, image) || other.image == image));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, firstname, lastname, email,
-      phone, id, token, password, fcmtoken, image);
+  int get hashCode => Object.hash(
+      runtimeType, firstname, lastname, email, phone, id, password, image);
 
   @JsonKey(ignore: true)
   @override
@@ -279,11 +243,9 @@ abstract class _User implements User {
       {required final String firstname,
       required final String lastname,
       required final String email,
-      final int? phone,
+      final String? phone,
       final String? id,
-      final String? token,
       final String? password,
-      final String? fcmtoken,
       final String? image}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
@@ -295,15 +257,11 @@ abstract class _User implements User {
   @override
   String get email;
   @override
-  int? get phone;
+  String? get phone;
   @override
   String? get id;
   @override
-  String? get token;
-  @override
   String? get password;
-  @override
-  String? get fcmtoken;
   @override
   String? get image;
   @override

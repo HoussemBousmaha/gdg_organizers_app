@@ -90,7 +90,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               showCoverPhotoOptions: () {
                 showDialog(
                   context: context,
-                  
                   builder: (_) {
                     return BlocBuilder<ImageCubit, XFile?>(
                       builder: (context, state) {
