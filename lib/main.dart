@@ -9,16 +9,15 @@ import 'package:gdg_organizers_app/features/settings/screens/editprofilescreen.d
 import 'package:gdg_organizers_app/logic/auth_bloc/auth_bloc.dart';
 import 'package:gdg_organizers_app/logic/bloc_observer.dart';
 import 'package:gdg_organizers_app/features/nav/bloc/cubit.dart';
-import 'package:gdg_organizers_app/shared/widgets/customAppBar.dart';
-
+import 'package:gdg_organizers_app/logic/user_bloc/user_bloc.dart';
+import 'package:gdg_organizers_app/shared/services/diohelper.dart';
 import 'features/home/loading.dart';
 import 'logic/imagecubit.dart';
 import 'models/user/user.dart';
 
 void main() {
-  final AuthRepo authRepo = AuthRepo();
   Bloc.observer = MyBlocObserver();
-  runApp(MyApp(authRepo));
+  runApp(MyApp(AuthRepo()));
 }
 
 class MyApp extends StatefulWidget {
@@ -31,11 +30,15 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late AuthBloc authBloc;
+    late  UserBloc userBloc ;
+
   get authRepo => widget.authRepo;
 
   @override
   void initState() {
+    DioHelper.init();
     authBloc = AuthBloc(authRepo);
+    userBloc = UserBloc(authBloc, authRepo);
     authBloc.add(const AuthEvent.appstarted());
     super.initState();
   }
@@ -54,12 +57,13 @@ class _MyAppState extends State<MyApp> {
           create: (context) => authBloc,
         ),
         BlocProvider(
-          create: (context) => LoginBloc(authBloc, authRepo),
+          create: (context) => LoginBloc(authBloc,),
         ),
         BlocProvider(
           create: (context) => NavigationCubit(),
         ),
-        BlocProvider(create: (context) => ImageCubit())
+        BlocProvider(create: (context) => ImageCubit()),
+        BlocProvider(create: (context) => userBloc)
       ],
       child: MaterialApp(
           routes: {

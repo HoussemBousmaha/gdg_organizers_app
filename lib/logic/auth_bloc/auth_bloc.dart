@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:ffi';
 import 'dart:math';
 
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -28,8 +29,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FutureOr<void> _onAppStarted(
     _AppStarted event,
   ) async {
-    // rah tatbadal
-    emit(const _Unauthenticated());
+    try {
+              emit(const _Loading());
+
+      final token = await _authRepo.getToken();
+      if (token != null) {
+        final Response response = await AuthRepo.getUser(token);
+        print(response.data['user']);
+        setuser(response.data['user']);
+      } else {
+        emit(const _Unauthenticated());
+      }
+    } catch (e) {
+      print(e);
+      emit(const _Failure('Something went wrong'));
+    }
   }
 
   FutureOr<void> _onLoggedIn(
@@ -64,16 +78,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     _UpdateUser event,
   ) async {
     try {
-      emit(const _Loading());
-      // setuser(data);
+      setuser(event.data);
     } catch (e) {
       print(e);
       emit(const _Unauthenticated());
     }
   }
 
-  void setuser(String data) {
-    _user = User.fromJson(jsonDecode(data)['data']['user']);
+  void setuser(Map<String, dynamic> data) {
+    _user = User.fromJson(data);
     emit(_Authenticated(user));
   }
 

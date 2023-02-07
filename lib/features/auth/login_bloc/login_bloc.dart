@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:http/http.dart' as http;
@@ -13,9 +14,8 @@ part 'login_state.dart';
 part 'login_bloc.freezed.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final AuthRepo _authRepo;
   final AuthBloc authBloc;
-  LoginBloc(this.authBloc, this._authRepo) : super(const LoginState.initial()) {
+  LoginBloc(this.authBloc,) : super(const LoginState.initial()) {
     on<LoginEvent>((event, emit) {
       event.map(login: _login);
     });
@@ -23,27 +23,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   FutureOr<void> _login(
     LoginEvent event,
   ) async {
+    Response? res;
     try {
       emit(const LoginState.loading());
-      print('loading');
-      await _authRepo.login(event.email, event.password).then((value) {
-        print(value.body);
-        if (value.statusCode == 200) {
-          emit(LoginState.success());
-          authBloc.add(AuthEvent.loggedIn(
-            value.body,
-            jsonDecode(value.body)['data']['token'],
-          ));
-        } else {
-          emit(LoginState.failure(jsonDecode(value.body)['error']));
-        }
-      });
-    } on Exception catch (e) {
-      print(e);
-      emit(LoginState.failure(e.toString()));
+      res = await AuthRepo.login(event.email, event.password);
+      emit(const LoginState.success());
+      authBloc.add(AuthEvent.loggedIn(
+        res.data['user'],
+        res.data['token'],
+      ));
     } catch (e) {
+      emit(LoginState.failure(res!.data['error'] ?? 'Login Failed'));
       print(e);
-      emit(LoginState.failure(e.toString()));
     }
   }
 }

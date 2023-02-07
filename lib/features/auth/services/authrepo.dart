@@ -2,23 +2,29 @@ import 'dart:convert';
 import 'dart:io';
 
 import '../../../constants/const.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
+
+import '../../../shared/services/diohelper.dart';
 
 class AuthApi {
-  Future<http.Response> login(
+  
+ static Future<Response> login(
     String email,
     String password,
   ) async {
-      http.Response res = await http.post(
-        Uri.parse('$uri/admin/login'),
-        body: jsonEncode({
-          'email': email,
-          'password': password,
-        }),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
+    return await DioHelper.postData(
+      url: '/admin/login',
+      data: {
+        'email': email,
+        'password': password,
+      },
+  
+    );
+}
+  static Future<Response> getUser(String token) async {
+      return await DioHelper.getData(
+        url: '/user/:id',
+        token: token,
       );
-      return res;
-  }
+    }
 }

@@ -1,24 +1,34 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:gdg_organizers_app/models/user/user.dart';
-import 'package:http/http.dart' as http;
+import 'package:gdg_organizers_app/shared/services/diohelper.dart';
 
 import 'authrepo.dart';
 
 class AuthRepo {
-  final AuthApi _authApi = AuthApi();
   final _secureStorage = const FlutterSecureStorage();
 
-  Future<http.Response> login(String email, String password) async {
-    final http.Response response = await _authApi.login(email, password);
+ static Future<Response> login(String email, String password) async {
+    final Response response = await AuthApi.login(email, password);
+    print(response.data);
     return response;
+  }
+
+ static Future<Response> getUser(String token) async {
+    final Response response = await AuthApi.getUser(token);
+    print(response.data);
+    return response;
+  } 
+
+  static Future<Map<String , dynamic>> updateimage (String token, String image) async {
+    final String response = await DioHelper.uploadImage(token, image);
+    return jsonDecode(response) ;
   }
 
   Future<void> deleteData() async {
     await _secureStorage.deleteAll();
     await _secureStorage.delete(key: 'x-auth-token');
-    await _secureStorage.delete(key: 'x-auth-refershToken');
   }
 
   Future<void> persistData(token) async {

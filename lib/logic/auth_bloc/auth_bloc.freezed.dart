@@ -19,25 +19,25 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() appstarted,
-    required TResult Function(String data, String token) loggedIn,
+    required TResult Function(Map<String, dynamic> data, String token) loggedIn,
     required TResult Function() loggedOut,
-    required TResult Function(User user) updateuser,
+    required TResult Function(Map<String, dynamic> data) updateuser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appstarted,
-    TResult? Function(String data, String token)? loggedIn,
+    TResult? Function(Map<String, dynamic> data, String token)? loggedIn,
     TResult? Function()? loggedOut,
-    TResult? Function(User user)? updateuser,
+    TResult? Function(Map<String, dynamic> data)? updateuser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appstarted,
-    TResult Function(String data, String token)? loggedIn,
+    TResult Function(Map<String, dynamic> data, String token)? loggedIn,
     TResult Function()? loggedOut,
-    TResult Function(User user)? updateuser,
+    TResult Function(Map<String, dynamic> data)? updateuser,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -124,9 +124,9 @@ class _$_AppStarted implements _AppStarted {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() appstarted,
-    required TResult Function(String data, String token) loggedIn,
+    required TResult Function(Map<String, dynamic> data, String token) loggedIn,
     required TResult Function() loggedOut,
-    required TResult Function(User user) updateuser,
+    required TResult Function(Map<String, dynamic> data) updateuser,
   }) {
     return appstarted();
   }
@@ -135,9 +135,9 @@ class _$_AppStarted implements _AppStarted {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appstarted,
-    TResult? Function(String data, String token)? loggedIn,
+    TResult? Function(Map<String, dynamic> data, String token)? loggedIn,
     TResult? Function()? loggedOut,
-    TResult? Function(User user)? updateuser,
+    TResult? Function(Map<String, dynamic> data)? updateuser,
   }) {
     return appstarted?.call();
   }
@@ -146,9 +146,9 @@ class _$_AppStarted implements _AppStarted {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appstarted,
-    TResult Function(String data, String token)? loggedIn,
+    TResult Function(Map<String, dynamic> data, String token)? loggedIn,
     TResult Function()? loggedOut,
-    TResult Function(User user)? updateuser,
+    TResult Function(Map<String, dynamic> data)? updateuser,
     required TResult orElse(),
   }) {
     if (appstarted != null) {
@@ -205,7 +205,7 @@ abstract class _$$_LoggedInCopyWith<$Res> {
           _$_LoggedIn value, $Res Function(_$_LoggedIn) then) =
       __$$_LoggedInCopyWithImpl<$Res>;
   @useResult
-  $Res call({String data, String token});
+  $Res call({Map<String, dynamic> data, String token});
 }
 
 /// @nodoc
@@ -224,9 +224,9 @@ class __$$_LoggedInCopyWithImpl<$Res>
   }) {
     return _then(_$_LoggedIn(
       null == data
-          ? _value.data
+          ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Map<String, dynamic>,
       null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -238,10 +238,16 @@ class __$$_LoggedInCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LoggedIn implements _LoggedIn {
-  const _$_LoggedIn(this.data, this.token);
+  const _$_LoggedIn(final Map<String, dynamic> data, this.token) : _data = data;
 
+  final Map<String, dynamic> _data;
   @override
-  final String data;
+  Map<String, dynamic> get data {
+    if (_data is EqualUnmodifiableMapView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_data);
+  }
+
   @override
   final String token;
 
@@ -255,12 +261,13 @@ class _$_LoggedIn implements _LoggedIn {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoggedIn &&
-            (identical(other.data, data) || other.data == data) &&
+            const DeepCollectionEquality().equals(other._data, _data) &&
             (identical(other.token, token) || other.token == token));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, data, token);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_data), token);
 
   @JsonKey(ignore: true)
   @override
@@ -272,9 +279,9 @@ class _$_LoggedIn implements _LoggedIn {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() appstarted,
-    required TResult Function(String data, String token) loggedIn,
+    required TResult Function(Map<String, dynamic> data, String token) loggedIn,
     required TResult Function() loggedOut,
-    required TResult Function(User user) updateuser,
+    required TResult Function(Map<String, dynamic> data) updateuser,
   }) {
     return loggedIn(data, token);
   }
@@ -283,9 +290,9 @@ class _$_LoggedIn implements _LoggedIn {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appstarted,
-    TResult? Function(String data, String token)? loggedIn,
+    TResult? Function(Map<String, dynamic> data, String token)? loggedIn,
     TResult? Function()? loggedOut,
-    TResult? Function(User user)? updateuser,
+    TResult? Function(Map<String, dynamic> data)? updateuser,
   }) {
     return loggedIn?.call(data, token);
   }
@@ -294,9 +301,9 @@ class _$_LoggedIn implements _LoggedIn {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appstarted,
-    TResult Function(String data, String token)? loggedIn,
+    TResult Function(Map<String, dynamic> data, String token)? loggedIn,
     TResult Function()? loggedOut,
-    TResult Function(User user)? updateuser,
+    TResult Function(Map<String, dynamic> data)? updateuser,
     required TResult orElse(),
   }) {
     if (loggedIn != null) {
@@ -344,9 +351,10 @@ class _$_LoggedIn implements _LoggedIn {
 }
 
 abstract class _LoggedIn implements AuthEvent {
-  const factory _LoggedIn(final String data, final String token) = _$_LoggedIn;
+  const factory _LoggedIn(final Map<String, dynamic> data, final String token) =
+      _$_LoggedIn;
 
-  String get data;
+  Map<String, dynamic> get data;
   String get token;
   @JsonKey(ignore: true)
   _$$_LoggedInCopyWith<_$_LoggedIn> get copyWith =>
@@ -392,9 +400,9 @@ class _$_LoggedOut implements _LoggedOut {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() appstarted,
-    required TResult Function(String data, String token) loggedIn,
+    required TResult Function(Map<String, dynamic> data, String token) loggedIn,
     required TResult Function() loggedOut,
-    required TResult Function(User user) updateuser,
+    required TResult Function(Map<String, dynamic> data) updateuser,
   }) {
     return loggedOut();
   }
@@ -403,9 +411,9 @@ class _$_LoggedOut implements _LoggedOut {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appstarted,
-    TResult? Function(String data, String token)? loggedIn,
+    TResult? Function(Map<String, dynamic> data, String token)? loggedIn,
     TResult? Function()? loggedOut,
-    TResult? Function(User user)? updateuser,
+    TResult? Function(Map<String, dynamic> data)? updateuser,
   }) {
     return loggedOut?.call();
   }
@@ -414,9 +422,9 @@ class _$_LoggedOut implements _LoggedOut {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appstarted,
-    TResult Function(String data, String token)? loggedIn,
+    TResult Function(Map<String, dynamic> data, String token)? loggedIn,
     TResult Function()? loggedOut,
-    TResult Function(User user)? updateuser,
+    TResult Function(Map<String, dynamic> data)? updateuser,
     required TResult orElse(),
   }) {
     if (loggedOut != null) {
@@ -473,9 +481,7 @@ abstract class _$$_UpdateUserCopyWith<$Res> {
           _$_UpdateUser value, $Res Function(_$_UpdateUser) then) =
       __$$_UpdateUserCopyWithImpl<$Res>;
   @useResult
-  $Res call({User user});
-
-  $UserCopyWith<$Res> get user;
+  $Res call({Map<String, dynamic> data});
 }
 
 /// @nodoc
@@ -489,36 +495,33 @@ class __$$_UpdateUserCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = null,
+    Object? data = null,
   }) {
     return _then(_$_UpdateUser(
-      null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
+      null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$_UpdateUser implements _UpdateUser {
-  const _$_UpdateUser(this.user);
+  const _$_UpdateUser(final Map<String, dynamic> data) : _data = data;
 
+  final Map<String, dynamic> _data;
   @override
-  final User user;
+  Map<String, dynamic> get data {
+    if (_data is EqualUnmodifiableMapView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_data);
+  }
 
   @override
   String toString() {
-    return 'AuthEvent.updateuser(user: $user)';
+    return 'AuthEvent.updateuser(data: $data)';
   }
 
   @override
@@ -526,11 +529,12 @@ class _$_UpdateUser implements _UpdateUser {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UpdateUser &&
-            (identical(other.user, user) || other.user == user));
+            const DeepCollectionEquality().equals(other._data, _data));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
 
   @JsonKey(ignore: true)
   @override
@@ -542,35 +546,35 @@ class _$_UpdateUser implements _UpdateUser {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() appstarted,
-    required TResult Function(String data, String token) loggedIn,
+    required TResult Function(Map<String, dynamic> data, String token) loggedIn,
     required TResult Function() loggedOut,
-    required TResult Function(User user) updateuser,
+    required TResult Function(Map<String, dynamic> data) updateuser,
   }) {
-    return updateuser(user);
+    return updateuser(data);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appstarted,
-    TResult? Function(String data, String token)? loggedIn,
+    TResult? Function(Map<String, dynamic> data, String token)? loggedIn,
     TResult? Function()? loggedOut,
-    TResult? Function(User user)? updateuser,
+    TResult? Function(Map<String, dynamic> data)? updateuser,
   }) {
-    return updateuser?.call(user);
+    return updateuser?.call(data);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appstarted,
-    TResult Function(String data, String token)? loggedIn,
+    TResult Function(Map<String, dynamic> data, String token)? loggedIn,
     TResult Function()? loggedOut,
-    TResult Function(User user)? updateuser,
+    TResult Function(Map<String, dynamic> data)? updateuser,
     required TResult orElse(),
   }) {
     if (updateuser != null) {
-      return updateuser(user);
+      return updateuser(data);
     }
     return orElse();
   }
@@ -614,9 +618,9 @@ class _$_UpdateUser implements _UpdateUser {
 }
 
 abstract class _UpdateUser implements AuthEvent {
-  const factory _UpdateUser(final User user) = _$_UpdateUser;
+  const factory _UpdateUser(final Map<String, dynamic> data) = _$_UpdateUser;
 
-  User get user;
+  Map<String, dynamic> get data;
   @JsonKey(ignore: true)
   _$$_UpdateUserCopyWith<_$_UpdateUser> get copyWith =>
       throw _privateConstructorUsedError;

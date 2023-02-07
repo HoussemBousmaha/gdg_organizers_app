@@ -6,6 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gdg_organizers_app/constants/const.dart';
 import 'package:gdg_organizers_app/features/settings/widgets/profileAvatare.dart';
+import 'package:gdg_organizers_app/logic/auth_bloc/auth_bloc.dart';
+import 'package:gdg_organizers_app/logic/user_bloc/user_bloc.dart';
+import 'package:gdg_organizers_app/shared/services/diohelper.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../constants/icon_broken.dart';
@@ -85,8 +88,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             alignment:
                 currentIndex < 3 ? Alignment.topRight : Alignment.bottomCenter,
             child: CoverPhoto(
-              coverPhotoUrl:
-                  'https://theramenstand.blog/wp-content/uploads/2019/07/Zeref.Dragneel.full_.806825.jpg',
+              coverPhotoUrl: context.watch<AuthBloc>().user.image!,
               showCoverPhotoOptions: () {
                 showDialog(
                   context: context,
@@ -123,7 +125,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                               if (context.read<ImageCubit>().state == null)
                                 CachedNetworkImage(
                                   imageUrl:
-                                      'https://theramenstand.blog/wp-content/uploads/2019/07/Zeref.Dragneel.full_.806825.jpg',
+                                      context.watch<AuthBloc>().user.image!,
                                   imageBuilder: (context, imageProvider) =>
                                       Container(
                                     margin: EdgeInsets.all(20),
@@ -182,7 +184,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                                   ),
                                   Expanded(
                                     child: TextButton(
-                                        onPressed: () {
+                                        onPressed: () async {
+                                          if (state != null) {
+                                            context
+                                                .read<UserBloc>()
+                                                .add(UserEvent.updateUserImage(
+                                                  state.path,
+                                                ));
+                                            context.read<ImageCubit>().clear();
+                                          }
                                           Navigator.pop(context);
                                         },
                                         child: const Text(
