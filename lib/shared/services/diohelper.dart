@@ -1,16 +1,11 @@
-import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:gdg_organizers_app/constants/const.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 
 class DioHelper {
   static late Dio dio;
 
-  DioHelper() {
-    init();
-  }
   static init() {
     dio = Dio(
       BaseOptions(

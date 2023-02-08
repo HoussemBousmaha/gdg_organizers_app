@@ -6,7 +6,6 @@ import 'package:gdg_organizers_app/features/settings/screens/settings_screen.dar
 import 'package:gdg_organizers_app/features/nav/bloc/states.dart';
 
 import '../../tasks/tasks_screen.dart';
-import '../../tasks/widgets/task_widget.dart';
 
 class NavigationCubit extends Cubit<NavigationStates> {
   NavigationCubit() : super(NavigationInitialState());

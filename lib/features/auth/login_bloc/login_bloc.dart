@@ -15,7 +15,9 @@ part 'login_bloc.freezed.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthBloc authBloc;
-  LoginBloc(this.authBloc,) : super(const LoginState.initial()) {
+  LoginBloc(
+    this.authBloc,
+  ) : super(const LoginState.initial()) {
     on<LoginEvent>((event, emit) {
       event.map(login: _login);
     });
@@ -27,13 +29,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       emit(const LoginState.loading());
       res = await AuthRepo.login(event.email, event.password);
+      print(res.data);
       emit(const LoginState.success());
       authBloc.add(AuthEvent.loggedIn(
         res.data['user'],
         res.data['token'],
       ));
     } catch (e) {
-      emit(LoginState.failure(res!.data['error'] ?? 'Login Failed'));
+      emit(LoginState.failure(
+          res != null ? res.data['error'] ?? 'Login Failed' : 'Login Failed'));
       print(e);
     }
   }

@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
-import 'widgets/task_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gdg_organizers_app/features/tasks/task_cubit/task_cubit.dart';
+import 'package:gdg_organizers_app/logic/togglecubit.dart';
+import 'package:shimmer/shimmer.dart';
+
+import '../../../constants/const.dart';
+
+part 'widgets/task_widget.dart';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({Key? key}) : super(key: key);
@@ -28,19 +35,22 @@ class TasksScreen extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              // just a static widget
-              return TaskWidget();
+          BlocBuilder<TaskCubit, TaskState>(
+            builder: (context, state) {
+              return state.when(
+                  initial: () => const SizedBox.shrink(),
+                  loading: () => Column(
+                        children: List.generate(10, (index) => TaskShimmer()),
+                      ),
+                  loaded: (_, tasks) => Column(
+                      children: tasks
+                          .map((e) => TaskWidget(
+                                title: e.name,
+                                time: e.date_debut!,
+                              ))
+                          .toList()),
+                  error: (e) => Center(child: Text(e)));
             },
-            separatorBuilder: (context, index) {
-              return const SizedBox(
-                height: 20,
-              );
-            },
-            itemCount: 4,
           ),
           const Padding(
             padding: EdgeInsets.only(
@@ -59,19 +69,22 @@ class TasksScreen extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              // just a static widget
-              return TaskWidget();
+          BlocBuilder<TaskCubit, TaskState>(
+            builder: (context, state) {
+              return state.when(
+                  initial: () => const SizedBox.shrink(),
+                  loading: () => Column(
+                        children: List.generate(10, (index) => TaskShimmer()),
+                      ),
+                  loaded: (doneTasks, _) => Column(
+                      children: doneTasks
+                          .map((e) => TaskWidget(
+                                title: e.name,
+                                time: e.date_debut!,
+                              ))
+                          .toList()),
+                  error: (e) => Center(child: Text(e)));
             },
-            separatorBuilder: (context, index) {
-              return const SizedBox(
-                height: 20,
-              );
-            },
-            itemCount: 4,
           ),
           const SizedBox(
             height: 15,

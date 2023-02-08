@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:gdg_organizers_app/constants/const.dart';
+import 'package:gdg_organizers_app/features/events/cubit/event_cubit.dart';
+import 'package:gdg_organizers_app/features/events/models/event.dart';
 import 'package:gdg_organizers_app/features/nav/bloc/cubit.dart';
 import 'package:gdg_organizers_app/features/nav/bloc/states.dart';
 import 'package:gdg_organizers_app/shared/widgets/customAppBar.dart';
@@ -13,9 +15,19 @@ import '../../shared/widgets/bug_description.dart';
 import '../../shared/widgets/feedback.dart';
 import '../../shared/widgets/logout_pop_up.dart';
 
-class LayoutScreen extends StatelessWidget {
+class LayoutScreen extends StatefulWidget {
   const LayoutScreen({Key? key}) : super(key: key);
 
+  @override
+  State<LayoutScreen> createState() => _LayoutScreenState();
+}
+
+class _LayoutScreenState extends State<LayoutScreen> {
+  @override
+  void initState() {
+    context.read<EventCubit>().getEvents();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var isDialOpen = ValueNotifier<bool>(false);

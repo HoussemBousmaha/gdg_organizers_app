@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gdg_organizers_app/constants/theme.dart';
 import 'package:gdg_organizers_app/features/auth/login_bloc/login_bloc.dart';
 import 'package:gdg_organizers_app/features/auth/screens/authscreen.dart';
-import 'package:gdg_organizers_app/features/auth/services/authapi.dart';
+import 'package:gdg_organizers_app/features/events/cubit/event_cubit.dart';
 import 'package:gdg_organizers_app/features/nav/app_layout.dart';
 import 'package:gdg_organizers_app/features/settings/screens/editprofilescreen.dart';
 import 'package:gdg_organizers_app/logic/auth_bloc/auth_bloc.dart';
@@ -17,12 +17,11 @@ import 'models/user/user.dart';
 
 void main() {
   Bloc.observer = MyBlocObserver();
-  runApp(MyApp(AuthRepo()));
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp(this.authRepo, {Key? key}) : super(key: key);
-  final AuthRepo authRepo;
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -32,13 +31,12 @@ class _MyAppState extends State<MyApp> {
   late AuthBloc authBloc;
     late  UserBloc userBloc ;
 
-  get authRepo => widget.authRepo;
 
   @override
   void initState() {
     DioHelper.init();
-    authBloc = AuthBloc(authRepo);
-    userBloc = UserBloc(authBloc, authRepo);
+    authBloc = AuthBloc();
+    userBloc = UserBloc(authBloc);
     authBloc.add(const AuthEvent.appstarted());
     super.initState();
   }
@@ -46,6 +44,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void dispose() {
     authBloc.close();
+    userBloc.close();
     super.dispose();
   }
 
@@ -63,7 +62,8 @@ class _MyAppState extends State<MyApp> {
           create: (context) => NavigationCubit(),
         ),
         BlocProvider(create: (context) => ImageCubit()),
-        BlocProvider(create: (context) => userBloc)
+        BlocProvider(create: (context) => userBloc),
+        BlocProvider(create: (context) => EventCubit())
       ],
       child: MaterialApp(
           routes: {

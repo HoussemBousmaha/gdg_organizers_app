@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:gdg_organizers_app/features/events/widgets/event_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gdg_organizers_app/features/auth/widgets/authwidgets.dart';
+import 'package:gdg_organizers_app/features/events/cubit/event_cubit.dart';
+import 'package:gdg_organizers_app/features/home/home_screen.dart';
+import 'package:shimmer/shimmer.dart';
+import '../../../constants/const.dart';
+part 'widgets/event_widget.dart';
 
 class EventsScreen extends StatelessWidget {
   const EventsScreen({Key? key}) : super(key: key);
@@ -25,22 +31,24 @@ class EventsScreen extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
-            height: 15,
-          ),
-          ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              // just a static widget
-              return EventWidget();
+          const SizedBox(height: 15),
+          BlocBuilder<EventCubit, EventState>(
+            builder: (context, state) {
+              return state.when(
+                  initial: () => const SizedBox.shrink(),
+                  loading: () => Column(
+                        children:
+                            List.generate(4, (index) => const EventShimmer()),
+                      ),
+                  loaded: (_, soonEvents) => Column(
+                      children: soonEvents
+                          .map((e) => EventWidget(
+                                image: e.image,
+                                state: e.state!,
+                              ))
+                          .toList()),
+                  error: (e) => Center(child: Text(e)));
             },
-            separatorBuilder: (context, index) {
-              return const SizedBox(
-                height: 20,
-              );
-            },
-            itemCount: 1,
           ),
           const Padding(
             padding: EdgeInsets.only(
@@ -56,25 +64,23 @@ class EventsScreen extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
-            height: 15,
-          ),
-          ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              // just a static widget
-              return EventWidget();
+          BlocBuilder<EventCubit, EventState>(
+            builder: (context, state) {
+              return state.when(
+                  initial: () => const SizedBox(),
+                  loading: () => Column(
+                        children:
+                            List.generate(4, (index) => const EventShimmer()),
+                      ),
+                  loaded: (newEvents, _) => Column(
+                      children: newEvents
+                          .map((e) => EventWidget(
+                                image: e.image,
+                                state: e.state!,
+                              ))
+                          .toList()),
+                  error: (e) => Center(child: Text(e)));
             },
-            separatorBuilder: (context, index) {
-              return const SizedBox(
-                height: 20,
-              );
-            },
-            itemCount: 2,
-          ),
-          const SizedBox(
-            height: 15,
           ),
         ],
       ),

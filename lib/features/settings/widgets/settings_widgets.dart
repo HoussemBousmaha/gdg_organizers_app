@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gdg_organizers_app/constants/const.dart';
+import 'package:gdg_organizers_app/logic/auth_bloc/auth_bloc.dart';
 
 class SettingButton extends StatelessWidget {
   const SettingButton(
@@ -13,7 +15,7 @@ class SettingButton extends StatelessWidget {
     return GestureDetector(
         onTap: onPressed,
         child: Container(
-          margin: const EdgeInsets.symmetric( vertical: 10),
+          margin: const EdgeInsets.symmetric(vertical: 10),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           decoration: BoxDecoration(
               color: Colors.white,
@@ -50,7 +52,6 @@ class SettingButton extends StatelessWidget {
   }
 }
 
-
 class UserInfo extends StatelessWidget {
   const UserInfo({
     super.key,
@@ -60,12 +61,12 @@ class UserInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        children: const  [
-           Text(
-            'User name',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+        children: [
+          Text(
+            '${context.watch<AuthBloc>().user.lastname} ${context.watch<AuthBloc>().user.firstname}',
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
           ),
-           Text('Role',
+          const Text('Role',
               style: TextStyle(
                   fontSize: 16, fontWeight: FontWeight.w400, color: kRed)),
         ],

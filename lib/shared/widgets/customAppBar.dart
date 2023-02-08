@@ -37,8 +37,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               if (currentIndex < 4)
                 SizedBox(
-                  width: currentIndex > 2 ? 45 : 10,
-                  height: 50,
+                  width: currentIndex > 2 ? 45 : 20,
+                  height: 60,
                 ),
               if (currentIndex > 3)
                 IconButton(
@@ -84,7 +84,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         SafeArea(
           child: AnimatedAlign(
-            duration: Duration(milliseconds: 500),
+            duration: const Duration(milliseconds: 500),
             alignment:
                 currentIndex < 3 ? Alignment.topRight : Alignment.bottomCenter,
             child: CoverPhoto(

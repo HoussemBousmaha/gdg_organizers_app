@@ -17,7 +17,7 @@ const kBoxDecorationForEvents = BoxDecoration(
       spreadRadius: 5.0,
       offset: Offset(
         0,
-        3.0,
+        2.0,
       ),
     )
   ],
@@ -36,8 +36,8 @@ const emaillinearGradient = LinearGradient(
 );
 const passwordlinearGradient = LinearGradient(
   colors: [
- Color(0xFF4285F4),
-   Color(0xFFFFCA32),
+    Color(0xFF4285F4),
+    Color(0xFFFFCA32),
   ],
 );
 const String images = 'assets/images';
@@ -45,6 +45,8 @@ const String icons = 'assets/icons/';
 const kGreen = Color(0xFF0D9D58);
 const kBlue = Color(0xFF4285F4);
 const kRed = Color(0xFFEA4334);
+const kLightGrey = Color(0xfffafafa);
+const kGrey = Color(0Xff757575);
 const kYellow = Color(0xFFFFCA32);
 const kTextLightColor = Color(0xff5A5A5F);
 const kThinTextLightColor = Color(0xff9c9c9c);
@@ -56,10 +58,7 @@ const kCornerRadius = 25.0;
 const kCornerInputRadius = 20.0;
 const kCornerButtonRadius = 8.0;
 
-
 const String uri = 'http://192.168.93.38:8080/api';
-
-
 
 String? validateEmail(String? value) {
   String pattern =
@@ -72,18 +71,16 @@ String? validateEmail(String? value) {
   }
 }
 
-
-  String? validatePassword(String? value) {
-    if (value == null) {
-      return 'Please enter password';
-    } else
-    if (value.isEmpty) {
-      return 'Please enter password';
+String? validatePassword(String? value) {
+  if (value == null) {
+    return 'Please enter password';
+  } else if (value.isEmpty) {
+    return 'Please enter password';
+  } else {
+    if (value.length < 10) {
+      return 'Password  must be of 10 character';
     } else {
-      if (value.length < 10) {
-        return 'Password  must be of 10 character';
-      } else {
-        return null;
-      }
+      return null;
     }
   }
+}

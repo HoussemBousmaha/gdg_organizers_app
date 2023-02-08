@@ -1,67 +1,115 @@
-import 'package:flutter/material.dart';
 
-import '../../../constants/const.dart';
-import '../../../constants/icon_broken.dart';
+part of '../tasks_screen.dart';
 
 class TaskWidget extends StatelessWidget {
-  const TaskWidget({Key? key}) : super(key: key);
+  const TaskWidget({Key? key, required this.title, required this.time}) : super(key: key);
+  final String  title ; 
+  final String  time ;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0),
-      child: Container(
-        decoration: kBoxDecorationForTask,
-        child: Container(
-          margin:const EdgeInsets.all(1),
-          height: 70,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(
-              5,
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 30),
+      height: 70,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(0, 4),
+            color: Colors.grey.shade300,
+            spreadRadius: 1,
+            blurRadius: 5,
+          ),
+        ],
+        border: Border.all(
+          color: kBlue,
+          width: 1,
+        ),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(
+          5,
+        ),
+      ),
+      child: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  ),
+                ),
+                Text(
+                  time,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14,
+                    color: kGrey,
+                  )
+                ),
+              ],
             ),
           ),
-          child: Row(
-            children: [
-              Checkbox(
-                side: const BorderSide(
-                  color: Colors.red,
-                ),
-                value: false,
-                onChanged: (value) {},
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
-                ),
+          const Spacer(),
+          const CustomCheckbox(),
+        ],
+      ),
+    );
+  }
+}
+
+class CustomCheckbox extends StatelessWidget {
+  const CustomCheckbox({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => ToggelCubit(),
+      child: BlocBuilder<ToggelCubit, bool>(
+        builder: (context, state) {
+          return Transform.scale(
+            scale: 1.3,
+            child: Checkbox(
+              side: const BorderSide(
+                color: kGrey,
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Task 1',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 16,
-                    ),
-                  ),
-                  Text(
-                    '20min (08:30--08:50)',
-                  ),
-                ],
+              value: state,
+              onChanged: (value) {
+                context.read<ToggelCubit>().toggle();
+              },
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
               ),
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: GestureDetector(
-                  onTap: () {},
-                  child: const Icon(
-                    IconBroken.More_Circle,
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class TaskShimmer extends StatelessWidget {
+  const TaskShimmer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[200]!,
+      highlightColor: Colors.grey[100]!,
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5), color: Colors.white),
+        margin: const EdgeInsets.symmetric(
+          horizontal: 30,
         ),
+        height: 70,
       ),
     );
   }

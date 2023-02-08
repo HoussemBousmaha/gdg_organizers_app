@@ -15,8 +15,7 @@ part 'auth_state.dart';
 part 'auth_bloc.freezed.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final AuthRepo _authRepo;
-  AuthBloc(this._authRepo) : super(const _Initial()) {
+  AuthBloc() : super(const _Initial()) {
     on<AuthEvent>((event, emit) {
       event.map(
           appstarted: _onAppStarted,
@@ -32,7 +31,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
               emit(const _Loading());
 
-      final token = await _authRepo.getToken();
+      final token = await AuthRepo.getToken();
       if (token != null) {
         final Response response = await AuthRepo.getUser(token);
         print(response.data['user']);
@@ -52,7 +51,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       emit(const _Loading());
 
-      await _authRepo
+      await AuthRepo
           .persistData(event.token)
           .then((value) => setuser(event.data));
     } catch (e) {
@@ -66,7 +65,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ) async {
     try {
       emit(const _Loading());
-      await _authRepo.deleteData();
+      await AuthRepo.deleteData();
       emit(const _Unauthenticated());
     } catch (e) {
       print(e);

@@ -12,8 +12,7 @@ part 'user_bloc.freezed.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final AuthBloc authBloc;
-  final AuthRepo _authRepo;
-  UserBloc(this.authBloc, this._authRepo) : super(_Initial()) {
+  UserBloc(this.authBloc, ) : super(_Initial()) {
     on<UserEvent>((event, emit) {
       event.map(
           updateUser: _onUpdateUser,
@@ -28,7 +27,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   FutureOr<void> _onUpdateUserImage(_UpdateUserImage event) async {
     try {
-      final token = await _authRepo.getToken();
+      final token = await AuthRepo.getToken();
       if (token != null) {
         final res = await AuthRepo.updateimage(event.path, token);
         print(res);

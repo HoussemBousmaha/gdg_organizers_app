@@ -13,7 +13,7 @@ class AuthApi {
     String password,
   ) async {
     return await DioHelper.postData(
-      url: '/admin/login',
+      url: '/user/login',
       data: {
         'email': email,
         'password': password,

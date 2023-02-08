@@ -7,7 +7,7 @@ import 'package:gdg_organizers_app/shared/services/diohelper.dart';
 import 'authrepo.dart';
 
 class AuthRepo {
-  final _secureStorage = const FlutterSecureStorage();
+  static final _secureStorage = const FlutterSecureStorage();
 
  static Future<Response> login(String email, String password) async {
     final Response response = await AuthApi.login(email, password);
@@ -26,16 +26,16 @@ class AuthRepo {
     return jsonDecode(response) ;
   }
 
-  Future<void> deleteData() async {
+  static Future<void> deleteData() async {
     await _secureStorage.deleteAll();
     await _secureStorage.delete(key: 'x-auth-token');
   }
 
-  Future<void> persistData(token) async {
+  static Future<void> persistData(token) async {
     await _secureStorage.write(key: 'x-auth-token', value: token);
   }
 
-  Future<String?> getToken() async {
+  static Future<String?> getToken() async {
     final token = await _secureStorage.read(key: 'x-auth-token');
     return token;
   }

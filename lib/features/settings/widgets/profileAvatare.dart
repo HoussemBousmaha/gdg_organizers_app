@@ -19,9 +19,10 @@ class CoverPhoto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: showBackButton ? 120 : 40,
       width: showBackButton ? 140 : 40,
+      margin: EdgeInsets.only(top: 5),
       child: CachedNetworkImage(
         imageUrl: coverPhotoUrl,
         imageBuilder: (context, imageProvider) {
