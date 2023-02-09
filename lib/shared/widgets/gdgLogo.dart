@@ -82,10 +82,10 @@ class GdgLogoPainter extends CustomPainter {
 
     // this is points of the logo path  (x1,y2) (x2,y1) (x3,y2) (x4,y1) , dont change it
     // the first line is the background line and the second line is the color line
-    final double x1 = width * 1.7;
-    final double x2 = width * 0.7;
-    final double x3 = -width * 1.1;
-    final double x4 = -0.1 * width;
+    final double x1 = width * 1.95;
+    final double x2 = width * 0.95;
+    final double x3 = -width * 1.05;
+    final double x4 = -0.05 * width;
     final double y2 = height * 0.5;
     final double y1 = height;
     canvas.drawLine(Offset(x1, y2), Offset(x2, y1), paint);

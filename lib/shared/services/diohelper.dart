@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:gdg_organizers_app/constants/const.dart';
 import 'package:http/http.dart' as http;
@@ -25,14 +24,13 @@ class DioHelper {
     Map<String, dynamic>? query,
     String? token,
   }) async {
-    return await dio.get(
-      url,
-      queryParameters: query,
-      options: Options(
-        headers: {
-          'authorization': token,
-        },)
-    );
+    return await dio.get(url,
+        queryParameters: query,
+        options: Options(
+          headers: {
+            'authorization': token,
+          },
+        ));
   }
 
   static Future<Response> postData({
@@ -41,11 +39,14 @@ class DioHelper {
     required Map<String, dynamic> data,
     String? token,
   }) async {
-    return await dio.post(
-      url,
-      queryParameters: query,
-      data: data,
-    );
+    return await dio.post(url,
+        queryParameters: query,
+        data: data,
+        options: Options(
+          headers: {
+            'authorization': token,
+          },
+        ));
   }
 
   static Future<Response> putData({
@@ -54,11 +55,14 @@ class DioHelper {
     required Map<String, dynamic> data,
     String? token,
   }) async {
-    return await dio.put(
-      url,
-      queryParameters: query,
-      data: data,
-    );
+    return await dio.put(url,
+        queryParameters: query,
+        data: data,
+        options: Options(
+          headers: {
+            'authorization': token,
+          },
+        ));
   }
 
   static Future<Response> deleteData({
@@ -72,7 +76,7 @@ class DioHelper {
     );
   }
 
-  static Future<String> uploadImage(String path , String token) async {
+  static Future<String> uploadImage(String path, String token) async {
     http.MultipartRequest req =
         http.MultipartRequest('PUT', Uri.parse('$uri/user/image/:id'));
     req.files.add(await http.MultipartFile.fromPath('images', path));
@@ -81,5 +85,5 @@ class DioHelper {
     });
     http.StreamedResponse res = await req.send();
     return await res.stream.bytesToString();
-}
+  }
 }

@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "52.0.0"
+  _flutterfire_internals:
+    dependency: transitive
+    description:
+      name: _flutterfire_internals
+      sha256: "6215ac7d00ed98300b72f45ed2b38c2ca841f9f4e6965fab33cbd591e45e4473"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.13"
   advanced_search:
     dependency: "direct main"
     description:
@@ -25,6 +33,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.0"
+  archive:
+    dependency: transitive
+    description:
+      name: archive
+      sha256: d6347d54a2d8028e0437e3c099f66fdb8ae02c4720c1e7534c9f24c10351f85d
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.3.6"
   args:
     dependency: transitive
     description:
@@ -161,6 +177,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.2"
+  cli_util:
+    dependency: transitive
+    description:
+      name: cli_util
+      sha256: "66f86e916d285c1a93d3b79587d94bd71984a66aac4ff74e524cfa7877f1395c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.5"
   clock:
     dependency: transitive
     description:
@@ -209,6 +233,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
+  csslib:
+    dependency: transitive
+    description:
+      name: csslib
+      sha256: b36c7f7e24c0bdf1bf9a3da461c837d1de64b9f8beb190c9011d8c72a3dfd745
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.17.2"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -265,6 +297,54 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.4"
+  firebase_core:
+    dependency: "direct main"
+    description:
+      name: firebase_core
+      sha256: be13e431c0c950f0fc66bdb67b41b8059121d7e7d8bbbc21fb59164892d561f8
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.5.0"
+  firebase_core_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_core_platform_interface
+      sha256: "5615b30c36f55b2777d0533771deda7e5730e769e5d3cb7fda79e9bed86cfa55"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.5.3"
+  firebase_core_web:
+    dependency: transitive
+    description:
+      name: firebase_core_web
+      sha256: "4b3a41410f3313bb95fd560aa5eb761b6ad65c185de772c72231e8b4aeed6d18"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
+  firebase_messaging:
+    dependency: "direct main"
+    description:
+      name: firebase_messaging
+      sha256: dbccddc62fef6f3745ba83062bfd1fbf2eb6a931db4c73d03f85c5772dfdec7f
+      url: "https://pub.dev"
+    source: hosted
+    version: "14.2.2"
+  firebase_messaging_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_messaging_platform_interface
+      sha256: "564a47ea76db9cd2d17e7d95790428ad3de9d0075795d14c4c901ba0bf518e1a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.2.11"
+  firebase_messaging_web:
+    dependency: transitive
+    description:
+      name: firebase_messaging_web
+      sha256: "76291494583a003d4ce0d613c41cb87c58fab25773317daa66a245f537e1c3f7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.12"
   fixnum:
     dependency: transitive
     description:
@@ -350,6 +430,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  flutter_launcher_icons:
+    dependency: "direct dev"
+    description:
+      name: flutter_launcher_icons
+      sha256: ce0e501cfc258907842238e4ca605e74b7fd1cdf04b3b43e86c43f3e40a1592c
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.11.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -382,6 +470,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.0"
+  flutter_native_splash:
+    dependency: "direct main"
+    description:
+      name: flutter_native_splash
+      sha256: "6777a3abb974021a39b5fdd2d46a03ca390e03903b6351f21d10e7ecc969f12d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.16"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -512,6 +608,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.0"
+  html:
+    dependency: transitive
+    description:
+      name: html
+      sha256: d9793e10dbe0e6c364f4c59bf3e01fb33a9b2a674bc7a1081693dba0614b6269
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.15.1"
   http:
     dependency: transitive
     description:
@@ -536,6 +640,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  iconsax:
+    dependency: "direct main"
+    description:
+      name: iconsax
+      sha256: fb0144c61f41f3f8a385fadc27783ea9f5359670be885ed7f35cef32565d5228
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.8"
+  image:
+    dependency: transitive
+    description:
+      name: image
+      sha256: "8e9d133755c3e84c73288363e6343157c383a0c6c56fc51afcc5d4d7180306d6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.3.0"
   image_picker:
     dependency: "direct main"
     description:
@@ -576,6 +696,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.6.2"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      sha256: "910f85bce16fb5c6f614e117efa303e85a1731bb0081edf3604a2ae6e9a3cc91"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.17.0"
   io:
     dependency: transitive
     description:
@@ -616,6 +744,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  lite_rolling_switch:
+    dependency: "direct main"
+    description:
+      name: lite_rolling_switch
+      sha256: "1e1866d49c49f67139139853421586b4450dac822f61e4c1d9f4244fe431ab6e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   logging:
     dependency: transitive
     description:
@@ -784,6 +920,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.3"
+  pointycastle:
+    dependency: transitive
+    description:
+      name: pointycastle
+      sha256: db7306cf0249f838d1a24af52b5a5887c5bf7f31d8bb4e827d071dc0939ad346
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.6.2"
   pool:
     dependency: transitive
     description:
@@ -1061,6 +1205,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
+  universal_io:
+    dependency: transitive
+    description:
+      name: universal_io
+      sha256: "79f78ddad839ee3aae3ec7c01eb4575faf0d5c860f8e5223bc9f9c17f7f03cef"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.4"
   uuid:
     dependency: transitive
     description:

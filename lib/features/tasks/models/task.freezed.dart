@@ -22,8 +22,9 @@ Task _$TaskFromJson(Map<String, dynamic> json) {
 mixin _$Task {
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  String? get date_debut => throw _privateConstructorUsedError;
-  String? get date_fin => throw _privateConstructorUsedError;
+  String? get datedebut => throw _privateConstructorUsedError;
+  String? get datefin => throw _privateConstructorUsedError;
+  String? get duration => throw _privateConstructorUsedError;
   String? get state => throw _privateConstructorUsedError;
   List<Comment>? get comments => throw _privateConstructorUsedError;
 
@@ -40,8 +41,9 @@ abstract class $TaskCopyWith<$Res> {
   $Res call(
       {String name,
       String description,
-      String? date_debut,
-      String? date_fin,
+      String? datedebut,
+      String? datefin,
+      String? duration,
       String? state,
       List<Comment>? comments});
 }
@@ -61,8 +63,9 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
   $Res call({
     Object? name = null,
     Object? description = null,
-    Object? date_debut = freezed,
-    Object? date_fin = freezed,
+    Object? datedebut = freezed,
+    Object? datefin = freezed,
+    Object? duration = freezed,
     Object? state = freezed,
     Object? comments = freezed,
   }) {
@@ -75,13 +78,17 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      date_debut: freezed == date_debut
-          ? _value.date_debut
-          : date_debut // ignore: cast_nullable_to_non_nullable
+      datedebut: freezed == datedebut
+          ? _value.datedebut
+          : datedebut // ignore: cast_nullable_to_non_nullable
               as String?,
-      date_fin: freezed == date_fin
-          ? _value.date_fin
-          : date_fin // ignore: cast_nullable_to_non_nullable
+      datefin: freezed == datefin
+          ? _value.datefin
+          : datefin // ignore: cast_nullable_to_non_nullable
+              as String?,
+      duration: freezed == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
               as String?,
       state: freezed == state
           ? _value.state
@@ -104,8 +111,9 @@ abstract class _$$_TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
   $Res call(
       {String name,
       String description,
-      String? date_debut,
-      String? date_fin,
+      String? datedebut,
+      String? datefin,
+      String? duration,
       String? state,
       List<Comment>? comments});
 }
@@ -121,8 +129,9 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res, _$_Task>
   $Res call({
     Object? name = null,
     Object? description = null,
-    Object? date_debut = freezed,
-    Object? date_fin = freezed,
+    Object? datedebut = freezed,
+    Object? datefin = freezed,
+    Object? duration = freezed,
     Object? state = freezed,
     Object? comments = freezed,
   }) {
@@ -135,13 +144,17 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res, _$_Task>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      date_debut: freezed == date_debut
-          ? _value.date_debut
-          : date_debut // ignore: cast_nullable_to_non_nullable
+      datedebut: freezed == datedebut
+          ? _value.datedebut
+          : datedebut // ignore: cast_nullable_to_non_nullable
               as String?,
-      date_fin: freezed == date_fin
-          ? _value.date_fin
-          : date_fin // ignore: cast_nullable_to_non_nullable
+      datefin: freezed == datefin
+          ? _value.datefin
+          : datefin // ignore: cast_nullable_to_non_nullable
+              as String?,
+      duration: freezed == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
               as String?,
       state: freezed == state
           ? _value.state
@@ -161,8 +174,9 @@ class _$_Task implements _Task {
   const _$_Task(
       {required this.name,
       required this.description,
-      this.date_debut,
-      this.date_fin,
+      this.datedebut,
+      this.datefin,
+      this.duration,
       this.state = 'incompleted',
       final List<Comment>? comments})
       : _comments = comments;
@@ -174,9 +188,11 @@ class _$_Task implements _Task {
   @override
   final String description;
   @override
-  final String? date_debut;
+  final String? datedebut;
   @override
-  final String? date_fin;
+  final String? datefin;
+  @override
+  final String? duration;
   @override
   @JsonKey()
   final String? state;
@@ -192,7 +208,7 @@ class _$_Task implements _Task {
 
   @override
   String toString() {
-    return 'Task(name: $name, description: $description, date_debut: $date_debut, date_fin: $date_fin, state: $state, comments: $comments)';
+    return 'Task(name: $name, description: $description, datedebut: $datedebut, datefin: $datefin, duration: $duration, state: $state, comments: $comments)';
   }
 
   @override
@@ -203,18 +219,19 @@ class _$_Task implements _Task {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.date_debut, date_debut) ||
-                other.date_debut == date_debut) &&
-            (identical(other.date_fin, date_fin) ||
-                other.date_fin == date_fin) &&
+            (identical(other.datedebut, datedebut) ||
+                other.datedebut == datedebut) &&
+            (identical(other.datefin, datefin) || other.datefin == datefin) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration) &&
             (identical(other.state, state) || other.state == state) &&
             const DeepCollectionEquality().equals(other._comments, _comments));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, description, date_debut,
-      date_fin, state, const DeepCollectionEquality().hash(_comments));
+  int get hashCode => Object.hash(runtimeType, name, description, datedebut,
+      datefin, duration, state, const DeepCollectionEquality().hash(_comments));
 
   @JsonKey(ignore: true)
   @override
@@ -234,8 +251,9 @@ abstract class _Task implements Task {
   const factory _Task(
       {required final String name,
       required final String description,
-      final String? date_debut,
-      final String? date_fin,
+      final String? datedebut,
+      final String? datefin,
+      final String? duration,
       final String? state,
       final List<Comment>? comments}) = _$_Task;
 
@@ -246,9 +264,11 @@ abstract class _Task implements Task {
   @override
   String get description;
   @override
-  String? get date_debut;
+  String? get datedebut;
   @override
-  String? get date_fin;
+  String? get datefin;
+  @override
+  String? get duration;
   @override
   String? get state;
   @override

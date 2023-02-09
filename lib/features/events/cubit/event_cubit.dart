@@ -25,9 +25,9 @@ class EventCubit extends Cubit<EventState> {
           return;
         } else {
           final newEvents =
-              events.where((element) => element.state == 'active').toList();
+              events.where((element) => element.state == 'Active').toList();
           final soonEvents =
-              events.where((element) => element.state == 'soon').toList();
+              events.where((element) => element.state == 'Soon').toList();
           emit(EventState.loaded(newEvents, soonEvents));
         }
       }

@@ -12,7 +12,9 @@ part 'user_bloc.freezed.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final AuthBloc authBloc;
-  UserBloc(this.authBloc, ) : super(_Initial()) {
+  UserBloc(
+    this.authBloc,
+  ) : super(const _Initial()) {
     on<UserEvent>((event, emit) {
       event.map(
           updateUser: _onUpdateUser,
@@ -22,19 +24,34 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 
   FutureOr<void> _onUpdateUser(_UpdateUser event) async {
-    try {} catch (e) {}
+    final String? token = await AuthRepo.getToken();
+    if (token == null) {
+      emit(const UserState.failure('Token not found'));
+    }
+    if (token != null) {
+      try {
+        emit(const UserState.loading());
+        final res = await AuthRepo.updateUser(token, event.data);
+        authBloc.add(AuthEvent.updateuser(res.data['user']));
+        emit(const UserState.success());
+      } catch (e) {
+        emit(UserState.failure(e.toString()));
+      }
+    } else {
+      emit(const UserState.failure('Token not found'));
+    }
   }
 
   FutureOr<void> _onUpdateUserImage(_UpdateUserImage event) async {
     try {
+      emit(const UserState.loading());
       final token = await AuthRepo.getToken();
       if (token != null) {
         final res = await AuthRepo.updateimage(event.path, token);
-        print(res);
         authBloc.add(AuthEvent.updateuser(res['user']));
-        emit(UserState.success());
+        emit(const UserState.success());
       } else {
-        emit(UserState.failure('Token not found'));
+        emit(const UserState.failure('Token not found'));
       }
     } catch (e) {
       emit(UserState.failure(e.toString()));

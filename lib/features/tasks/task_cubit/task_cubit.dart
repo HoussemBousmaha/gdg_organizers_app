@@ -25,8 +25,8 @@ class TaskCubit extends Cubit<TaskState> {
         emit(const TaskState.error('No tasks found'));
         return;
       } else {
-        final doneTasks = tasks.where((element) => element.state  == 'done').toList();
-        final newTasks = tasks.where((element) => element.state  != 'done').toList();
+        final doneTasks = tasks.where((element) => element.state  == 'completed').toList();
+        final newTasks = tasks.where((element) => element.state  != 'completed').toList();
         emit(TaskState.loaded(doneTasks , newTasks));
       }
     } catch (e) {

@@ -21,9 +21,9 @@ Comment _$CommentFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Comment {
   String get content => throw _privateConstructorUsedError;
-  String get userName => throw _privateConstructorUsedError;
-  String? get UserImage => throw _privateConstructorUsedError;
-  String? get Userid => throw _privateConstructorUsedError;
+  User? get sender => throw _privateConstructorUsedError;
+  String? get createdAt => throw _privateConstructorUsedError;
+  bool? get isEvent => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,8 +35,9 @@ abstract class $CommentCopyWith<$Res> {
   factory $CommentCopyWith(Comment value, $Res Function(Comment) then) =
       _$CommentCopyWithImpl<$Res, Comment>;
   @useResult
-  $Res call(
-      {String content, String userName, String? UserImage, String? Userid});
+  $Res call({String content, User? sender, String? createdAt, bool? isEvent});
+
+  $UserCopyWith<$Res>? get sender;
 }
 
 /// @nodoc
@@ -53,28 +54,40 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
   @override
   $Res call({
     Object? content = null,
-    Object? userName = null,
-    Object? UserImage = freezed,
-    Object? Userid = freezed,
+    Object? sender = freezed,
+    Object? createdAt = freezed,
+    Object? isEvent = freezed,
   }) {
     return _then(_value.copyWith(
       content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      userName: null == userName
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
-              as String,
-      UserImage: freezed == UserImage
-          ? _value.UserImage
-          : UserImage // ignore: cast_nullable_to_non_nullable
+      sender: freezed == sender
+          ? _value.sender
+          : sender // ignore: cast_nullable_to_non_nullable
+              as User?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
               as String?,
-      Userid: freezed == Userid
-          ? _value.Userid
-          : Userid // ignore: cast_nullable_to_non_nullable
-              as String?,
+      isEvent: freezed == isEvent
+          ? _value.isEvent
+          : isEvent // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res>? get sender {
+    if (_value.sender == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_value.sender!, (value) {
+      return _then(_value.copyWith(sender: value) as $Val);
+    });
   }
 }
 
@@ -85,8 +98,10 @@ abstract class _$$_CommentCopyWith<$Res> implements $CommentCopyWith<$Res> {
       __$$_CommentCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String content, String userName, String? UserImage, String? Userid});
+  $Res call({String content, User? sender, String? createdAt, bool? isEvent});
+
+  @override
+  $UserCopyWith<$Res>? get sender;
 }
 
 /// @nodoc
@@ -100,27 +115,27 @@ class __$$_CommentCopyWithImpl<$Res>
   @override
   $Res call({
     Object? content = null,
-    Object? userName = null,
-    Object? UserImage = freezed,
-    Object? Userid = freezed,
+    Object? sender = freezed,
+    Object? createdAt = freezed,
+    Object? isEvent = freezed,
   }) {
     return _then(_$_Comment(
       content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      userName: null == userName
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
-              as String,
-      UserImage: freezed == UserImage
-          ? _value.UserImage
-          : UserImage // ignore: cast_nullable_to_non_nullable
+      sender: freezed == sender
+          ? _value.sender
+          : sender // ignore: cast_nullable_to_non_nullable
+              as User?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
               as String?,
-      Userid: freezed == Userid
-          ? _value.Userid
-          : Userid // ignore: cast_nullable_to_non_nullable
-              as String?,
+      isEvent: freezed == isEvent
+          ? _value.isEvent
+          : isEvent // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -129,10 +144,7 @@ class __$$_CommentCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Comment with DiagnosticableTreeMixin implements _Comment {
   const _$_Comment(
-      {required this.content,
-      required this.userName,
-      this.UserImage,
-      this.Userid});
+      {required this.content, this.sender, this.createdAt, this.isEvent});
 
   factory _$_Comment.fromJson(Map<String, dynamic> json) =>
       _$$_CommentFromJson(json);
@@ -140,15 +152,15 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
   @override
   final String content;
   @override
-  final String userName;
+  final User? sender;
   @override
-  final String? UserImage;
+  final String? createdAt;
   @override
-  final String? Userid;
+  final bool? isEvent;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Comment(content: $content, userName: $userName, UserImage: $UserImage, Userid: $Userid)';
+    return 'Comment(content: $content, sender: $sender, createdAt: $createdAt, isEvent: $isEvent)';
   }
 
   @override
@@ -157,9 +169,9 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
     properties
       ..add(DiagnosticsProperty('type', 'Comment'))
       ..add(DiagnosticsProperty('content', content))
-      ..add(DiagnosticsProperty('userName', userName))
-      ..add(DiagnosticsProperty('UserImage', UserImage))
-      ..add(DiagnosticsProperty('Userid', Userid));
+      ..add(DiagnosticsProperty('sender', sender))
+      ..add(DiagnosticsProperty('createdAt', createdAt))
+      ..add(DiagnosticsProperty('isEvent', isEvent));
   }
 
   @override
@@ -168,17 +180,16 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
         (other.runtimeType == runtimeType &&
             other is _$_Comment &&
             (identical(other.content, content) || other.content == content) &&
-            (identical(other.userName, userName) ||
-                other.userName == userName) &&
-            (identical(other.UserImage, UserImage) ||
-                other.UserImage == UserImage) &&
-            (identical(other.Userid, Userid) || other.Userid == Userid));
+            (identical(other.sender, sender) || other.sender == sender) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.isEvent, isEvent) || other.isEvent == isEvent));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, content, userName, UserImage, Userid);
+      Object.hash(runtimeType, content, sender, createdAt, isEvent);
 
   @JsonKey(ignore: true)
   @override
@@ -197,20 +208,20 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
 abstract class _Comment implements Comment {
   const factory _Comment(
       {required final String content,
-      required final String userName,
-      final String? UserImage,
-      final String? Userid}) = _$_Comment;
+      final User? sender,
+      final String? createdAt,
+      final bool? isEvent}) = _$_Comment;
 
   factory _Comment.fromJson(Map<String, dynamic> json) = _$_Comment.fromJson;
 
   @override
   String get content;
   @override
-  String get userName;
+  User? get sender;
   @override
-  String? get UserImage;
+  String? get createdAt;
   @override
-  String? get Userid;
+  bool? get isEvent;
   @override
   @JsonKey(ignore: true)
   _$$_CommentCopyWith<_$_Comment> get copyWith =>

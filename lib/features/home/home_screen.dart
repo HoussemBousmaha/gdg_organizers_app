@@ -1,7 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gdg_organizers_app/features/auth/widgets/authwidgets.dart';
 import 'package:advanced_search/advanced_search.dart';
+import 'package:gdg_organizers_app/features/home/post_cubit/posts_cubit.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../constants/const.dart';
 part 'widgets/post.dart';
@@ -34,70 +37,35 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          Column(
-            children: posts
-                .map((e) => PostWidget(
-                      name: e.name,
-                      time: e.time,
-                      desc: e.desc,
-                      image: e.image,
-                      profileImage: e.profileImage,
-                    ))
-                .toList(),
+          BlocBuilder<PostsCubit, PostsState>(
+            builder: (context, state) {
+              return state.when(
+                  initial: () => const SizedBox.shrink(),
+                  loading: () => Column(
+                        children: List.generate(
+                          3,
+                          (index) => const PostShimmer(),
+                        ),
+                      ),
+                  loaded: (posts) => Column(
+                        children: posts
+                            .map((e) => PostWidget(
+                                  name: e.fullName,
+                                  time: e.messagetime,
+                                  desc: e.body,
+                                  image: e.photo!,
+                                  profileImage: e.postedBy!.image!,
+                                ))
+                            .toList(),
+                      ),
+                  error: (e) => Center(child: Text(e)));
+            },
           ),
         ],
       ),
     );
   }
 }
-
-List<PostWidget> posts = [
-  const PostWidget(
-    name: 'GDG Algiers ',
-    time: "2h",
-    desc:
-        'GDG Algiers is a community of developers who are interested in Google technologies. We are a group of developers who are passionate about Google technologies and want to share our knowledge with the community',
-    image:
-        "https://developers.google.com/community/devfest/images/devfest-social.png",
-    profileImage: 'https://pbs.twimg.com/media/D22N_huX4AEbb1y.jpg',
-  ),
-  const PostWidget(
-    name: 'GDG Algiers ',
-    time: "2h",
-    desc:
-        'GDG Algiers is a community of developers who are interested in Google technologies. We are a group of developers who are passionate about Google technologies and want to share our knowledge with the community',
-    image:
-        "https://developers.google.com/community/devfest/images/devfest-social.png",
-    profileImage: 'https://pbs.twimg.com/media/D22N_huX4AEbb1y.jpg',
-  ),
-  const PostWidget(
-    name: 'GDG Algiers ',
-    time: "2h",
-    desc:
-        'GDG Algiers is a community of developers who are interested in Google technologies. We are a group of developers who are passionate about Google technologies and want to share our knowledge with the community',
-    image:
-        "https://developers.google.com/community/devfest/images/devfest-social.png",
-    profileImage: 'https://pbs.twimg.com/media/D22N_huX4AEbb1y.jpg',
-  ),
-  const PostWidget(
-    name: 'GDG Algiers ',
-    time: "2h",
-    desc:
-        'GDG Algiers is a community of developers who are interested in Google technologies. We are a group of developers who are passionate about Google technologies and want to share our knowledge with the community',
-    image:
-        "https://developers.google.com/community/devfest/images/devfest-social.png",
-    profileImage: 'https://pbs.twimg.com/media/D22N_huX4AEbb1y.jpg',
-  ),
-  const PostWidget(
-    name: 'GDG Algiers ',
-    time: "2h",
-    desc:
-        'GDG Algiers is a community of developers who are interested in Google technologies. We are a group of developers who are passionate about Google technologies and want to share our knowledge with the community',
-    image:
-        "https://developers.google.com/community/devfest/images/devfest-social.png",
-    profileImage: 'https://pbs.twimg.com/media/D22N_huX4AEbb1y.jpg',
-  ),
-];
 
 class CustomImage extends StatelessWidget {
   const CustomImage({super.key, required this.uri, this.imageBuilder});
@@ -112,28 +80,6 @@ class CustomImage extends StatelessWidget {
           const Center(child: Icon(Icons.error)),
       progressIndicatorBuilder: (context, url, progress) =>
           const Center(child: CustomLoader()),
-    );
-  }
-}
-
-class SearchTextField extends StatelessWidget {
-  const SearchTextField({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const TextField(
-      readOnly: true,
-      cursorColor: Colors.black,
-      decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: "Search",
-          hintStyle: TextStyle(color: Color(0xff849395)),
-          filled: true,
-          suffixIcon: Icon(
-            Icons.search,
-            color: Color(0xff849395),
-          ),
-          fillColor: Color(0xffF4F8F9)),
     );
   }
 }

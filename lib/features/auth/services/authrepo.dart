@@ -7,8 +7,7 @@ import 'package:dio/dio.dart';
 import '../../../shared/services/diohelper.dart';
 
 class AuthApi {
-  
- static Future<Response> login(
+  static Future<Response> login(
     String email,
     String password,
   ) async {
@@ -18,13 +17,33 @@ class AuthApi {
         'email': email,
         'password': password,
       },
-  
     );
-}
+  }
+
   static Future<Response> getUser(String token) async {
-      return await DioHelper.getData(
-        url: '/user/:id',
-        token: token,
-      );
-    }
+    return await DioHelper.getData(
+      url: '/user/:id',
+      token: token,
+    );
+  }
+
+  static Future<Response> updateFcmtoken(String token, String fcmToken) async {
+    return await DioHelper.putData(
+      url: '/user/fcm/:id',
+      token: token,
+      data: {
+        'fcmToken': fcmToken,
+      },
+    );
+  }
+
+  static Future<Response> updateUser(
+      String token, Map<String, dynamic> data) async {
+    print(token);
+    return await DioHelper.putData(
+      url: '/user/:id',
+      token: token,
+      data: data,
+    );
+  }
 }

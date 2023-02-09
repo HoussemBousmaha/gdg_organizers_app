@@ -40,16 +40,24 @@ class TasksScreen extends StatelessWidget {
               return state.when(
                   initial: () => const SizedBox.shrink(),
                   loading: () => Column(
-                        children: List.generate(10, (index) => TaskShimmer()),
+                        children:
+                            List.generate(10, (index) => const TaskShimmer()),
                       ),
                   loaded: (_, tasks) => Column(
                       children: tasks
                           .map((e) => TaskWidget(
                                 title: e.name,
-                                time: e.date_debut!,
+                                time: e.datedebut!,
                               ))
                           .toList()),
-                  error: (e) => Center(child: Text(e)));
+                  error: (e) => Center(
+                          child: Text(
+                        e,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      )));
             },
           ),
           const Padding(
@@ -74,16 +82,23 @@ class TasksScreen extends StatelessWidget {
               return state.when(
                   initial: () => const SizedBox.shrink(),
                   loading: () => Column(
-                        children: List.generate(10, (index) => TaskShimmer()),
+                        children: List.generate(10, (index) => const TaskShimmer()),
                       ),
                   loaded: (doneTasks, _) => Column(
                       children: doneTasks
                           .map((e) => TaskWidget(
                                 title: e.name,
-                                time: e.date_debut!,
+                                time: e.datedebut!,
                               ))
                           .toList()),
-                  error: (e) => Center(child: Text(e)));
+                  error: (e) => Center(
+                          child: Text(
+                        e,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      )));
             },
           ),
           const SizedBox(

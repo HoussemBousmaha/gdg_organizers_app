@@ -9,8 +9,9 @@ class Task with _$Task{
   const factory Task({
     required String name,
     required String description,
-    String? date_debut,
-    String? date_fin , 
+    String? datedebut,
+    String? datefin , 
+    String? duration,
     @Default('incompleted') String? state,
     List<Comment>? comments,
 

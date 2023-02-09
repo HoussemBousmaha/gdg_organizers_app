@@ -66,7 +66,7 @@ class UserInfo extends StatelessWidget {
             '${context.watch<AuthBloc>().user.lastname} ${context.watch<AuthBloc>().user.firstname}',
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
           ),
-          const Text('Role',
+          const Text('Member',
               style: TextStyle(
                   fontSize: 16, fontWeight: FontWeight.w400, color: kRed)),
         ],

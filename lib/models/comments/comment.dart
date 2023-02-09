@@ -1,6 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
+import '../user/user.dart';
+
 
 part  'comment.freezed.dart';
 part 'comment.g.dart';
@@ -12,9 +14,10 @@ part 'comment.g.dart';
 class Comment with _$Comment{
   const factory Comment({
     required String content,
-    required String userName,
-    String? UserImage,
-    String? Userid , 
+    User ? sender,
+    String? createdAt,
+    bool? isEvent,
+
 
   }) = _Comment; 
      factory Comment.fromJson(Map<String, dynamic>  json) => _$CommentFromJson(json);

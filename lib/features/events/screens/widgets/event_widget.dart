@@ -1,39 +1,36 @@
 part of '../events_screen.dart';
 
 class EventWidget extends StatelessWidget {
-  const EventWidget({Key? key, required this.state, required this.image})
-      : super(key: key);
-  final String image;
-  final String state;
+  const EventWidget({Key? key, required this.event}) : super(key: key);
+  final Event event;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: kBoxDecorationForEvents,
       margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+      padding: const EdgeInsets.all(2.5),
       child: Container(
-        margin: const EdgeInsets.all(2.5),
-        height: 180,
         color: Colors.white,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            CustomImage(
-              uri: image,
-              imageBuilder: (context, imageProvider) => Image.network(
-                image,
-                fit: BoxFit.fitWidth,
-                width: double.infinity,
-                height: 120,
+            Hero(
+              tag: event.image,
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: CustomImage(
+                  uri: event.image,
+                ),
               ),
             ),
-            const Spacer(),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
               child: Row(
                 children: [
                   Text(
-                    state,
+                    event.state!,
                     style: const TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w700,
@@ -44,7 +41,13 @@ class EventWidget extends StatelessWidget {
                     style: TextButton.styleFrom(
                       backgroundColor: const Color(0xFFFFCA32),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(
+                        context,
+                        EventsDetails.routeName,
+                        arguments: event,
+                      );
+                    },
                     child: const Text(
                       'More Details',
                       style: TextStyle(

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
@@ -21,6 +22,12 @@ class AuthRepo {
     return response;
   } 
 
+  static Future<Response> updateUser (String token, Map<String, dynamic> data) async {
+    final Response response = await AuthApi.updateUser(token, data);
+    print(response.data);
+    return response;
+  }
+
   static Future<Map<String , dynamic>> updateimage (String token, String image) async {
     final String response = await DioHelper.uploadImage(token, image);
     return jsonDecode(response) ;
@@ -38,5 +45,8 @@ class AuthRepo {
   static Future<String?> getToken() async {
     final token = await _secureStorage.read(key: 'x-auth-token');
     return token;
+  }
+  static FutureOr<void> updateFcmtoken(String token, String fcmToken) async {
+    await AuthApi.updateFcmtoken(token, fcmToken);
   }
 }

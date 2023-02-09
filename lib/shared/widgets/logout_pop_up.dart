@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gdg_organizers_app/constants/const.dart';
+import 'package:gdg_organizers_app/logic/auth_bloc/auth_bloc.dart';
 
 class LogoutPopUp extends StatelessWidget {
   const LogoutPopUp({Key? key}) : super(key: key);
@@ -25,12 +27,14 @@ class LogoutPopUp extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-           const Spacer(),
+            const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
                   style: TextButton.styleFrom(
                     backgroundColor: kRed,
                     padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -46,7 +50,10 @@ class LogoutPopUp extends StatelessWidget {
                   width: 50,
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    context.read<AuthBloc>().add(const AuthEvent.loggedOut());
+                  },
                   style: TextButton.styleFrom(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     backgroundColor: kGreen,

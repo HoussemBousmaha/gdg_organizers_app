@@ -20,13 +20,14 @@ Event _$EventFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Event {
+  String? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   List<User>? get organizers => throw _privateConstructorUsedError;
   List<Task>? get tasks => throw _privateConstructorUsedError;
-  String? get date_debut => throw _privateConstructorUsedError;
-  String? get date_fin => throw _privateConstructorUsedError;
+  String? get datedebut => throw _privateConstructorUsedError;
+  String? get datefin => throw _privateConstructorUsedError;
   String? get state => throw _privateConstructorUsedError;
   List<Comment>? get comments => throw _privateConstructorUsedError;
 
@@ -41,13 +42,14 @@ abstract class $EventCopyWith<$Res> {
       _$EventCopyWithImpl<$Res, Event>;
   @useResult
   $Res call(
-      {String name,
+      {String? id,
+      String name,
       String description,
       String image,
       List<User>? organizers,
       List<Task>? tasks,
-      String? date_debut,
-      String? date_fin,
+      String? datedebut,
+      String? datefin,
       String? state,
       List<Comment>? comments});
 }
@@ -65,17 +67,22 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = null,
     Object? description = null,
     Object? image = null,
     Object? organizers = freezed,
     Object? tasks = freezed,
-    Object? date_debut = freezed,
-    Object? date_fin = freezed,
+    Object? datedebut = freezed,
+    Object? datefin = freezed,
     Object? state = freezed,
     Object? comments = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -96,13 +103,13 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
           ? _value.tasks
           : tasks // ignore: cast_nullable_to_non_nullable
               as List<Task>?,
-      date_debut: freezed == date_debut
-          ? _value.date_debut
-          : date_debut // ignore: cast_nullable_to_non_nullable
+      datedebut: freezed == datedebut
+          ? _value.datedebut
+          : datedebut // ignore: cast_nullable_to_non_nullable
               as String?,
-      date_fin: freezed == date_fin
-          ? _value.date_fin
-          : date_fin // ignore: cast_nullable_to_non_nullable
+      datefin: freezed == datefin
+          ? _value.datefin
+          : datefin // ignore: cast_nullable_to_non_nullable
               as String?,
       state: freezed == state
           ? _value.state
@@ -123,13 +130,14 @@ abstract class _$$_EventCopyWith<$Res> implements $EventCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String name,
+      {String? id,
+      String name,
       String description,
       String image,
       List<User>? organizers,
       List<Task>? tasks,
-      String? date_debut,
-      String? date_fin,
+      String? datedebut,
+      String? datefin,
       String? state,
       List<Comment>? comments});
 }
@@ -143,17 +151,22 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = null,
     Object? description = null,
     Object? image = null,
     Object? organizers = freezed,
     Object? tasks = freezed,
-    Object? date_debut = freezed,
-    Object? date_fin = freezed,
+    Object? datedebut = freezed,
+    Object? datefin = freezed,
     Object? state = freezed,
     Object? comments = freezed,
   }) {
     return _then(_$_Event(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -174,13 +187,13 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
           ? _value._tasks
           : tasks // ignore: cast_nullable_to_non_nullable
               as List<Task>?,
-      date_debut: freezed == date_debut
-          ? _value.date_debut
-          : date_debut // ignore: cast_nullable_to_non_nullable
+      datedebut: freezed == datedebut
+          ? _value.datedebut
+          : datedebut // ignore: cast_nullable_to_non_nullable
               as String?,
-      date_fin: freezed == date_fin
-          ? _value.date_fin
-          : date_fin // ignore: cast_nullable_to_non_nullable
+      datefin: freezed == datefin
+          ? _value.datefin
+          : datefin // ignore: cast_nullable_to_non_nullable
               as String?,
       state: freezed == state
           ? _value.state
@@ -198,13 +211,14 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
 @JsonSerializable()
 class _$_Event with DiagnosticableTreeMixin implements _Event {
   const _$_Event(
-      {required this.name,
+      {this.id,
+      required this.name,
       required this.description,
       required this.image,
       final List<User>? organizers,
       final List<Task>? tasks,
-      this.date_debut,
-      this.date_fin,
+      this.datedebut,
+      this.datefin,
       this.state = 'inactive',
       final List<Comment>? comments})
       : _organizers = organizers,
@@ -214,6 +228,8 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
   factory _$_Event.fromJson(Map<String, dynamic> json) =>
       _$$_EventFromJson(json);
 
+  @override
+  final String? id;
   @override
   final String name;
   @override
@@ -241,9 +257,9 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
   }
 
   @override
-  final String? date_debut;
+  final String? datedebut;
   @override
-  final String? date_fin;
+  final String? datefin;
   @override
   @JsonKey()
   final String? state;
@@ -259,7 +275,7 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Event(name: $name, description: $description, image: $image, organizers: $organizers, tasks: $tasks, date_debut: $date_debut, date_fin: $date_fin, state: $state, comments: $comments)';
+    return 'Event(id: $id, name: $name, description: $description, image: $image, organizers: $organizers, tasks: $tasks, datedebut: $datedebut, datefin: $datefin, state: $state, comments: $comments)';
   }
 
   @override
@@ -267,13 +283,14 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Event'))
+      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('image', image))
       ..add(DiagnosticsProperty('organizers', organizers))
       ..add(DiagnosticsProperty('tasks', tasks))
-      ..add(DiagnosticsProperty('date_debut', date_debut))
-      ..add(DiagnosticsProperty('date_fin', date_fin))
+      ..add(DiagnosticsProperty('datedebut', datedebut))
+      ..add(DiagnosticsProperty('datefin', datefin))
       ..add(DiagnosticsProperty('state', state))
       ..add(DiagnosticsProperty('comments', comments));
   }
@@ -283,6 +300,7 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Event &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -290,10 +308,9 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
             const DeepCollectionEquality()
                 .equals(other._organizers, _organizers) &&
             const DeepCollectionEquality().equals(other._tasks, _tasks) &&
-            (identical(other.date_debut, date_debut) ||
-                other.date_debut == date_debut) &&
-            (identical(other.date_fin, date_fin) ||
-                other.date_fin == date_fin) &&
+            (identical(other.datedebut, datedebut) ||
+                other.datedebut == datedebut) &&
+            (identical(other.datefin, datefin) || other.datefin == datefin) &&
             (identical(other.state, state) || other.state == state) &&
             const DeepCollectionEquality().equals(other._comments, _comments));
   }
@@ -302,13 +319,14 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      id,
       name,
       description,
       image,
       const DeepCollectionEquality().hash(_organizers),
       const DeepCollectionEquality().hash(_tasks),
-      date_debut,
-      date_fin,
+      datedebut,
+      datefin,
       state,
       const DeepCollectionEquality().hash(_comments));
 
@@ -328,18 +346,21 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
 
 abstract class _Event implements Event {
   const factory _Event(
-      {required final String name,
+      {final String? id,
+      required final String name,
       required final String description,
       required final String image,
       final List<User>? organizers,
       final List<Task>? tasks,
-      final String? date_debut,
-      final String? date_fin,
+      final String? datedebut,
+      final String? datefin,
       final String? state,
       final List<Comment>? comments}) = _$_Event;
 
   factory _Event.fromJson(Map<String, dynamic> json) = _$_Event.fromJson;
 
+  @override
+  String? get id;
   @override
   String get name;
   @override
@@ -351,9 +372,9 @@ abstract class _Event implements Event {
   @override
   List<Task>? get tasks;
   @override
-  String? get date_debut;
+  String? get datedebut;
   @override
-  String? get date_fin;
+  String? get datefin;
   @override
   String? get state;
   @override

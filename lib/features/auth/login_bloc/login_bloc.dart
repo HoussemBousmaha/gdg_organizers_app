@@ -2,11 +2,13 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../logic/auth_bloc/auth_bloc.dart';
+import '../../../shared/services/notification.dart';
 import '../services/authapi.dart';
 
 part 'login_event.dart';
@@ -35,6 +37,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         res.data['user'],
         res.data['token'],
       ));
+      NotificationServices.joinchannel();
     } catch (e) {
       emit(LoginState.failure(
           res != null ? res.data['error'] ?? 'Login Failed' : 'Login Failed'));

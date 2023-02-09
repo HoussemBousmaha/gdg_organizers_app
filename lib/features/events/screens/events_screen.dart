@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gdg_organizers_app/features/auth/widgets/authwidgets.dart';
 import 'package:gdg_organizers_app/features/events/cubit/event_cubit.dart';
 import 'package:gdg_organizers_app/features/home/home_screen.dart';
 import 'package:shimmer/shimmer.dart';
-import '../../../constants/const.dart';
+import '../../../../constants/const.dart';
+import '../models/event.dart';
+import 'event_details.dart';
 part 'widgets/event_widget.dart';
 
 class EventsScreen extends StatelessWidget {
@@ -43,8 +44,8 @@ class EventsScreen extends StatelessWidget {
                   loaded: (_, soonEvents) => Column(
                       children: soonEvents
                           .map((e) => EventWidget(
-                                image: e.image,
-                                state: e.state!,
+                          event: e,
+                                
                               ))
                           .toList()),
                   error: (e) => Center(child: Text(e)));
@@ -75,8 +76,7 @@ class EventsScreen extends StatelessWidget {
                   loaded: (newEvents, _) => Column(
                       children: newEvents
                           .map((e) => EventWidget(
-                                image: e.image,
-                                state: e.state!,
+                          event: e,
                               ))
                           .toList()),
                   error: (e) => Center(child: Text(e)));

@@ -1,11 +1,10 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:ffi';
-import 'dart:math';
 
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:gdg_organizers_app/shared/services/notification.dart';
 
 import '../../features/auth/services/authapi.dart';
 import '../../models/user/user.dart';
@@ -29,13 +28,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     _AppStarted event,
   ) async {
     try {
-              emit(const _Loading());
+      emit(const _Loading());
 
       final token = await AuthRepo.getToken();
       if (token != null) {
         final Response response = await AuthRepo.getUser(token);
         print(response.data['user']);
         setuser(response.data['user']);
+        FirebaseMessaging.instance.getToken().then((value) {
+        AuthRepo.updateFcmtoken(value?? '', token);
+        });
       } else {
         emit(const _Unauthenticated());
       }
@@ -51,8 +53,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       emit(const _Loading());
 
-      await AuthRepo
-          .persistData(event.token)
+      await AuthRepo.persistData(event.token)
           .then((value) => setuser(event.data));
     } catch (e) {
       print(e);

@@ -9,16 +9,23 @@ import 'package:gdg_organizers_app/features/settings/widgets/profileAvatare.dart
 import 'package:gdg_organizers_app/logic/auth_bloc/auth_bloc.dart';
 import 'package:gdg_organizers_app/logic/user_bloc/user_bloc.dart';
 import 'package:gdg_organizers_app/shared/services/diohelper.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../constants/icon_broken.dart';
+import '../../features/notification/notification_screen.dart';
 import '../../logic/imagecubit.dart';
 import 'feedback.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  CustomAppBar({super.key, required this.title, required this.currentIndex});
+  CustomAppBar(
+      {super.key,
+      required this.title,
+      required this.currentIndex,
+      this.showBackButton = false});
   final String title;
   final int currentIndex;
+  final bool showBackButton;
   final ImagePicker _picker = ImagePicker();
 
   @override
@@ -37,19 +44,23 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               if (currentIndex < 4)
                 SizedBox(
-                  width: currentIndex > 2 ? 45 : 20,
+                  width: currentIndex > 2
+                      ? 45
+                      : showBackButton
+                          ? 0
+                          : 20,
                   height: 60,
                 ),
-              if (currentIndex > 3)
+              if (showBackButton)
                 IconButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
                     icon: Icon(
                       IconBroken.Arrow___Left_2,
-                      color: Colors.white,
+                      color: currentIndex > 2 ? Colors.white : Colors.black,
                     )),
-              if (currentIndex > 2) Spacer(),
+              if (currentIndex > 2) const Spacer(),
               Text(
                 title,
                 style: TextStyle(
@@ -61,22 +72,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               const Spacer(),
               IconButton(
                   onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (_) {
-                        return const AlertDialog(
-                          contentPadding: EdgeInsets.zero,
-                          content: FeedBackWidget(),
-                        );
-                      },
-                    );
+                    Navigator.pushNamed(context, Notifications.routeName);
                   },
                   icon: Icon(
-                    IconBroken.Notification,
+                    Iconsax.notification,
                     color: currentIndex > 2 ? Colors.white : kBlue,
                   )),
               if (currentIndex < 3)
-                SizedBox(
+                const SizedBox(
                   width: 40,
                 )
             ],
@@ -102,7 +105,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                             children: [
                               if (context.read<ImageCubit>().state != null)
                                 Container(
-                                  margin: EdgeInsets.all(20),
+                                  margin: const EdgeInsets.all(20),
                                   height: 200,
                                   width: double.infinity,
                                   decoration: BoxDecoration(
@@ -128,7 +131,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                                       context.watch<AuthBloc>().user.image!,
                                   imageBuilder: (context, imageProvider) =>
                                       Container(
-                                    margin: EdgeInsets.all(20),
+                                    margin: const EdgeInsets.all(20),
                                     height: 200,
                                     width: double.infinity,
                                     decoration: BoxDecoration(
@@ -146,11 +149,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                                 ),
                               ListTile(
                                 onTap: () async {
-                                  final pickedFile = await _picker.pickImage(
-                                      source: ImageSource.camera);
-                                  context
-                                      .read<ImageCubit>()
-                                      .changeCoverPhoto(pickedFile);
+                                  _picker
+                                      .pickImage(source: ImageSource.camera)
+                                      .then((value) => context
+                                          .read<ImageCubit>()
+                                          .changeCoverPhoto(value));
                                 },
                                 leading: const Icon(IconBroken.Camera),
                                 title: const Text(
@@ -159,11 +162,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                               ),
                               ListTile(
                                 onTap: () async {
-                                  final pickedFile = await _picker.pickImage(
-                                      source: ImageSource.gallery);
-                                  context
-                                      .read<ImageCubit>()
-                                      .changeCoverPhoto(pickedFile);
+                                  _picker
+                                      .pickImage(source: ImageSource.gallery)
+                                      .then((value) => context
+                                          .read<ImageCubit>()
+                                          .changeCoverPhoto(value));
                                 },
                                 leading: const Icon(IconBroken.Image),
                                 title: const Text('Gallery'),

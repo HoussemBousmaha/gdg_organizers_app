@@ -9,7 +9,7 @@ class User with _$User {
     
     required String firstname ,
     required String lastname , 
-    required String email , 
+     String? email , 
     String? phone ,
     String? id , 
     String? password ,
@@ -17,7 +17,7 @@ class User with _$User {
 
 
   }) = _User;
-
+   
 
 
    factory User.fromJson(Map<String, dynamic>  json) => _$UserFromJson(json);

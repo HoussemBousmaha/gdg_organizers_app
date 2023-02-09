@@ -53,6 +53,21 @@ dependencies:
   flutter_local_notifications: ^13.0.0
   advanced_search: ^2.2.3
   shimmer: ^2.0.0
+  intl: ^0.17.0
+  lite_rolling_switch: ^1.0.0
+
+  flutter_native_splash:
+  firebase_core: 
+  firebase_messaging: 
+  iconsax: ^0.0.8
+
+  
+flutter_native_splash:
+  color: "#4285f4"
+  
+
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -66,6 +81,11 @@ dev_dependencies:
   build_runner: ^2.2.0
   freezed: ^2.3.2
   json_serializable: ^6.6.0
+  flutter_launcher_icons: "^0.11.0"
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/appicon.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -18,43 +18,47 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CommentEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId, String channelId) getComments,
+    required TResult Function(
+            String userId, String channelId, List<Comment> comments)
+        connect,
     required TResult Function(String comment) sendComment,
-    required TResult Function(List<Comment> comments) recieveComment,
+    required TResult Function(Comment comment) recieveComment,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, String channelId)? getComments,
+    TResult? Function(String userId, String channelId, List<Comment> comments)?
+        connect,
     TResult? Function(String comment)? sendComment,
-    TResult? Function(List<Comment> comments)? recieveComment,
+    TResult? Function(Comment comment)? recieveComment,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, String channelId)? getComments,
+    TResult Function(String userId, String channelId, List<Comment> comments)?
+        connect,
     TResult Function(String comment)? sendComment,
-    TResult Function(List<Comment> comments)? recieveComment,
+    TResult Function(Comment comment)? recieveComment,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetComments value) getComments,
+    required TResult Function(_GetComments value) connect,
     required TResult Function(_SendComment value) sendComment,
     required TResult Function(_RecieveComment value) recieveComment,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetComments value)? getComments,
+    TResult? Function(_GetComments value)? connect,
     TResult? Function(_SendComment value)? sendComment,
     TResult? Function(_RecieveComment value)? recieveComment,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetComments value)? getComments,
+    TResult Function(_GetComments value)? connect,
     TResult Function(_SendComment value)? sendComment,
     TResult Function(_RecieveComment value)? recieveComment,
     required TResult orElse(),
@@ -86,7 +90,7 @@ abstract class _$$_GetCommentsCopyWith<$Res> {
           _$_GetComments value, $Res Function(_$_GetComments) then) =
       __$$_GetCommentsCopyWithImpl<$Res>;
   @useResult
-  $Res call({String userId, String channelId});
+  $Res call({String userId, String channelId, List<Comment> comments});
 }
 
 /// @nodoc
@@ -102,6 +106,7 @@ class __$$_GetCommentsCopyWithImpl<$Res>
   $Res call({
     Object? userId = null,
     Object? channelId = null,
+    Object? comments = null,
   }) {
     return _then(_$_GetComments(
       null == userId
@@ -112,6 +117,10 @@ class __$$_GetCommentsCopyWithImpl<$Res>
           ? _value.channelId
           : channelId // ignore: cast_nullable_to_non_nullable
               as String,
+      null == comments
+          ? _value._comments
+          : comments // ignore: cast_nullable_to_non_nullable
+              as List<Comment>,
     ));
   }
 }
@@ -119,16 +128,25 @@ class __$$_GetCommentsCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_GetComments implements _GetComments {
-  const _$_GetComments(this.userId, this.channelId);
+  const _$_GetComments(
+      this.userId, this.channelId, final List<Comment> comments)
+      : _comments = comments;
 
   @override
   final String userId;
   @override
   final String channelId;
+  final List<Comment> _comments;
+  @override
+  List<Comment> get comments {
+    if (_comments is EqualUnmodifiableListView) return _comments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_comments);
+  }
 
   @override
   String toString() {
-    return 'CommentEvent.getComments(userId: $userId, channelId: $channelId)';
+    return 'CommentEvent.connect(userId: $userId, channelId: $channelId, comments: $comments)';
   }
 
   @override
@@ -138,11 +156,13 @@ class _$_GetComments implements _GetComments {
             other is _$_GetComments &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.channelId, channelId) ||
-                other.channelId == channelId));
+                other.channelId == channelId) &&
+            const DeepCollectionEquality().equals(other._comments, _comments));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userId, channelId);
+  int get hashCode => Object.hash(runtimeType, userId, channelId,
+      const DeepCollectionEquality().hash(_comments));
 
   @JsonKey(ignore: true)
   @override
@@ -153,33 +173,37 @@ class _$_GetComments implements _GetComments {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId, String channelId) getComments,
+    required TResult Function(
+            String userId, String channelId, List<Comment> comments)
+        connect,
     required TResult Function(String comment) sendComment,
-    required TResult Function(List<Comment> comments) recieveComment,
+    required TResult Function(Comment comment) recieveComment,
   }) {
-    return getComments(userId, channelId);
+    return connect(userId, channelId, comments);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, String channelId)? getComments,
+    TResult? Function(String userId, String channelId, List<Comment> comments)?
+        connect,
     TResult? Function(String comment)? sendComment,
-    TResult? Function(List<Comment> comments)? recieveComment,
+    TResult? Function(Comment comment)? recieveComment,
   }) {
-    return getComments?.call(userId, channelId);
+    return connect?.call(userId, channelId, comments);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, String channelId)? getComments,
+    TResult Function(String userId, String channelId, List<Comment> comments)?
+        connect,
     TResult Function(String comment)? sendComment,
-    TResult Function(List<Comment> comments)? recieveComment,
+    TResult Function(Comment comment)? recieveComment,
     required TResult orElse(),
   }) {
-    if (getComments != null) {
-      return getComments(userId, channelId);
+    if (connect != null) {
+      return connect(userId, channelId, comments);
     }
     return orElse();
   }
@@ -187,44 +211,45 @@ class _$_GetComments implements _GetComments {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetComments value) getComments,
+    required TResult Function(_GetComments value) connect,
     required TResult Function(_SendComment value) sendComment,
     required TResult Function(_RecieveComment value) recieveComment,
   }) {
-    return getComments(this);
+    return connect(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetComments value)? getComments,
+    TResult? Function(_GetComments value)? connect,
     TResult? Function(_SendComment value)? sendComment,
     TResult? Function(_RecieveComment value)? recieveComment,
   }) {
-    return getComments?.call(this);
+    return connect?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetComments value)? getComments,
+    TResult Function(_GetComments value)? connect,
     TResult Function(_SendComment value)? sendComment,
     TResult Function(_RecieveComment value)? recieveComment,
     required TResult orElse(),
   }) {
-    if (getComments != null) {
-      return getComments(this);
+    if (connect != null) {
+      return connect(this);
     }
     return orElse();
   }
 }
 
 abstract class _GetComments implements CommentEvent {
-  const factory _GetComments(final String userId, final String channelId) =
-      _$_GetComments;
+  const factory _GetComments(final String userId, final String channelId,
+      final List<Comment> comments) = _$_GetComments;
 
   String get userId;
   String get channelId;
+  List<Comment> get comments;
   @JsonKey(ignore: true)
   _$$_GetCommentsCopyWith<_$_GetComments> get copyWith =>
       throw _privateConstructorUsedError;
@@ -294,9 +319,11 @@ class _$_SendComment implements _SendComment {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId, String channelId) getComments,
+    required TResult Function(
+            String userId, String channelId, List<Comment> comments)
+        connect,
     required TResult Function(String comment) sendComment,
-    required TResult Function(List<Comment> comments) recieveComment,
+    required TResult Function(Comment comment) recieveComment,
   }) {
     return sendComment(comment);
   }
@@ -304,9 +331,10 @@ class _$_SendComment implements _SendComment {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, String channelId)? getComments,
+    TResult? Function(String userId, String channelId, List<Comment> comments)?
+        connect,
     TResult? Function(String comment)? sendComment,
-    TResult? Function(List<Comment> comments)? recieveComment,
+    TResult? Function(Comment comment)? recieveComment,
   }) {
     return sendComment?.call(comment);
   }
@@ -314,9 +342,10 @@ class _$_SendComment implements _SendComment {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, String channelId)? getComments,
+    TResult Function(String userId, String channelId, List<Comment> comments)?
+        connect,
     TResult Function(String comment)? sendComment,
-    TResult Function(List<Comment> comments)? recieveComment,
+    TResult Function(Comment comment)? recieveComment,
     required TResult orElse(),
   }) {
     if (sendComment != null) {
@@ -328,7 +357,7 @@ class _$_SendComment implements _SendComment {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetComments value) getComments,
+    required TResult Function(_GetComments value) connect,
     required TResult Function(_SendComment value) sendComment,
     required TResult Function(_RecieveComment value) recieveComment,
   }) {
@@ -338,7 +367,7 @@ class _$_SendComment implements _SendComment {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetComments value)? getComments,
+    TResult? Function(_GetComments value)? connect,
     TResult? Function(_SendComment value)? sendComment,
     TResult? Function(_RecieveComment value)? recieveComment,
   }) {
@@ -348,7 +377,7 @@ class _$_SendComment implements _SendComment {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetComments value)? getComments,
+    TResult Function(_GetComments value)? connect,
     TResult Function(_SendComment value)? sendComment,
     TResult Function(_RecieveComment value)? recieveComment,
     required TResult orElse(),
@@ -375,7 +404,9 @@ abstract class _$$_RecieveCommentCopyWith<$Res> {
           _$_RecieveComment value, $Res Function(_$_RecieveComment) then) =
       __$$_RecieveCommentCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Comment> comments});
+  $Res call({Comment comment});
+
+  $CommentCopyWith<$Res> get comment;
 }
 
 /// @nodoc
@@ -389,33 +420,36 @@ class __$$_RecieveCommentCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? comments = null,
+    Object? comment = null,
   }) {
     return _then(_$_RecieveComment(
-      null == comments
-          ? _value._comments
-          : comments // ignore: cast_nullable_to_non_nullable
-              as List<Comment>,
+      null == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as Comment,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CommentCopyWith<$Res> get comment {
+    return $CommentCopyWith<$Res>(_value.comment, (value) {
+      return _then(_value.copyWith(comment: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$_RecieveComment implements _RecieveComment {
-  const _$_RecieveComment(final List<Comment> comments) : _comments = comments;
+  const _$_RecieveComment(this.comment);
 
-  final List<Comment> _comments;
   @override
-  List<Comment> get comments {
-    if (_comments is EqualUnmodifiableListView) return _comments;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_comments);
-  }
+  final Comment comment;
 
   @override
   String toString() {
-    return 'CommentEvent.recieveComment(comments: $comments)';
+    return 'CommentEvent.recieveComment(comment: $comment)';
   }
 
   @override
@@ -423,12 +457,11 @@ class _$_RecieveComment implements _RecieveComment {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_RecieveComment &&
-            const DeepCollectionEquality().equals(other._comments, _comments));
+            (identical(other.comment, comment) || other.comment == comment));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_comments));
+  int get hashCode => Object.hash(runtimeType, comment);
 
   @JsonKey(ignore: true)
   @override
@@ -439,33 +472,37 @@ class _$_RecieveComment implements _RecieveComment {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId, String channelId) getComments,
+    required TResult Function(
+            String userId, String channelId, List<Comment> comments)
+        connect,
     required TResult Function(String comment) sendComment,
-    required TResult Function(List<Comment> comments) recieveComment,
+    required TResult Function(Comment comment) recieveComment,
   }) {
-    return recieveComment(comments);
+    return recieveComment(comment);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, String channelId)? getComments,
+    TResult? Function(String userId, String channelId, List<Comment> comments)?
+        connect,
     TResult? Function(String comment)? sendComment,
-    TResult? Function(List<Comment> comments)? recieveComment,
+    TResult? Function(Comment comment)? recieveComment,
   }) {
-    return recieveComment?.call(comments);
+    return recieveComment?.call(comment);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, String channelId)? getComments,
+    TResult Function(String userId, String channelId, List<Comment> comments)?
+        connect,
     TResult Function(String comment)? sendComment,
-    TResult Function(List<Comment> comments)? recieveComment,
+    TResult Function(Comment comment)? recieveComment,
     required TResult orElse(),
   }) {
     if (recieveComment != null) {
-      return recieveComment(comments);
+      return recieveComment(comment);
     }
     return orElse();
   }
@@ -473,7 +510,7 @@ class _$_RecieveComment implements _RecieveComment {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetComments value) getComments,
+    required TResult Function(_GetComments value) connect,
     required TResult Function(_SendComment value) sendComment,
     required TResult Function(_RecieveComment value) recieveComment,
   }) {
@@ -483,7 +520,7 @@ class _$_RecieveComment implements _RecieveComment {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetComments value)? getComments,
+    TResult? Function(_GetComments value)? connect,
     TResult? Function(_SendComment value)? sendComment,
     TResult? Function(_RecieveComment value)? recieveComment,
   }) {
@@ -493,7 +530,7 @@ class _$_RecieveComment implements _RecieveComment {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetComments value)? getComments,
+    TResult Function(_GetComments value)? connect,
     TResult Function(_SendComment value)? sendComment,
     TResult Function(_RecieveComment value)? recieveComment,
     required TResult orElse(),
@@ -506,10 +543,9 @@ class _$_RecieveComment implements _RecieveComment {
 }
 
 abstract class _RecieveComment implements CommentEvent {
-  const factory _RecieveComment(final List<Comment> comments) =
-      _$_RecieveComment;
+  const factory _RecieveComment(final Comment comment) = _$_RecieveComment;
 
-  List<Comment> get comments;
+  Comment get comment;
   @JsonKey(ignore: true)
   _$$_RecieveCommentCopyWith<_$_RecieveComment> get copyWith =>
       throw _privateConstructorUsedError;

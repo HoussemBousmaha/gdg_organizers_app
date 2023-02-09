@@ -10,14 +10,15 @@ part 'event.g.dart';
 
 class Event with _$Event{
   const factory Event({
+    String? id,
     required String name,
     required String description,
     required String image ,
     List<User>? organizers ,
     List<Task>? tasks,
 
-    String? date_debut,
-    String? date_fin , 
+    String? datedebut,
+    String? datefin , 
     @Default('inactive') String? state,
     
     List<Comment>? comments,

@@ -59,6 +59,7 @@ const kCornerInputRadius = 20.0;
 const kCornerButtonRadius = 8.0;
 
 const String uri = 'http://192.168.93.38:8080/api';
+const String socketUri = 'http://192.168.93.38:8080';
 
 String? validateEmail(String? value) {
   String pattern =

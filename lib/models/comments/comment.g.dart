@@ -8,15 +8,17 @@ part of 'comment.dart';
 
 _$_Comment _$$_CommentFromJson(Map<String, dynamic> json) => _$_Comment(
       content: json['content'] as String,
-      userName: json['userName'] as String,
-      UserImage: json['UserImage'] as String?,
-      Userid: json['Userid'] as String?,
+      sender: json['sender'] == null
+          ? null
+          : User.fromJson(json['sender'] as Map<String, dynamic>),
+      createdAt: json['createdAt'] as String?,
+      isEvent: json['isEvent'] as bool?,
     );
 
 Map<String, dynamic> _$$_CommentToJson(_$_Comment instance) =>
     <String, dynamic>{
       'content': instance.content,
-      'userName': instance.userName,
-      'UserImage': instance.UserImage,
-      'Userid': instance.Userid,
+      'sender': instance.sender,
+      'createdAt': instance.createdAt,
+      'isEvent': instance.isEvent,
     };

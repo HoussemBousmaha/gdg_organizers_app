@@ -22,7 +22,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
 mixin _$User {
   String get firstname => throw _privateConstructorUsedError;
   String get lastname => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
   String? get id => throw _privateConstructorUsedError;
   String? get password => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {String firstname,
       String lastname,
-      String email,
+      String? email,
       String? phone,
       String? id,
       String? password,
@@ -63,7 +63,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   $Res call({
     Object? firstname = null,
     Object? lastname = null,
-    Object? email = null,
+    Object? email = freezed,
     Object? phone = freezed,
     Object? id = freezed,
     Object? password = freezed,
@@ -78,10 +78,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.lastname
           : lastname // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -111,7 +111,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {String firstname,
       String lastname,
-      String email,
+      String? email,
       String? phone,
       String? id,
       String? password,
@@ -129,7 +129,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
   $Res call({
     Object? firstname = null,
     Object? lastname = null,
-    Object? email = null,
+    Object? email = freezed,
     Object? phone = freezed,
     Object? id = freezed,
     Object? password = freezed,
@@ -144,10 +144,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.lastname
           : lastname // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -174,7 +174,7 @@ class _$_User implements _User {
   const _$_User(
       {required this.firstname,
       required this.lastname,
-      required this.email,
+      this.email,
       this.phone,
       this.id,
       this.password,
@@ -187,7 +187,7 @@ class _$_User implements _User {
   @override
   final String lastname;
   @override
-  final String email;
+  final String? email;
   @override
   final String? phone;
   @override
@@ -242,7 +242,7 @@ abstract class _User implements User {
   const factory _User(
       {required final String firstname,
       required final String lastname,
-      required final String email,
+      final String? email,
       final String? phone,
       final String? id,
       final String? password,
@@ -255,7 +255,7 @@ abstract class _User implements User {
   @override
   String get lastname;
   @override
-  String get email;
+  String? get email;
   @override
   String? get phone;
   @override
