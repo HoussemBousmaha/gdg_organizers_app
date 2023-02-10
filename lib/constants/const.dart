@@ -40,6 +40,20 @@ const passwordlinearGradient = LinearGradient(
     Color(0xFFFFCA32),
   ],
 );
+const kBoxDecorationForLogin = BoxDecoration(
+  borderRadius: BorderRadius.only(
+    topLeft: Radius.circular(20),
+    topRight: Radius.circular(20),
+  ),
+  gradient: LinearGradient(
+    colors: [
+      Color(0xFFEA4334),
+      Color(0xFF0D9D58),
+      Color(0xFF4285F4),
+      Color(0xFFFFCA32),
+    ],
+  ),
+);
 const String images = 'assets/images';
 const String icons = 'assets/icons/';
 const kGreen = Color(0xFF0D9D58);
