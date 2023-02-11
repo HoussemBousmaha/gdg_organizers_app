@@ -72,8 +72,8 @@ const kCornerRadius = 25.0;
 const kCornerInputRadius = 20.0;
 const kCornerButtonRadius = 8.0;
 
-const String uri = 'http://192.168.221.38:5000/api';
-const String socketUri = "http://192.168.221.38:8080";
+const String uri = 'http://<IPV4>/api';
+const String socketUri = "http://<IPV4>";
 String? validateEmail(String? value) {
   String pattern =
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
