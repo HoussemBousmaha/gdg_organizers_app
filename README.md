@@ -116,6 +116,6 @@ Distributed under the Apache License. See `LICENSE` for more information.
 
 GDG Algiers - [@gdg_algiers](https://twitter.com/gdg_algiers) - gdg.algiers@esi.dz
 
-Project Link: [https://github.com/z-sohaib/organizers-app-rest-api](https://github.com/MoussaabBadla/gdg_organizers_app)
+Project Link: [https://github.com/MoussaabBadla/gdg_organizers_app](https://github.com/MoussaabBadla/gdg_organizers_app)
 
 
