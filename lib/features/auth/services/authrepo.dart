@@ -46,4 +46,28 @@ class AuthApi {
       data: data,
     );
   }
+
+  static Future<Response> sendFeedback(
+      String token, double rating, String feedback) async {
+    return await DioHelper.postData(
+      url: '/user/feedback',
+      token: token,
+      data: {
+        'content': feedback,
+        'rating': rating,
+      },
+    );
+  }
+
+  static Future<Response> updatePassword(
+      String token, String oldpassword, String newpassword) async {
+    return await DioHelper.putData(
+      url: '/user/password/:id',
+      token: token,
+      data: {
+        'oldpassword': oldpassword,
+        'newpassword': newpassword,
+      },
+    );
+  }
 }

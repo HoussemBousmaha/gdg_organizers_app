@@ -13,7 +13,8 @@ class Task with _$Task{
     String? datefin , 
     String? duration,
     @Default('incompleted') String? state,
-    List<Comment>? comments,
+    String? thread , 
+    
 
   }) = _Task; 
 

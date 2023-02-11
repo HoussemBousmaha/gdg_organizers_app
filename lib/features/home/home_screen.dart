@@ -15,53 +15,58 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Align(
-            alignment: Alignment.center,
-            child: searchBar(),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(
-              left: 20.0,
-              top: 18,
+    return RefreshIndicator(
+      onRefresh: () async {
+        context.read<PostsCubit>().getPosts();
+      },
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Align(
+              alignment: Alignment.center,
+              child: searchBar(),
             ),
-            child: Text(
-              "Actualities",
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 18,
+            const Padding(
+              padding: EdgeInsets.only(
+                left: 20.0,
+                top: 18,
+              ),
+              child: Text(
+                "Actualities",
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 18,
+                ),
               ),
             ),
-          ),
-          BlocBuilder<PostsCubit, PostsState>(
-            builder: (context, state) {
-              return state.when(
-                  initial: () => const SizedBox.shrink(),
-                  loading: () => Column(
-                        children: List.generate(
-                          3,
-                          (index) => const PostShimmer(),
+            BlocBuilder<PostsCubit, PostsState>(
+              builder: (context, state) {
+                return state.when(
+                    initial: () => const SizedBox.shrink(),
+                    loading: () => Column(
+                          children: List.generate(
+                            3,
+                            (index) => const PostShimmer(),
+                          ),
                         ),
-                      ),
-                  loaded: (posts) => Column(
-                        children: posts
-                            .map((e) => PostWidget(
-                                  name: e.fullName,
-                                  time: e.messagetime,
-                                  desc: e.body,
-                                  image: e.photo!,
-                                  profileImage: e.postedBy!.image!,
-                                ))
-                            .toList(),
-                      ),
-                  error: (e) => Center(child: Text(e)));
-            },
-          ),
-        ],
+                    loaded: (posts) => Column(
+                          children: posts
+                              .map((e) => PostWidget(
+                                    name: e.fullName,
+                                    time: e.messagetime,
+                                    desc: e.body,
+                                    image: e.photo!,
+                                    profileImage: e.postedBy!.image!,
+                                  ))
+                              .toList(),
+                        ),
+                    error: (e) => Center(child: Text(e)));
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

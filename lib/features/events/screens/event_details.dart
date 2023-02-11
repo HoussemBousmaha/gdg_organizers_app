@@ -7,6 +7,7 @@ import 'package:gdg_organizers_app/logic/auth_bloc/auth_bloc.dart';
 import 'package:gdg_organizers_app/logic/comment_bloc/comment_bloc.dart';
 import 'package:gdg_organizers_app/shared/widgets/customAppBar.dart';
 import 'package:intl/intl.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../models/comments/comment.dart';
 import '../../../shared/services/socket_io.dart';
@@ -24,13 +25,11 @@ class _EventsDetailsState extends State<EventsDetails> {
   late TextEditingController textEditingController;
   late FocusNode focusNode;
   late final Event event;
-  late final CommentBloc commentBloc;
 
   @override
   void initState() {
     textEditingController = TextEditingController();
     focusNode = FocusNode();
-    commentBloc = context.read<CommentBloc>();
     super.initState();
   }
 
@@ -45,11 +44,7 @@ class _EventsDetailsState extends State<EventsDetails> {
   void didChangeDependencies() {
     event = ModalRoute.of(context)!.settings.arguments as Event;
     context.read<CommentBloc>().add(CommentEvent.connect(
-        context.watch<AuthBloc>().user.id ?? '',
-        event.id ?? '',
-        event.comments ?? []));
-
-    commentBloc.comments = event.comments ?? [];
+        context.watch<AuthBloc>().user.id ?? '', event.thread ?? ''));
 
     super.didChangeDependencies();
   }
@@ -63,6 +58,7 @@ class _EventsDetailsState extends State<EventsDetails> {
         showBackButton: true,
       ),
       body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
         slivers: [
           SliverAppBar(
             expandedHeight: 200,
@@ -144,9 +140,9 @@ class _EventsDetailsState extends State<EventsDetails> {
                       return state.when(
                           initial: () => const SizedBox.shrink(),
                           failure: (value) => Text(value),
-                          loading: () => const Center(
-                                child: CustomLoader(),
-                              ),
+                          loading: () => Column(
+                              children: List.generate(
+                                  4, (index) => const CommentShimmer())),
                           success: (value) => Column(
                                 children: value
                                     .map((e) => CommentWidget(comment: e))
@@ -304,8 +300,7 @@ class CommentWidget extends StatelessWidget {
             uri: context.watch<AuthBloc>().user.image!,
             imageBuilder: (context, imageProvider) => CircleAvatar(
               radius: 20,
-              backgroundImage:
-                  NetworkImage(context.watch<AuthBloc>().user.image!),
+              backgroundImage: NetworkImage(comment.sender!.image!),
             ),
           ),
           const SizedBox(
@@ -314,29 +309,27 @@ class CommentWidget extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Text(
-                    comment.sender!.firstname + ' ' + comment.sender!.lastname,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 17,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    DateFormat('dd/MM/yyyy').format(
-                      DateTime.parse(comment.createdAt!),
-                    ),
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
+              Text(
+                comment.sender!.firstname + ' ' + comment.sender!.lastname,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 17,
+                ),
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              Text(
+                DateFormat('dd/MM/yyyy').format(
+                  DateTime.parse(comment.createdAt!),
+                ),
+                style: const TextStyle(
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 12,
+                ),
               ),
               const SizedBox(
                 height: 10,
@@ -369,150 +362,80 @@ class CommentWidget extends StatelessWidget {
   }
 }
 
+class CommentShimmer extends StatelessWidget {
+  const CommentShimmer({super.key});
 
-
-
-
-
-
-
-
-// Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               const SizedBox(
-//                 height: 35,
-//               ),
-//               const Padding(
-//                 padding: const EdgeInsets.symmetric(horizontal: 22),
-//                 child: Text(
-//                   'Description',
-//                   style: TextStyle(
-//                     color: Color(0xFF4285F4),
-//                     fontWeight: FontWeight.w700,
-//                     fontSize: 17,
-//                   ),
-//                 ),
-//               ),
-//               const SizedBox(
-//                 height: 15,
-//               ),
-//               Padding(
-//                 padding: EdgeInsets.symmetric(horizontal: 22),
-//                 child: Text(event.description),
-//               ),
-//               const SizedBox(
-//                 height: 20,
-//               ),
-//               Padding(
-//                   padding: const EdgeInsets.symmetric(horizontal: 22),
-//                   child: RichText(
-//                       text: TextSpan(
-//                           style: const TextStyle(
-//                             color: kBlue,
-//                             fontWeight: FontWeight.w700,
-//                             fontSize: 17,
-//                           ),
-//                           text: 'Date   ',
-//                           children: [
-//                         TextSpan(
-//                             text: '   ${event.datedebut}',
-//                             style: const TextStyle(
-//                                 color: Colors.black,
-//                                 fontSize: 15,
-//                                 fontWeight: FontWeight.normal))
-//                       ]))),
-//               const SizedBox(
-//                 height: 20,
-//               ),
-//               Padding(
-//                   padding: const EdgeInsets.symmetric(horizontal: 22),
-//                   child: RichText(
-//                       text: TextSpan(
-//                           style: const TextStyle(
-//                             color: Color(0xFF4285F4),
-//                             fontWeight: FontWeight.w700,
-//                             fontSize: 17,
-//                           ),
-//                           text: 'Status   ',
-//                           children: [
-//                         TextSpan(
-//                             text: '   ${event.state}',
-//                             style: const TextStyle(
-//                                 color: Colors.black,
-//                                 fontSize: 15,
-//                                 fontWeight: FontWeight.normal))
-//                       ]))),
-//               const SizedBox(
-//                 height: 20,
-//               ),
-//               const Padding(
-//                 padding: EdgeInsets.symmetric(horizontal: 22),
-//                 child: Text(
-//                   'Galory',
-//                   style: TextStyle(
-//                     color: Color(0xFF4285F4),
-//                     fontWeight: FontWeight.w700,
-//                     fontSize: 17,
-//                   ),
-//                 ),
-//               ),
-//               const SizedBox(
-//                 height: 25,
-//               ),
-//               SizedBox(
-//                   height: 175,
-//                   child: ListView.builder(
-//                       scrollDirection: Axis.horizontal,
-//                       physics: const BouncingScrollPhysics(),
-//                       itemCount: 6,
-//                       itemBuilder: (context, index) {
-//                         return CustomImage(
-//                             uri: event.image,
-//                             imageBuilder: (context, imageProvider) {
-//                               return Container(
-//                                 margin:
-//                                     const EdgeInsets.symmetric(horizontal: 7),
-//                                 width: 175,
-//                                 decoration: BoxDecoration(
-//                                     borderRadius: BorderRadius.circular(15),
-//                                     image: DecorationImage(
-//                                         image: imageProvider,
-//                                         fit: BoxFit.contain),
-//                                     color: Colors.white),
-//                               );
-//                             });
-//                       })),
-//               const SizedBox(
-//                 height: 25,
-//               ),
-//               const Padding(
-//                 padding: EdgeInsets.symmetric(horizontal: 22),
-//                 child: Text(
-//                   'Comments ',
-//                   style: TextStyle(
-//                     color: Color(0xFF4285F4),
-//                     fontWeight: FontWeight.w700,
-//                     fontSize: 17,
-//                   ),
-//                 ),
-//               ),
-//               const SizedBox(
-//                 height: 25,
-//               ),
-//               Container(
-//                   color: kLightGrey,
-//                   margin: const EdgeInsets.symmetric(horizontal: 22),
-//                   child: ListView.separated(
-//                       itemCount: 6,
-//                       itemBuilder: (context, index) {
-//                         return const CommentWidget();
-//                       },
-//                       separatorBuilder: (context, index) => const Divider(
-//                             color: Colors.grey,
-//                             thickness: 1,
-//                             indent: 22,
-//                             endIndent: 22,
-//                           ))),
-//             ],
-//           )
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Shimmer.fromColors(
+            baseColor: Colors.grey[300]!,
+            highlightColor: Colors.white,
+            child: const CircleAvatar(
+              radius: 20,
+              backgroundColor: Colors.white,
+            ),
+          ),
+          const SizedBox(
+            width: 15,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Shimmer.fromColors(
+                    baseColor: Colors.grey[300]!,
+                    highlightColor: Colors.white,
+                    child: Container(
+                      width: 100,
+                      height: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Shimmer.fromColors(
+                    baseColor: Colors.grey[300]!,
+                    highlightColor: Colors.white,
+                    child: Container(
+                      width: 100,
+                      height: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Shimmer.fromColors(
+                baseColor: Colors.grey[300]!,
+                highlightColor: Colors.white,
+                child: Container(
+                  width: 200,
+                  height: 20,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const Divider(
+                color: Colors.grey,
+                thickness: 1,
+                indent: 22,
+                endIndent: 22,
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}

@@ -10,11 +10,15 @@ class ToggelCubit extends Cubit<bool> {
   void on() {
     emit(true);
   }
+
   void off() {
     emit(false);
   }
-  void toggleWith(bool value) {
+  void set(bool value) {
     emit(value);
   }
+
+  void toggleWith(bool value) {
+    emit(!value);
+  }
 }
- 

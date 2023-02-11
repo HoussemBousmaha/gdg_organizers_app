@@ -10,29 +10,40 @@ import 'authrepo.dart';
 class AuthRepo {
   static final _secureStorage = const FlutterSecureStorage();
 
- static Future<Response> login(String email, String password) async {
+  static Future<Response> login(String email, String password) async {
     final Response response = await AuthApi.login(email, password);
-    print(response.data);
     return response;
   }
 
- static Future<Response> getUser(String token) async {
+  static Future<Response> getUser(String token) async {
     final Response response = await AuthApi.getUser(token);
-    print(response.data);
     return response;
-  } 
+  }
 
-  static Future<Response> updateUser (String token, Map<String, dynamic> data) async {
+  static Future<Response> updateUser(
+      String token, Map<String, dynamic> data) async {
     final Response response = await AuthApi.updateUser(token, data);
+    return response;
+  }
+
+  static Future<Response> sendFeedback(
+      String token, double rating, String feedback) async {
+    final Response response =
+        await AuthApi.sendFeedback(token, rating, feedback);
     print(response.data);
     return response;
   }
 
-  static Future<Map<String , dynamic>> updateimage (String token, String image) async {
+  static Future<Map<String, dynamic>> updateimage(
+      String token, String image) async {
     final String response = await DioHelper.uploadImage(token, image);
-    return jsonDecode(response) ;
+    return jsonDecode(response);
   }
-
+  static Future<Response> updatePassword(
+      String token, String oldpassword , String newpassword ) async {
+    final Response response = await AuthApi.updatePassword(token, oldpassword , newpassword);
+    return response;
+  }
   static Future<void> deleteData() async {
     await _secureStorage.deleteAll();
     await _secureStorage.delete(key: 'x-auth-token');
@@ -46,7 +57,8 @@ class AuthRepo {
     final token = await _secureStorage.read(key: 'x-auth-token');
     return token;
   }
-  static FutureOr<void> updateFcmtoken(String token, String fcmToken) async {
+
+  static FutureOr<void> updateFcmtoken( String fcmToken , String token,) async {
     await AuthApi.updateFcmtoken(token, fcmToken);
   }
 }

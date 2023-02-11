@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gdg_organizers_app/features/auth/services/authapi.dart';
 import 'package:gdg_organizers_app/logic/auth_bloc/auth_bloc.dart';
@@ -19,8 +20,32 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       event.map(
           updateUser: _onUpdateUser,
           updateUserImage: _onUpdateUserImage,
-          updateUserPassword: _onUpadteUserPassword);
+          updateUserPassword: _onUpadteUserPassword,
+          sendFeedback: _onSendFeedback);
     });
+  }
+
+  FutureOr<void> _onSendFeedback(_SendFeedback event) async {
+    try {
+      emit(const UserState.loading());
+      final token = await AuthRepo.getToken();
+      print(token);
+      if (token != null) {
+        final res =
+            await AuthRepo.sendFeedback(token, event.rating, event.feedback);
+
+        print(res.data);
+        if (res.statusCode == 201) {
+          emit(const UserState.success());
+        } else {
+          emit(UserState.failure(res.data['error'] ?? 'Something went wrong'));
+        }
+      } else {
+        emit(const UserState.failure('Token not found'));
+      }
+    } catch (e) {
+      emit(UserState.failure(e.toString()));
+    }
   }
 
   FutureOr<void> _onUpdateUser(_UpdateUser event) async {
@@ -32,8 +57,12 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       try {
         emit(const UserState.loading());
         final res = await AuthRepo.updateUser(token, event.data);
-        authBloc.add(AuthEvent.updateuser(res.data['user']));
-        emit(const UserState.success());
+        if (res.statusCode == 200) {
+          authBloc.add(AuthEvent.updateuser(res.data['user']));
+          emit(const UserState.success());
+        } else {
+          emit(UserState.failure(res.data['error'] ?? 'Something went wrong'));
+        }
       } catch (e) {
         emit(UserState.failure(e.toString()));
       }
@@ -59,6 +88,21 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 
   FutureOr<void> _onUpadteUserPassword(_UpdateUserPassword event) async {
-    try {} catch (e) {}
+    try {
+      emit(const UserState.loading());
+      final token = await AuthRepo.getToken();
+      if (token != null) {
+        final res = await AuthRepo.updatePassword(token, event.oldpassword , event.newpassword);
+        if (res.statusCode == 200) {
+          emit(const UserState.success());
+        } else {
+          emit(UserState.failure(res.data['error'] ?? 'Something went wrong'));
+        }
+      } else {
+        emit(const UserState.failure('Token not found'));
+      }
+    } catch (e) {
+      emit(UserState.failure(e.toString()));
+    } catch (e) {}
   }
 }

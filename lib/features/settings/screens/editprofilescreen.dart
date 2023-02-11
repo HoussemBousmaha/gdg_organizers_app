@@ -5,6 +5,7 @@ import 'package:gdg_organizers_app/constants/const.dart';
 import 'package:gdg_organizers_app/features/settings/widgets/settings_widgets.dart';
 import 'package:gdg_organizers_app/logic/auth_bloc/auth_bloc.dart';
 import 'package:gdg_organizers_app/shared/widgets/customappbar.dart';
+import 'package:gdg_organizers_app/shared/widgets/logout_pop_up.dart';
 
 import '../../../logic/togglecubit.dart';
 import '../../../logic/user_bloc/user_bloc.dart';
@@ -13,7 +14,9 @@ import '../../../shared/widgets/loading.dart';
 
 class EditProfile extends StatelessWidget {
   static const String routeName = '/editprofile';
+
   EditProfile({super.key});
+
   Map<String, dynamic> data = {};
   final _formKey = GlobalKey<FormState>();
 

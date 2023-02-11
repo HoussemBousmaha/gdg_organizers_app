@@ -26,7 +26,7 @@ mixin _$Task {
   String? get datefin => throw _privateConstructorUsedError;
   String? get duration => throw _privateConstructorUsedError;
   String? get state => throw _privateConstructorUsedError;
-  List<Comment>? get comments => throw _privateConstructorUsedError;
+  String? get thread => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +45,7 @@ abstract class $TaskCopyWith<$Res> {
       String? datefin,
       String? duration,
       String? state,
-      List<Comment>? comments});
+      String? thread});
 }
 
 /// @nodoc
@@ -67,7 +67,7 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
     Object? datefin = freezed,
     Object? duration = freezed,
     Object? state = freezed,
-    Object? comments = freezed,
+    Object? thread = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -94,10 +94,10 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as String?,
-      comments: freezed == comments
-          ? _value.comments
-          : comments // ignore: cast_nullable_to_non_nullable
-              as List<Comment>?,
+      thread: freezed == thread
+          ? _value.thread
+          : thread // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -115,7 +115,7 @@ abstract class _$$_TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
       String? datefin,
       String? duration,
       String? state,
-      List<Comment>? comments});
+      String? thread});
 }
 
 /// @nodoc
@@ -133,7 +133,7 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res, _$_Task>
     Object? datefin = freezed,
     Object? duration = freezed,
     Object? state = freezed,
-    Object? comments = freezed,
+    Object? thread = freezed,
   }) {
     return _then(_$_Task(
       name: null == name
@@ -160,10 +160,10 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res, _$_Task>
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as String?,
-      comments: freezed == comments
-          ? _value._comments
-          : comments // ignore: cast_nullable_to_non_nullable
-              as List<Comment>?,
+      thread: freezed == thread
+          ? _value.thread
+          : thread // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -178,8 +178,7 @@ class _$_Task implements _Task {
       this.datefin,
       this.duration,
       this.state = 'incompleted',
-      final List<Comment>? comments})
-      : _comments = comments;
+      this.thread});
 
   factory _$_Task.fromJson(Map<String, dynamic> json) => _$$_TaskFromJson(json);
 
@@ -196,19 +195,12 @@ class _$_Task implements _Task {
   @override
   @JsonKey()
   final String? state;
-  final List<Comment>? _comments;
   @override
-  List<Comment>? get comments {
-    final value = _comments;
-    if (value == null) return null;
-    if (_comments is EqualUnmodifiableListView) return _comments;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  final String? thread;
 
   @override
   String toString() {
-    return 'Task(name: $name, description: $description, datedebut: $datedebut, datefin: $datefin, duration: $duration, state: $state, comments: $comments)';
+    return 'Task(name: $name, description: $description, datedebut: $datedebut, datefin: $datefin, duration: $duration, state: $state, thread: $thread)';
   }
 
   @override
@@ -225,13 +217,13 @@ class _$_Task implements _Task {
             (identical(other.duration, duration) ||
                 other.duration == duration) &&
             (identical(other.state, state) || other.state == state) &&
-            const DeepCollectionEquality().equals(other._comments, _comments));
+            (identical(other.thread, thread) || other.thread == thread));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, name, description, datedebut,
-      datefin, duration, state, const DeepCollectionEquality().hash(_comments));
+      datefin, duration, state, thread);
 
   @JsonKey(ignore: true)
   @override
@@ -255,7 +247,7 @@ abstract class _Task implements Task {
       final String? datefin,
       final String? duration,
       final String? state,
-      final List<Comment>? comments}) = _$_Task;
+      final String? thread}) = _$_Task;
 
   factory _Task.fromJson(Map<String, dynamic> json) = _$_Task.fromJson;
 
@@ -272,7 +264,7 @@ abstract class _Task implements Task {
   @override
   String? get state;
   @override
-  List<Comment>? get comments;
+  String? get thread;
   @override
   @JsonKey(ignore: true)
   _$$_TaskCopyWith<_$_Task> get copyWith => throw _privateConstructorUsedError;

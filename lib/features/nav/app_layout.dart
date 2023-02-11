@@ -4,6 +4,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:gdg_organizers_app/constants/const.dart';
 import 'package:gdg_organizers_app/features/events/cubit/event_cubit.dart';
 import 'package:gdg_organizers_app/features/events/models/event.dart';
+import 'package:gdg_organizers_app/features/game/game_screen.dart';
 import 'package:gdg_organizers_app/features/home/post_cubit/posts_cubit.dart';
 import 'package:gdg_organizers_app/features/nav/bloc/cubit.dart';
 import 'package:gdg_organizers_app/features/nav/bloc/states.dart';
@@ -53,61 +54,68 @@ class _LayoutScreenState extends State<LayoutScreen> {
           },
           child: Stack(
             children: [
-              Scaffold(
-                floatingActionButton: SpeedDial(
-                  children: [
-                    SpeedDialChild(
-                      child: const Icon(Icons.qr_code_2),
-                      backgroundColor: const Color(0xFF4285F4),
-                      foregroundColor: Colors.white,
-                      onTap: () {},
-                    ),
-                    SpeedDialChild(
-                      child: const Icon(Icons.call),
-                      backgroundColor: const Color(0xFF4285F4),
-                      foregroundColor: Colors.white,
-                      onTap: () {},
-                    ),
-                    SpeedDialChild(
-                      child: const Icon(Icons.map),
-                      backgroundColor: const Color(0xFF4285F4),
-                      foregroundColor: Colors.white,
-                      onTap: () {},
-                    ),
-                  ],
-                  activeIcon: Icons.close,
-                  openCloseDial: isDialOpen,
-                  backgroundColor: Color(0xFF4285F4),
-                  child: const Icon(
-                    Icons.add,
-                    size: 30,
+              BlocListener<UserBloc, UserState>(
+                listener: (context, state) {
+                  state.maybeMap(
+                      orElse: () {},
+                      failure: (value) {
+                        showDialog(
+                          context: context,
+                          builder: (_) {
+                            return AlertDialog(
+                              contentPadding: EdgeInsets.zero,
+                              content: ErrorPopUp(
+                                error: value.message,
+                              ),
+                            );
+                          },
+                        );
+                      },
+                      success: (state) {
+                        showDialog(
+                          context: context,
+                          builder: (_) {
+                            return const AlertDialog(
+                              contentPadding: EdgeInsets.zero,
+                              content: SuccessPopup(),
+                            );
+                          },
+                        );
+                      });
+                },
+                child: Scaffold(
+                  floatingActionButton: FloatingActionButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(BrainyGame.routeName);
+                    },
+                    child: Icon(Iconsax.game),
                   ),
-                ),
-                appBar: CustomAppBar(
-                  currentIndex: appCubit.currentIndex,
-                  title: appCubit.appBarTitles[appCubit.currentIndex],
-                ),
-                body: appCubit.screens[appCubit.currentIndex],
-                bottomNavigationBar: BottomNavigationBar(
-                  showSelectedLabels: false,
-                  showUnselectedLabels: false,
-                  type: BottomNavigationBarType.fixed,
-                  selectedItemColor: kBlue,
-                  unselectedItemColor: Colors.grey,
-                  onTap: (value) {
-                    appCubit.changeIndex(value);
-                  },
-                  currentIndex: appCubit.currentIndex,
-                  items: const [
-                    BottomNavigationBarItem(
-                        label: 'home', icon: Icon(Iconsax.home)),
-                    BottomNavigationBarItem(
-                        label: 'task', icon: Icon(Iconsax.activity)),
-                    BottomNavigationBarItem(
-                        label: 'events', icon: Icon(Iconsax.calendar)),
-                    BottomNavigationBarItem(
-                        label: 'Settengs', icon: Icon(Iconsax.setting)),
-                  ],
+                  appBar: CustomAppBar(
+                    currentIndex: appCubit.currentIndex,
+                    title: appCubit.appBarTitles[appCubit.currentIndex],
+                  ),
+                  body: appCubit.screens[appCubit.currentIndex],
+                  bottomNavigationBar: BottomNavigationBar(
+                    showSelectedLabels: false,
+                    showUnselectedLabels: false,
+                    type: BottomNavigationBarType.fixed,
+                    selectedItemColor: kBlue,
+                    unselectedItemColor: Colors.grey,
+                    onTap: (value) {
+                      appCubit.changeIndex(value);
+                    },
+                    currentIndex: appCubit.currentIndex,
+                    items: const [
+                      BottomNavigationBarItem(
+                          label: 'home', icon: Icon(Iconsax.home)),
+                      BottomNavigationBarItem(
+                          label: 'task', icon: Icon(Iconsax.activity)),
+                      BottomNavigationBarItem(
+                          label: 'events', icon: Icon(Iconsax.calendar)),
+                      BottomNavigationBarItem(
+                          label: 'Settengs', icon: Icon(Iconsax.setting)),
+                    ],
+                  ),
                 ),
               ),
               BlocBuilder<UserBloc, UserState>(

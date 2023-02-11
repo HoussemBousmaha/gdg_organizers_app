@@ -55,6 +55,8 @@ dependencies:
   shimmer: ^2.0.0
   intl: ^0.17.0
   lite_rolling_switch: ^1.0.0
+  flame: ^1.6.0
+
 
   flutter_native_splash:
   firebase_core: 

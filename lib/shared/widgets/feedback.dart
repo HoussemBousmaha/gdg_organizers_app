@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:gdg_organizers_app/constants/const.dart';
+import 'package:gdg_organizers_app/logic/user_bloc/user_bloc.dart';
 
 class FeedBackWidget extends StatefulWidget {
   const FeedBackWidget({Key? key}) : super(key: key);
@@ -9,8 +11,22 @@ class FeedBackWidget extends StatefulWidget {
   State<FeedBackWidget> createState() => _FeedBackWidgetState();
 }
 
+late TextEditingController _controller;
+
 class _FeedBackWidgetState extends State<FeedBackWidget> {
   double value = 3.5;
+  @override
+  void initState() {
+    _controller = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -100,6 +116,7 @@ class _FeedBackWidgetState extends State<FeedBackWidget> {
                         TextFormField(
                           keyboardType: TextInputType.multiline,
                           maxLines: 7,
+                          controller: _controller,
                           decoration: const InputDecoration(
                             hintText: 'Description of the feedback ...',
                             fillColor: Colors.red,
@@ -125,7 +142,25 @@ class _FeedBackWidgetState extends State<FeedBackWidget> {
                         SizedBox(
                           width: double.infinity,
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              if (_controller.text.isEmpty) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Please enter your feedback'),
+                                  ),
+                                );
+                                return;
+                              } else {
+                                context.read<UserBloc>().add(
+                                      UserEvent.sendFeedback(
+                                        _controller.text,
+                                        value,
+                                      ),
+                                    );
+                                _controller.clear();
+                                Navigator.pop(context);
+                              }
+                            },
                             style: TextButton.styleFrom(
                               backgroundColor: kBlue,
                             ),

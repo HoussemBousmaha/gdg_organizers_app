@@ -29,7 +29,7 @@ mixin _$Event {
   String? get datedebut => throw _privateConstructorUsedError;
   String? get datefin => throw _privateConstructorUsedError;
   String? get state => throw _privateConstructorUsedError;
-  List<Comment>? get comments => throw _privateConstructorUsedError;
+  String? get thread => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +51,7 @@ abstract class $EventCopyWith<$Res> {
       String? datedebut,
       String? datefin,
       String? state,
-      List<Comment>? comments});
+      String? thread});
 }
 
 /// @nodoc
@@ -76,7 +76,7 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
     Object? datedebut = freezed,
     Object? datefin = freezed,
     Object? state = freezed,
-    Object? comments = freezed,
+    Object? thread = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -115,10 +115,10 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as String?,
-      comments: freezed == comments
-          ? _value.comments
-          : comments // ignore: cast_nullable_to_non_nullable
-              as List<Comment>?,
+      thread: freezed == thread
+          ? _value.thread
+          : thread // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -139,7 +139,7 @@ abstract class _$$_EventCopyWith<$Res> implements $EventCopyWith<$Res> {
       String? datedebut,
       String? datefin,
       String? state,
-      List<Comment>? comments});
+      String? thread});
 }
 
 /// @nodoc
@@ -160,7 +160,7 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
     Object? datedebut = freezed,
     Object? datefin = freezed,
     Object? state = freezed,
-    Object? comments = freezed,
+    Object? thread = freezed,
   }) {
     return _then(_$_Event(
       id: freezed == id
@@ -199,10 +199,10 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as String?,
-      comments: freezed == comments
-          ? _value._comments
-          : comments // ignore: cast_nullable_to_non_nullable
-              as List<Comment>?,
+      thread: freezed == thread
+          ? _value.thread
+          : thread // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -220,10 +220,9 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
       this.datedebut,
       this.datefin,
       this.state = 'inactive',
-      final List<Comment>? comments})
+      this.thread})
       : _organizers = organizers,
-        _tasks = tasks,
-        _comments = comments;
+        _tasks = tasks;
 
   factory _$_Event.fromJson(Map<String, dynamic> json) =>
       _$$_EventFromJson(json);
@@ -263,19 +262,12 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
   @override
   @JsonKey()
   final String? state;
-  final List<Comment>? _comments;
   @override
-  List<Comment>? get comments {
-    final value = _comments;
-    if (value == null) return null;
-    if (_comments is EqualUnmodifiableListView) return _comments;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  final String? thread;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Event(id: $id, name: $name, description: $description, image: $image, organizers: $organizers, tasks: $tasks, datedebut: $datedebut, datefin: $datefin, state: $state, comments: $comments)';
+    return 'Event(id: $id, name: $name, description: $description, image: $image, organizers: $organizers, tasks: $tasks, datedebut: $datedebut, datefin: $datefin, state: $state, thread: $thread)';
   }
 
   @override
@@ -292,7 +284,7 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
       ..add(DiagnosticsProperty('datedebut', datedebut))
       ..add(DiagnosticsProperty('datefin', datefin))
       ..add(DiagnosticsProperty('state', state))
-      ..add(DiagnosticsProperty('comments', comments));
+      ..add(DiagnosticsProperty('thread', thread));
   }
 
   @override
@@ -312,7 +304,7 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
                 other.datedebut == datedebut) &&
             (identical(other.datefin, datefin) || other.datefin == datefin) &&
             (identical(other.state, state) || other.state == state) &&
-            const DeepCollectionEquality().equals(other._comments, _comments));
+            (identical(other.thread, thread) || other.thread == thread));
   }
 
   @JsonKey(ignore: true)
@@ -328,7 +320,7 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
       datedebut,
       datefin,
       state,
-      const DeepCollectionEquality().hash(_comments));
+      thread);
 
   @JsonKey(ignore: true)
   @override
@@ -355,7 +347,7 @@ abstract class _Event implements Event {
       final String? datedebut,
       final String? datefin,
       final String? state,
-      final List<Comment>? comments}) = _$_Event;
+      final String? thread}) = _$_Event;
 
   factory _Event.fromJson(Map<String, dynamic> json) = _$_Event.fromJson;
 
@@ -378,7 +370,7 @@ abstract class _Event implements Event {
   @override
   String? get state;
   @override
-  List<Comment>? get comments;
+  String? get thread;
   @override
   @JsonKey(ignore: true)
   _$$_EventCopyWith<_$_Event> get copyWith =>

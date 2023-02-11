@@ -6,9 +6,9 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:gdg_organizers_app/constants/theme.dart';
 import 'package:gdg_organizers_app/features/auth/login_bloc/login_bloc.dart';
 import 'package:gdg_organizers_app/features/auth/screens/authscreen.dart';
-import 'package:gdg_organizers_app/features/auth/services/authapi.dart';
 import 'package:gdg_organizers_app/features/events/cubit/event_cubit.dart';
 import 'package:gdg_organizers_app/features/events/screens/event_details.dart';
+import 'package:gdg_organizers_app/features/game/game_screen.dart';
 import 'package:gdg_organizers_app/features/home/post_cubit/posts_cubit.dart';
 import 'package:gdg_organizers_app/features/nav/app_layout.dart';
 import 'package:gdg_organizers_app/features/settings/screens/editprofilescreen.dart';
@@ -86,13 +86,14 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (context) => EventCubit()),
         BlocProvider(create: (context) => TaskCubit()),
         BlocProvider(create: (context) => PostsCubit()),
-        BlocProvider(create: (context) => CommentBloc(authBloc , [])),
+        BlocProvider(create: (context) => CommentBloc(authBloc,)),
       ],
       child: MaterialApp(
           routes: {
-            EditProfile.routeName: (_) =>  EditProfile(),
+            EditProfile.routeName: (_) => EditProfile(),
             EventsDetails.routeName: (_) => const EventsDetails(),
             Notifications.routeName: (_) => const Notifications(),
+            BrainyGame.routeName: (context) => const BrainyGame(),
           },
           theme: AppTheme.light(),
           debugShowCheckedModeBanner: false,
@@ -102,6 +103,7 @@ class _MyAppState extends State<MyApp> {
                 return const SizedBox.shrink();
               }, loading: () {
                 FlutterNativeSplash.remove();
+
                 return const LoadingScreen();
               }, authenticated: (User user) {
                 return const LayoutScreen();

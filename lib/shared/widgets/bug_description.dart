@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gdg_organizers_app/constants/const.dart';
+import 'package:gdg_organizers_app/logic/user_bloc/user_bloc.dart';
 
-class BugDescription extends StatelessWidget {
+class BugDescription extends StatefulWidget {
   const BugDescription({Key? key}) : super(key: key);
+
+  @override
+  State<BugDescription> createState() => _BugDescriptionState();
+}
+
+late TextEditingController _controller;
+
+class _BugDescriptionState extends State<BugDescription> {
+  @override
+  void initState() {
+    _controller = TextEditingController();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +60,7 @@ class BugDescription extends StatelessWidget {
                       TextFormField(
                         keyboardType: TextInputType.multiline,
                         maxLines: 7,
+                        controller: _controller,
                         decoration: const InputDecoration(
                           hintText: 'Description of the bug ...',
                           fillColor: Colors.red,
@@ -70,7 +86,14 @@ class BugDescription extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            if (_controller.text.isNotEmpty) {
+                              context.read<UserBloc>().add(
+                                  UserEvent.sendFeedback(_controller.text, 0));
+                              _controller.clear();
+                              Navigator.pop(context);
+                            }
+                          },
                           style: TextButton.styleFrom(
                             backgroundColor: kBlue,
                           ),

@@ -7,7 +7,7 @@ part of 'event.dart';
 // **************************************************************************
 
 _$_Event _$$_EventFromJson(Map<String, dynamic> json) => _$_Event(
-      id: json['_id'] as String?,
+      id: json['id'] as String?,
       name: json['name'] as String,
       description: json['description'] as String,
       image: json['image'] as String,
@@ -20,9 +20,7 @@ _$_Event _$$_EventFromJson(Map<String, dynamic> json) => _$_Event(
       datedebut: json['datedebut'] as String?,
       datefin: json['datefin'] as String?,
       state: json['state'] as String? ?? 'inactive',
-      comments: (json['comments'] as List<dynamic>?)
-          ?.map((e) => Comment.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      thread: json['thread'] as String?,
     );
 
 Map<String, dynamic> _$$_EventToJson(_$_Event instance) => <String, dynamic>{
@@ -35,5 +33,5 @@ Map<String, dynamic> _$$_EventToJson(_$_Event instance) => <String, dynamic>{
       'datedebut': instance.datedebut,
       'datefin': instance.datefin,
       'state': instance.state,
-      'comments': instance.comments,
+      'thread': instance.thread,
     };

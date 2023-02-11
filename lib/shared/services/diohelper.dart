@@ -26,6 +26,7 @@ class DioHelper {
   }) async {
     return await dio.get(url,
         queryParameters: query,
+
         options: Options(
           headers: {
             'authorization': token,

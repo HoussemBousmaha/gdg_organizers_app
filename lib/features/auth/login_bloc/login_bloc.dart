@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -31,12 +32,19 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       emit(const LoginState.loading());
       res = await AuthRepo.login(event.email, event.password);
-      print(res.data);
+      if (res.statusCode != 201) {
+        emit(LoginState.failure(res.data['error']));
+        return;
+      }
       emit(const LoginState.success());
       authBloc.add(AuthEvent.loggedIn(
         res.data['user'],
         res.data['token'],
       ));
+      FirebaseMessaging.instance.getToken().then((value) {
+        AuthRepo.updateFcmtoken(value ?? '', res!.data['token']);
+      });
+
       NotificationServices.joinchannel();
     } catch (e) {
       emit(LoginState.failure(

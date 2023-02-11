@@ -20,21 +20,27 @@ mixin _$UserEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(Map<String, dynamic> data) updateUser,
     required TResult Function(String path) updateUserImage,
-    required TResult Function(String password) updateUserPassword,
+    required TResult Function(String oldpassword, String newpassword)
+        updateUserPassword,
+    required TResult Function(String feedback, double rating) sendFeedback,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Map<String, dynamic> data)? updateUser,
     TResult? Function(String path)? updateUserImage,
-    TResult? Function(String password)? updateUserPassword,
+    TResult? Function(String oldpassword, String newpassword)?
+        updateUserPassword,
+    TResult? Function(String feedback, double rating)? sendFeedback,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Map<String, dynamic> data)? updateUser,
     TResult Function(String path)? updateUserImage,
-    TResult Function(String password)? updateUserPassword,
+    TResult Function(String oldpassword, String newpassword)?
+        updateUserPassword,
+    TResult Function(String feedback, double rating)? sendFeedback,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +49,7 @@ mixin _$UserEvent {
     required TResult Function(_UpdateUser value) updateUser,
     required TResult Function(_UpdateUserImage value) updateUserImage,
     required TResult Function(_UpdateUserPassword value) updateUserPassword,
+    required TResult Function(_SendFeedback value) sendFeedback,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +57,7 @@ mixin _$UserEvent {
     TResult? Function(_UpdateUser value)? updateUser,
     TResult? Function(_UpdateUserImage value)? updateUserImage,
     TResult? Function(_UpdateUserPassword value)? updateUserPassword,
+    TResult? Function(_SendFeedback value)? sendFeedback,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +65,7 @@ mixin _$UserEvent {
     TResult Function(_UpdateUser value)? updateUser,
     TResult Function(_UpdateUserImage value)? updateUserImage,
     TResult Function(_UpdateUserPassword value)? updateUserPassword,
+    TResult Function(_SendFeedback value)? sendFeedback,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -112,7 +121,7 @@ class __$$_UpdateUserCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateUser implements _UpdateUser {
+class _$_UpdateUser with DiagnosticableTreeMixin implements _UpdateUser {
   const _$_UpdateUser(final Map<String, dynamic> data) : _data = data;
 
   final Map<String, dynamic> _data;
@@ -124,8 +133,16 @@ class _$_UpdateUser implements _UpdateUser {
   }
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserEvent.updateUser(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'UserEvent.updateUser'))
+      ..add(DiagnosticsProperty('data', data));
   }
 
   @override
@@ -151,7 +168,9 @@ class _$_UpdateUser implements _UpdateUser {
   TResult when<TResult extends Object?>({
     required TResult Function(Map<String, dynamic> data) updateUser,
     required TResult Function(String path) updateUserImage,
-    required TResult Function(String password) updateUserPassword,
+    required TResult Function(String oldpassword, String newpassword)
+        updateUserPassword,
+    required TResult Function(String feedback, double rating) sendFeedback,
   }) {
     return updateUser(data);
   }
@@ -161,7 +180,9 @@ class _$_UpdateUser implements _UpdateUser {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Map<String, dynamic> data)? updateUser,
     TResult? Function(String path)? updateUserImage,
-    TResult? Function(String password)? updateUserPassword,
+    TResult? Function(String oldpassword, String newpassword)?
+        updateUserPassword,
+    TResult? Function(String feedback, double rating)? sendFeedback,
   }) {
     return updateUser?.call(data);
   }
@@ -171,7 +192,9 @@ class _$_UpdateUser implements _UpdateUser {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Map<String, dynamic> data)? updateUser,
     TResult Function(String path)? updateUserImage,
-    TResult Function(String password)? updateUserPassword,
+    TResult Function(String oldpassword, String newpassword)?
+        updateUserPassword,
+    TResult Function(String feedback, double rating)? sendFeedback,
     required TResult orElse(),
   }) {
     if (updateUser != null) {
@@ -186,6 +209,7 @@ class _$_UpdateUser implements _UpdateUser {
     required TResult Function(_UpdateUser value) updateUser,
     required TResult Function(_UpdateUserImage value) updateUserImage,
     required TResult Function(_UpdateUserPassword value) updateUserPassword,
+    required TResult Function(_SendFeedback value) sendFeedback,
   }) {
     return updateUser(this);
   }
@@ -196,6 +220,7 @@ class _$_UpdateUser implements _UpdateUser {
     TResult? Function(_UpdateUser value)? updateUser,
     TResult? Function(_UpdateUserImage value)? updateUserImage,
     TResult? Function(_UpdateUserPassword value)? updateUserPassword,
+    TResult? Function(_SendFeedback value)? sendFeedback,
   }) {
     return updateUser?.call(this);
   }
@@ -206,6 +231,7 @@ class _$_UpdateUser implements _UpdateUser {
     TResult Function(_UpdateUser value)? updateUser,
     TResult Function(_UpdateUserImage value)? updateUserImage,
     TResult Function(_UpdateUserPassword value)? updateUserPassword,
+    TResult Function(_SendFeedback value)? sendFeedback,
     required TResult orElse(),
   }) {
     if (updateUser != null) {
@@ -257,15 +283,25 @@ class __$$_UpdateUserImageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateUserImage implements _UpdateUserImage {
+class _$_UpdateUserImage
+    with DiagnosticableTreeMixin
+    implements _UpdateUserImage {
   const _$_UpdateUserImage(this.path);
 
   @override
   final String path;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserEvent.updateUserImage(path: $path)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'UserEvent.updateUserImage'))
+      ..add(DiagnosticsProperty('path', path));
   }
 
   @override
@@ -290,7 +326,9 @@ class _$_UpdateUserImage implements _UpdateUserImage {
   TResult when<TResult extends Object?>({
     required TResult Function(Map<String, dynamic> data) updateUser,
     required TResult Function(String path) updateUserImage,
-    required TResult Function(String password) updateUserPassword,
+    required TResult Function(String oldpassword, String newpassword)
+        updateUserPassword,
+    required TResult Function(String feedback, double rating) sendFeedback,
   }) {
     return updateUserImage(path);
   }
@@ -300,7 +338,9 @@ class _$_UpdateUserImage implements _UpdateUserImage {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Map<String, dynamic> data)? updateUser,
     TResult? Function(String path)? updateUserImage,
-    TResult? Function(String password)? updateUserPassword,
+    TResult? Function(String oldpassword, String newpassword)?
+        updateUserPassword,
+    TResult? Function(String feedback, double rating)? sendFeedback,
   }) {
     return updateUserImage?.call(path);
   }
@@ -310,7 +350,9 @@ class _$_UpdateUserImage implements _UpdateUserImage {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Map<String, dynamic> data)? updateUser,
     TResult Function(String path)? updateUserImage,
-    TResult Function(String password)? updateUserPassword,
+    TResult Function(String oldpassword, String newpassword)?
+        updateUserPassword,
+    TResult Function(String feedback, double rating)? sendFeedback,
     required TResult orElse(),
   }) {
     if (updateUserImage != null) {
@@ -325,6 +367,7 @@ class _$_UpdateUserImage implements _UpdateUserImage {
     required TResult Function(_UpdateUser value) updateUser,
     required TResult Function(_UpdateUserImage value) updateUserImage,
     required TResult Function(_UpdateUserPassword value) updateUserPassword,
+    required TResult Function(_SendFeedback value) sendFeedback,
   }) {
     return updateUserImage(this);
   }
@@ -335,6 +378,7 @@ class _$_UpdateUserImage implements _UpdateUserImage {
     TResult? Function(_UpdateUser value)? updateUser,
     TResult? Function(_UpdateUserImage value)? updateUserImage,
     TResult? Function(_UpdateUserPassword value)? updateUserPassword,
+    TResult? Function(_SendFeedback value)? sendFeedback,
   }) {
     return updateUserImage?.call(this);
   }
@@ -345,6 +389,7 @@ class _$_UpdateUserImage implements _UpdateUserImage {
     TResult Function(_UpdateUser value)? updateUser,
     TResult Function(_UpdateUserImage value)? updateUserImage,
     TResult Function(_UpdateUserPassword value)? updateUserPassword,
+    TResult Function(_SendFeedback value)? sendFeedback,
     required TResult orElse(),
   }) {
     if (updateUserImage != null) {
@@ -369,7 +414,7 @@ abstract class _$$_UpdateUserPasswordCopyWith<$Res> {
           $Res Function(_$_UpdateUserPassword) then) =
       __$$_UpdateUserPasswordCopyWithImpl<$Res>;
   @useResult
-  $Res call({String password});
+  $Res call({String oldpassword, String newpassword});
 }
 
 /// @nodoc
@@ -383,12 +428,17 @@ class __$$_UpdateUserPasswordCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? password = null,
+    Object? oldpassword = null,
+    Object? newpassword = null,
   }) {
     return _then(_$_UpdateUserPassword(
-      null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
+      null == oldpassword
+          ? _value.oldpassword
+          : oldpassword // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == newpassword
+          ? _value.newpassword
+          : newpassword // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -396,15 +446,28 @@ class __$$_UpdateUserPasswordCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateUserPassword implements _UpdateUserPassword {
-  const _$_UpdateUserPassword(this.password);
+class _$_UpdateUserPassword
+    with DiagnosticableTreeMixin
+    implements _UpdateUserPassword {
+  const _$_UpdateUserPassword(this.oldpassword, this.newpassword);
 
   @override
-  final String password;
+  final String oldpassword;
+  @override
+  final String newpassword;
 
   @override
-  String toString() {
-    return 'UserEvent.updateUserPassword(password: $password)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'UserEvent.updateUserPassword(oldpassword: $oldpassword, newpassword: $newpassword)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'UserEvent.updateUserPassword'))
+      ..add(DiagnosticsProperty('oldpassword', oldpassword))
+      ..add(DiagnosticsProperty('newpassword', newpassword));
   }
 
   @override
@@ -412,12 +475,14 @@ class _$_UpdateUserPassword implements _UpdateUserPassword {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UpdateUserPassword &&
-            (identical(other.password, password) ||
-                other.password == password));
+            (identical(other.oldpassword, oldpassword) ||
+                other.oldpassword == oldpassword) &&
+            (identical(other.newpassword, newpassword) ||
+                other.newpassword == newpassword));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, password);
+  int get hashCode => Object.hash(runtimeType, oldpassword, newpassword);
 
   @JsonKey(ignore: true)
   @override
@@ -431,9 +496,11 @@ class _$_UpdateUserPassword implements _UpdateUserPassword {
   TResult when<TResult extends Object?>({
     required TResult Function(Map<String, dynamic> data) updateUser,
     required TResult Function(String path) updateUserImage,
-    required TResult Function(String password) updateUserPassword,
+    required TResult Function(String oldpassword, String newpassword)
+        updateUserPassword,
+    required TResult Function(String feedback, double rating) sendFeedback,
   }) {
-    return updateUserPassword(password);
+    return updateUserPassword(oldpassword, newpassword);
   }
 
   @override
@@ -441,9 +508,11 @@ class _$_UpdateUserPassword implements _UpdateUserPassword {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Map<String, dynamic> data)? updateUser,
     TResult? Function(String path)? updateUserImage,
-    TResult? Function(String password)? updateUserPassword,
+    TResult? Function(String oldpassword, String newpassword)?
+        updateUserPassword,
+    TResult? Function(String feedback, double rating)? sendFeedback,
   }) {
-    return updateUserPassword?.call(password);
+    return updateUserPassword?.call(oldpassword, newpassword);
   }
 
   @override
@@ -451,11 +520,13 @@ class _$_UpdateUserPassword implements _UpdateUserPassword {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Map<String, dynamic> data)? updateUser,
     TResult Function(String path)? updateUserImage,
-    TResult Function(String password)? updateUserPassword,
+    TResult Function(String oldpassword, String newpassword)?
+        updateUserPassword,
+    TResult Function(String feedback, double rating)? sendFeedback,
     required TResult orElse(),
   }) {
     if (updateUserPassword != null) {
-      return updateUserPassword(password);
+      return updateUserPassword(oldpassword, newpassword);
     }
     return orElse();
   }
@@ -466,6 +537,7 @@ class _$_UpdateUserPassword implements _UpdateUserPassword {
     required TResult Function(_UpdateUser value) updateUser,
     required TResult Function(_UpdateUserImage value) updateUserImage,
     required TResult Function(_UpdateUserPassword value) updateUserPassword,
+    required TResult Function(_SendFeedback value) sendFeedback,
   }) {
     return updateUserPassword(this);
   }
@@ -476,6 +548,7 @@ class _$_UpdateUserPassword implements _UpdateUserPassword {
     TResult? Function(_UpdateUser value)? updateUser,
     TResult? Function(_UpdateUserImage value)? updateUserImage,
     TResult? Function(_UpdateUserPassword value)? updateUserPassword,
+    TResult? Function(_SendFeedback value)? sendFeedback,
   }) {
     return updateUserPassword?.call(this);
   }
@@ -486,6 +559,7 @@ class _$_UpdateUserPassword implements _UpdateUserPassword {
     TResult Function(_UpdateUser value)? updateUser,
     TResult Function(_UpdateUserImage value)? updateUserImage,
     TResult Function(_UpdateUserPassword value)? updateUserPassword,
+    TResult Function(_SendFeedback value)? sendFeedback,
     required TResult orElse(),
   }) {
     if (updateUserPassword != null) {
@@ -496,12 +570,182 @@ class _$_UpdateUserPassword implements _UpdateUserPassword {
 }
 
 abstract class _UpdateUserPassword implements UserEvent {
-  const factory _UpdateUserPassword(final String password) =
+  const factory _UpdateUserPassword(
+          final String oldpassword, final String newpassword) =
       _$_UpdateUserPassword;
 
-  String get password;
+  String get oldpassword;
+  String get newpassword;
   @JsonKey(ignore: true)
   _$$_UpdateUserPasswordCopyWith<_$_UpdateUserPassword> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SendFeedbackCopyWith<$Res> {
+  factory _$$_SendFeedbackCopyWith(
+          _$_SendFeedback value, $Res Function(_$_SendFeedback) then) =
+      __$$_SendFeedbackCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String feedback, double rating});
+}
+
+/// @nodoc
+class __$$_SendFeedbackCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$_SendFeedback>
+    implements _$$_SendFeedbackCopyWith<$Res> {
+  __$$_SendFeedbackCopyWithImpl(
+      _$_SendFeedback _value, $Res Function(_$_SendFeedback) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? feedback = null,
+    Object? rating = null,
+  }) {
+    return _then(_$_SendFeedback(
+      null == feedback
+          ? _value.feedback
+          : feedback // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SendFeedback with DiagnosticableTreeMixin implements _SendFeedback {
+  const _$_SendFeedback(this.feedback, this.rating);
+
+  @override
+  final String feedback;
+  @override
+  final double rating;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'UserEvent.sendFeedback(feedback: $feedback, rating: $rating)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'UserEvent.sendFeedback'))
+      ..add(DiagnosticsProperty('feedback', feedback))
+      ..add(DiagnosticsProperty('rating', rating));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SendFeedback &&
+            (identical(other.feedback, feedback) ||
+                other.feedback == feedback) &&
+            (identical(other.rating, rating) || other.rating == rating));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, feedback, rating);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SendFeedbackCopyWith<_$_SendFeedback> get copyWith =>
+      __$$_SendFeedbackCopyWithImpl<_$_SendFeedback>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Map<String, dynamic> data) updateUser,
+    required TResult Function(String path) updateUserImage,
+    required TResult Function(String oldpassword, String newpassword)
+        updateUserPassword,
+    required TResult Function(String feedback, double rating) sendFeedback,
+  }) {
+    return sendFeedback(feedback, rating);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Map<String, dynamic> data)? updateUser,
+    TResult? Function(String path)? updateUserImage,
+    TResult? Function(String oldpassword, String newpassword)?
+        updateUserPassword,
+    TResult? Function(String feedback, double rating)? sendFeedback,
+  }) {
+    return sendFeedback?.call(feedback, rating);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Map<String, dynamic> data)? updateUser,
+    TResult Function(String path)? updateUserImage,
+    TResult Function(String oldpassword, String newpassword)?
+        updateUserPassword,
+    TResult Function(String feedback, double rating)? sendFeedback,
+    required TResult orElse(),
+  }) {
+    if (sendFeedback != null) {
+      return sendFeedback(feedback, rating);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_UpdateUser value) updateUser,
+    required TResult Function(_UpdateUserImage value) updateUserImage,
+    required TResult Function(_UpdateUserPassword value) updateUserPassword,
+    required TResult Function(_SendFeedback value) sendFeedback,
+  }) {
+    return sendFeedback(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_UpdateUser value)? updateUser,
+    TResult? Function(_UpdateUserImage value)? updateUserImage,
+    TResult? Function(_UpdateUserPassword value)? updateUserPassword,
+    TResult? Function(_SendFeedback value)? sendFeedback,
+  }) {
+    return sendFeedback?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_UpdateUser value)? updateUser,
+    TResult Function(_UpdateUserImage value)? updateUserImage,
+    TResult Function(_UpdateUserPassword value)? updateUserPassword,
+    TResult Function(_SendFeedback value)? sendFeedback,
+    required TResult orElse(),
+  }) {
+    if (sendFeedback != null) {
+      return sendFeedback(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SendFeedback implements UserEvent {
+  const factory _SendFeedback(final String feedback, final double rating) =
+      _$_SendFeedback;
+
+  String get feedback;
+  double get rating;
+  @JsonKey(ignore: true)
+  _$$_SendFeedbackCopyWith<_$_SendFeedback> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -593,12 +837,18 @@ class __$$_InitialCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
+class _$_Initial with DiagnosticableTreeMixin implements _Initial {
   const _$_Initial();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserState.initial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'UserState.initial'));
   }
 
   @override
@@ -706,12 +956,18 @@ class __$$_LoadingCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Loading implements _Loading {
+class _$_Loading with DiagnosticableTreeMixin implements _Loading {
   const _$_Loading();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserState.loading()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'UserState.loading'));
   }
 
   @override
@@ -819,12 +1075,18 @@ class __$$_SuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Success implements _Success {
+class _$_Success with DiagnosticableTreeMixin implements _Success {
   const _$_Success();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserState.success()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'UserState.success'));
   }
 
   @override
@@ -947,15 +1209,23 @@ class __$$_FailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Failure implements _Failure {
+class _$_Failure with DiagnosticableTreeMixin implements _Failure {
   const _$_Failure(this.message);
 
   @override
   final String message;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserState.failure(message: $message)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'UserState.failure'))
+      ..add(DiagnosticsProperty('message', message));
   }
 
   @override

@@ -35,9 +35,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final Response response = await AuthRepo.getUser(token);
         print(response.data['user']);
         setuser(response.data['user']);
-        FirebaseMessaging.instance.getToken().then((value) {
-        AuthRepo.updateFcmtoken(value?? '', token);
-        });
       } else {
         emit(const _Unauthenticated());
       }

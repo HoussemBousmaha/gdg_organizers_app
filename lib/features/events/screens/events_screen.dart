@@ -13,76 +13,80 @@ class EventsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(
-              left: 30.0,
-              top: 15,
-            ),
-            child: Text(
-              'Coming Soon',
-              style: TextStyle(
-                color: Color(0xFF4285F4),
-                fontWeight: FontWeight.w700,
-                fontSize: 17,
+    return RefreshIndicator(
+      onRefresh: () async {
+        context.read<EventCubit>().getEvents();
+      },
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(
+                left: 30.0,
+                top: 15,
+              ),
+              child: Text(
+                'Coming Soon',
+                style: TextStyle(
+                  color: Color(0xFF4285F4),
+                  fontWeight: FontWeight.w700,
+                  fontSize: 17,
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 15),
-          BlocBuilder<EventCubit, EventState>(
-            builder: (context, state) {
-              return state.when(
-                  initial: () => const SizedBox.shrink(),
-                  loading: () => Column(
-                        children:
-                            List.generate(4, (index) => const EventShimmer()),
-                      ),
-                  loaded: (_, soonEvents) => Column(
-                      children: soonEvents
-                          .map((e) => EventWidget(
-                          event: e,
-                                
-                              ))
-                          .toList()),
-                  error: (e) => Center(child: Text(e)));
-            },
-          ),
-          const Padding(
-            padding: EdgeInsets.only(
-              left: 30.0,
-              top: 15,
+            const SizedBox(height: 15),
+            BlocBuilder<EventCubit, EventState>(
+              builder: (context, state) {
+                return state.when(
+                    initial: () => const SizedBox.shrink(),
+                    loading: () => Column(
+                          children:
+                              List.generate(4, (index) => const EventShimmer()),
+                        ),
+                    loaded: (_, soonEvents) => Column(
+                        children: soonEvents
+                            .map((e) => EventWidget(
+                                  event: e,
+                                ))
+                            .toList()),
+                    error: (e) => Center(child: Text(e)));
+              },
             ),
-            child: Text(
-              'New Events',
-              style: TextStyle(
-                color: Color(0xFF4285F4),
-                fontWeight: FontWeight.w700,
-                fontSize: 17,
+            const Padding(
+              padding: EdgeInsets.only(
+                left: 30.0,
+                top: 15,
+              ),
+              child: Text(
+                'New Events',
+                style: TextStyle(
+                  color: Color(0xFF4285F4),
+                  fontWeight: FontWeight.w700,
+                  fontSize: 17,
+                ),
               ),
             ),
-          ),
-          BlocBuilder<EventCubit, EventState>(
-            builder: (context, state) {
-              return state.when(
-                  initial: () => const SizedBox(),
-                  loading: () => Column(
-                        children:
-                            List.generate(4, (index) => const EventShimmer()),
-                      ),
-                  loaded: (newEvents, _) => Column(
-                      children: newEvents
-                          .map((e) => EventWidget(
-                          event: e,
-                              ))
-                          .toList()),
-                  error: (e) => Center(child: Text(e)));
-            },
-          ),
-        ],
+            BlocBuilder<EventCubit, EventState>(
+              builder: (context, state) {
+                return state.when(
+                    initial: () => const SizedBox(),
+                    loading: () => Column(
+                          children:
+                              List.generate(4, (index) => const EventShimmer()),
+                        ),
+                    loaded: (newEvents, _) => Column(
+                        children: newEvents
+                            .map((e) => EventWidget(
+                                  event: e,
+                                ))
+                            .toList()),
+                    error: (e) => Center(child: Text(e)));
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

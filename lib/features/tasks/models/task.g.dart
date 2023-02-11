@@ -13,9 +13,7 @@ _$_Task _$$_TaskFromJson(Map<String, dynamic> json) => _$_Task(
       datefin: json['datefin'] as String?,
       duration: json['duration'] as String?,
       state: json['state'] as String? ?? 'incompleted',
-      comments: (json['comments'] as List<dynamic>?)
-          ?.map((e) => Comment.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      thread: json['thread'] as String?,
     );
 
 Map<String, dynamic> _$$_TaskToJson(_$_Task instance) => <String, dynamic>{
@@ -25,5 +23,5 @@ Map<String, dynamic> _$$_TaskToJson(_$_Task instance) => <String, dynamic>{
       'datefin': instance.datefin,
       'duration': instance.duration,
       'state': instance.state,
-      'comments': instance.comments,
+      'thread': instance.thread,
     };

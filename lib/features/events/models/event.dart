@@ -20,8 +20,8 @@ class Event with _$Event{
     String? datedebut,
     String? datefin , 
     @Default('inactive') String? state,
+    String? thread,
     
-    List<Comment>? comments,
 
   }) = _Event; 
 
