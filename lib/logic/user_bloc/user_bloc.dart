@@ -57,7 +57,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       try {
         emit(const UserState.loading());
         final res = await AuthRepo.updateUser(token, event.data);
-        if (res.statusCode == 200) {
+        if (res.statusCode == 201) {
           authBloc.add(AuthEvent.updateuser(res.data['user']));
           emit(const UserState.success());
         } else {
