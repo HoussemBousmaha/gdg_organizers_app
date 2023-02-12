@@ -1,10 +1,7 @@
 part of '../tasks_screen.dart';
 
 class TaskWidget extends StatelessWidget {
-  const TaskWidget({
-    Key? key,
-    required this.task,
-  }) : super(key: key);
+  const TaskWidget({super.key, required this.task});
   final Task task;
 
   @override
@@ -21,14 +18,9 @@ class TaskWidget extends StatelessWidget {
             blurRadius: 5,
           ),
         ],
-        border: Border.all(
-          color: kBlue,
-          width: 1,
-        ),
+        border: Border.all(color: kBlue, width: 1),
         color: Colors.white,
-        borderRadius: BorderRadius.circular(
-          5,
-        ),
+        borderRadius: BorderRadius.circular(5),
       ),
       child: Row(
         children: [
@@ -45,12 +37,14 @@ class TaskWidget extends StatelessWidget {
                     fontSize: 16,
                   ),
                 ),
-                Text('${task.datedebut}  ${task.duration}}',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14,
-                      color: kGrey,
-                    )),
+                Text(
+                  '${task.datedebut}  ${task.duration}}',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14,
+                    color: kGrey,
+                  ),
+                ),
               ],
             ),
           ),
@@ -106,13 +100,8 @@ class TaskShimmer extends StatelessWidget {
       height: 70,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(
-          5,
-        ),
-        border: Border.all(
-          color: kGrey,
-          width: 1,
-        ),
+        borderRadius: BorderRadius.circular(5),
+        border: Border.all(color: kGrey, width: 1),
       ),
       child: Row(
         children: [
@@ -126,26 +115,26 @@ class TaskShimmer extends StatelessWidget {
                   baseColor: Colors.grey.shade300,
                   highlightColor: Colors.grey.shade100,
                   child: Container(
-                      height: 20,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey.shade300,
-                      )),
+                    height: 20,
+                    width: 150,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.grey.shade300,
+                    ),
+                  ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 Shimmer.fromColors(
                   baseColor: Colors.grey.shade300,
                   highlightColor: Colors.grey.shade100,
                   child: Container(
-                      height: 20,
-                      width: 120,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey.shade300,
-                      )),
+                    height: 20,
+                    width: 120,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.grey.shade300,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -155,13 +144,14 @@ class TaskShimmer extends StatelessWidget {
             baseColor: Colors.grey.shade300,
             highlightColor: Colors.grey.shade100,
             child: Container(
-                margin: const EdgeInsets.all(15),
-                height: 25,
-                width: 25,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.grey.shade300,
-                )),
+              margin: const EdgeInsets.all(15),
+              height: 25,
+              width: 25,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.grey.shade300,
+              ),
+            ),
           ),
         ],
       ),

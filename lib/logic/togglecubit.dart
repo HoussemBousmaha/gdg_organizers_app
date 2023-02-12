@@ -14,6 +14,7 @@ class ToggelCubit extends Cubit<bool> {
   void off() {
     emit(false);
   }
+
   void set(bool value) {
     emit(value);
   }

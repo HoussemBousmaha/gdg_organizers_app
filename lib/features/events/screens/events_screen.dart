@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gdg_organizers_app/features/events/cubit/event_cubit.dart';
-import 'package:gdg_organizers_app/features/home/home_screen.dart';
 import 'package:shimmer/shimmer.dart';
+
 import '../../../../constants/const.dart';
+import '../../home/home_screen.dart';
+import '../cubit/event_cubit.dart';
 import '../models/event.dart';
 import 'event_details.dart';
+
 part 'widgets/event_widget.dart';
 
 class EventsScreen extends StatelessWidget {
@@ -40,18 +42,11 @@ class EventsScreen extends StatelessWidget {
             BlocBuilder<EventCubit, EventState>(
               builder: (context, state) {
                 return state.when(
-                    initial: () => const SizedBox.shrink(),
-                    loading: () => Column(
-                          children:
-                              List.generate(4, (index) => const EventShimmer()),
-                        ),
-                    loaded: (_, soonEvents) => Column(
-                        children: soonEvents
-                            .map((e) => EventWidget(
-                                  event: e,
-                                ))
-                            .toList()),
-                    error: (e) => Center(child: Text(e)));
+                  initial: () => const SizedBox.shrink(),
+                  loading: () => Column(children: List.generate(4, (index) => const EventShimmer())),
+                  loaded: (_, soonEvents) => Column(children: soonEvents.map((e) => EventWidget(event: e)).toList()),
+                  error: (e) => Center(child: Text(e)),
+                );
               },
             ),
             const Padding(
@@ -71,18 +66,11 @@ class EventsScreen extends StatelessWidget {
             BlocBuilder<EventCubit, EventState>(
               builder: (context, state) {
                 return state.when(
-                    initial: () => const SizedBox(),
-                    loading: () => Column(
-                          children:
-                              List.generate(4, (index) => const EventShimmer()),
-                        ),
-                    loaded: (newEvents, _) => Column(
-                        children: newEvents
-                            .map((e) => EventWidget(
-                                  event: e,
-                                ))
-                            .toList()),
-                    error: (e) => Center(child: Text(e)));
+                  initial: () => const SizedBox(),
+                  loading: () => Column(children: List.generate(4, (index) => const EventShimmer())),
+                  loaded: (newEvents, _) => Column(children: newEvents.map((e) => EventWidget(event: e)).toList()),
+                  error: (e) => Center(child: Text(e)),
+                );
               },
             ),
           ],

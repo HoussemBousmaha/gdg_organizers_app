@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gdg_organizers_app/constants/const.dart';
-import 'package:gdg_organizers_app/features/auth/widgets/authwidgets.dart';
-import 'package:gdg_organizers_app/shared/widgets/gdgLogo.dart';
-
-import '../auth/screens/authscreen.dart';
+import '../../constants/const.dart';
+import '../../shared/widgets/gdg_logo.dart';
 
 class LoadingScreen extends StatelessWidget {
   const LoadingScreen({Key? key}) : super(key: key);

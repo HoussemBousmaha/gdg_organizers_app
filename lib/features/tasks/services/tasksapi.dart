@@ -1,6 +1,5 @@
-import 'package:gdg_organizers_app/features/tasks/models/task.dart';
-
 import '../../../shared/services/diohelper.dart';
+import '../models/task.dart';
 
 class TaskApi {
   static Future<List<Task>> getTasks(String token) async {

@@ -31,8 +31,7 @@ class ObjectManager extends Component with HasGameRef<DoodleDash> {
 
     var currentX = (gameRef.size.x.floor() / 2).toDouble() - 50;
 
-    var currentY =
-        gameRef.size.y - (_rand.nextInt(gameRef.size.y.floor()) / 3) - 50;
+    var currentY = gameRef.size.y - (_rand.nextInt(gameRef.size.y.floor()) / 3) - 50;
 
     for (var i = 0; i < 9; i++) {
       if (i != 0) {
@@ -54,12 +53,9 @@ class ObjectManager extends Component with HasGameRef<DoodleDash> {
 
   @override
   void update(double dt) {
-    final topOfLowestPlatform =
-        _platforms.first.position.y + _tallestPlatformHeight;
+    final topOfLowestPlatform = _platforms.first.position.y + _tallestPlatformHeight;
 
-    final screenBottom = gameRef.player.position.y +
-        (gameRef.size.x / 2) +
-        gameRef.screenBufferSpace;
+    final screenBottom = gameRef.player.position.y + (gameRef.size.x / 2) + gameRef.screenBufferSpace;
 
     if (topOfLowestPlatform > screenBottom) {
       var newPlatY = _generateNextY();
@@ -141,36 +137,26 @@ class ObjectManager extends Component with HasGameRef<DoodleDash> {
     double nextPlatformAnchorX;
 
     do {
-      nextPlatformAnchorX =
-          _rand.nextInt(gameRef.size.x.floor() - platformWidth).toDouble();
-    } while (previousPlatformXRange.overlaps(
-        Range(nextPlatformAnchorX, nextPlatformAnchorX + platformWidth)));
+      nextPlatformAnchorX = _rand.nextInt(gameRef.size.x.floor() - platformWidth).toDouble();
+    } while (previousPlatformXRange.overlaps(Range(nextPlatformAnchorX, nextPlatformAnchorX + platformWidth)));
 
     return nextPlatformAnchorX;
   }
 
   double _generateNextY() {
-    final currentHighestPlatformY =
-        _platforms.last.center.y + _tallestPlatformHeight;
+    final currentHighestPlatformY = _platforms.last.center.y + _tallestPlatformHeight;
 
-    final distanceToNextY = minVerticalDistanceToNextPlatform.toInt() +
-        _rand
-            .nextInt((maxVerticalDistanceToNextPlatform -
-                    minVerticalDistanceToNextPlatform)
-                .floor())
-            .toDouble();
+    final distanceToNextY = minVerticalDistanceToNextPlatform.toInt() + _rand.nextInt((maxVerticalDistanceToNextPlatform - minVerticalDistanceToNextPlatform).floor()).toDouble();
 
     return currentHighestPlatformY - distanceToNextY;
   }
 
   Platform _semiRandomPlatform(Vector2 position) {
-    if (specialPlatforms['spring'] == true &&
-        probGen.generateWithProbability(15)) {
+    if (specialPlatforms['spring'] == true && probGen.generateWithProbability(15)) {
       return SpringBoard(position: position);
     }
 
-    if (specialPlatforms['broken'] == true &&
-        probGen.generateWithProbability(10)) {
+    if (specialPlatforms['broken'] == true && probGen.generateWithProbability(10)) {
       return BrokenPlatform(position: position);
     }
 
@@ -193,9 +179,7 @@ class ObjectManager extends Component with HasGameRef<DoodleDash> {
   }
 
   void _cleanupEnemies() {
-    final screenBottom = gameRef.player.position.y +
-        (gameRef.size.x / 2) +
-        gameRef.screenBufferSpace;
+    final screenBottom = gameRef.player.position.y + (gameRef.size.x / 2) + gameRef.screenBufferSpace;
 
     while (_enemies.isNotEmpty && _enemies.first.position.y > screenBottom) {
       remove(_enemies.first);
@@ -206,15 +190,13 @@ class ObjectManager extends Component with HasGameRef<DoodleDash> {
   final List<PowerUp> _powerups = [];
 
   void _maybeAddPowerup() {
-    if (specialPlatforms['noogler'] == true &&
-        probGen.generateWithProbability(20)) {
+    if (specialPlatforms['noogler'] == true && probGen.generateWithProbability(20)) {
       var nooglerHat = NooglerHat(
         position: Vector2(_generateNextX(75), _generateNextY()),
       );
       add(nooglerHat);
       _powerups.add(nooglerHat);
-    } else if (specialPlatforms['rocket'] == true &&
-        probGen.generateWithProbability(15)) {
+    } else if (specialPlatforms['rocket'] == true && probGen.generateWithProbability(15)) {
       var rocket = Rocket(
         position: Vector2(_generateNextX(50), _generateNextY()),
       );
@@ -226,9 +208,7 @@ class ObjectManager extends Component with HasGameRef<DoodleDash> {
   }
 
   void _cleanupPowerups() {
-    final screenBottom = gameRef.player.position.y +
-        (gameRef.size.x / 2) +
-        gameRef.screenBufferSpace;
+    final screenBottom = gameRef.player.position.y + (gameRef.size.x / 2) + gameRef.screenBufferSpace;
     while (_powerups.isNotEmpty && _powerups.first.position.y > screenBottom) {
       if (_powerups.first.parent != null) {
         remove(_powerups.first);

@@ -11,27 +11,10 @@ import 'package:flutter/services.dart';
 import '../doodle_dash.dart';
 import 'sprites.dart';
 
-enum PlayerState {
-  left,
-  right,
-  center,
-  rocket,
-  nooglerCenter,
-  nooglerLeft,
-  nooglerRight
-}
+enum PlayerState { left, right, center, rocket, nooglerCenter, nooglerLeft, nooglerRight }
 
-class Player extends SpriteGroupComponent<PlayerState>
-    with HasGameRef<DoodleDash>, KeyboardHandler, CollisionCallbacks {
-  Player({
-    super.position,
-    required this.character,
-    this.jumpSpeed = 600,
-  }) : super(
-          size: Vector2(79, 109),
-          anchor: Anchor.center,
-          priority: 1,
-        );
+class Player extends SpriteGroupComponent<PlayerState> with HasGameRef<DoodleDash>, KeyboardHandler, CollisionCallbacks {
+  Player({super.position, required this.character, this.jumpSpeed = 600}) : super(size: Vector2(79, 109), anchor: Anchor.center, priority: 1);
 
   int _hAxisInput = 0;
   final int movingLeftInput = -1;
@@ -121,18 +104,11 @@ class Player extends SpriteGroupComponent<PlayerState>
     _hAxisInput = 0;
   }
 
-  bool get hasPowerup =>
-      current == PlayerState.rocket ||
-      current == PlayerState.nooglerLeft ||
-      current == PlayerState.nooglerRight ||
-      current == PlayerState.nooglerCenter;
+  bool get hasPowerup => current == PlayerState.rocket || current == PlayerState.nooglerLeft || current == PlayerState.nooglerRight || current == PlayerState.nooglerCenter;
 
   bool get isInvincible => current == PlayerState.rocket;
 
-  bool get isWearingHat =>
-      current == PlayerState.nooglerLeft ||
-      current == PlayerState.nooglerRight ||
-      current == PlayerState.nooglerCenter;
+  bool get isWearingHat => current == PlayerState.nooglerLeft || current == PlayerState.nooglerRight || current == PlayerState.nooglerCenter;
 
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
@@ -142,8 +118,7 @@ class Player extends SpriteGroupComponent<PlayerState>
       return;
     }
 
-    bool isCollidingVertically =
-        (intersectionPoints.first.y - intersectionPoints.last.y).abs() < 5;
+    bool isCollidingVertically = (intersectionPoints.first.y - intersectionPoints.last.y).abs() < 5;
 
     if (isMovingDown && isCollidingVertically) {
       current = PlayerState.center;
@@ -153,8 +128,7 @@ class Player extends SpriteGroupComponent<PlayerState>
       } else if (other is SpringBoard) {
         jump(specialJumpSpeed: jumpSpeed * 2);
         return;
-      } else if (other is BrokenPlatform &&
-          other.current == BrokenPlatformState.cracked) {
+      } else if (other is BrokenPlatform && other.current == BrokenPlatformState.cracked) {
         jump();
         other.breakPlatform();
         return;
@@ -207,15 +181,11 @@ class Player extends SpriteGroupComponent<PlayerState>
     // Load & configure sprite assets
     final left = await gameRef.loadSprite('game/${character.name}_left.png');
     final right = await gameRef.loadSprite('game/${character.name}_right.png');
-    final center =
-        await gameRef.loadSprite('game/${character.name}_center.png');
+    final center = await gameRef.loadSprite('game/${character.name}_center.png');
     final rocket = await gameRef.loadSprite('game/rocket_4.png');
-    final nooglerCenter =
-        await gameRef.loadSprite('game/${character.name}_hat_center.png');
-    final nooglerLeft =
-        await gameRef.loadSprite('game/${character.name}_hat_left.png');
-    final nooglerRight =
-        await gameRef.loadSprite('game/${character.name}_hat_right.png');
+    final nooglerCenter = await gameRef.loadSprite('game/${character.name}_hat_center.png');
+    final nooglerLeft = await gameRef.loadSprite('game/${character.name}_hat_left.png');
+    final nooglerRight = await gameRef.loadSprite('game/${character.name}_hat_right.png');
 
     sprites = <PlayerState, Sprite>{
       PlayerState.left: left,

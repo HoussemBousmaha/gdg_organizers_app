@@ -1,12 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:gdg_organizers_app/features/auth/services/authapi.dart';
 
+import '../../auth/services/authapi.dart';
 import '../models/post.dart';
-import '../postApi.dart';
+import '../post_api.dart';
 
-part 'posts_state.dart';
 part 'posts_cubit.freezed.dart';
+part 'posts_state.dart';
 
 class PostsCubit extends Cubit<PostsState> {
   PostsCubit() : super(const PostsState.initial());

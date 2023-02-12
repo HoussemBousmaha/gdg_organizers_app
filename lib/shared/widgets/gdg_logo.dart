@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gdg_organizers_app/constants/const.dart';
+
+import '../../constants/const.dart';
 
 class GdgLogo extends StatefulWidget {
   const GdgLogo({super.key, this.size = 30});
@@ -15,9 +16,7 @@ class _GdgLogoState extends State<GdgLogo> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-        vsync: this, duration: const Duration(seconds: 1, milliseconds: 500))
-      ..repeat(reverse: false);
+    _controller = AnimationController(vsync: this, duration: const Duration(seconds: 1, milliseconds: 500))..repeat(reverse: false);
   }
 
   @override
@@ -41,28 +40,23 @@ class GdgLogoAnimation extends StatelessWidget {
 
   GdgLogoAnimation({Key? key, required this.controller})
       : animations = List.generate(
-            4,
-            (index) => ColorTween(
-                  begin: Colors.white,
-                  end: [kYellow, kGreen, kRed, kBlue][index],
-                ).animate(CurvedAnimation(
-                  parent: controller,
-                  curve: Interval(
-                    index / 4,
-                    (index + 1) / 4,
-                    curve: Curves.elasticInOut,
-                  ),
-                ))),
+          4,
+          (index) => ColorTween(
+            begin: Colors.white,
+            end: [kYellow, kGreen, kRed, kBlue][index],
+          ).animate(
+            CurvedAnimation(
+              parent: controller,
+              curve: Interval(index / 4, (index + 1) / 4, curve: Curves.elasticInOut),
+            ),
+          ),
+        ),
         super(key: key);
 
   final List<Animation<Color?>> animations;
 
   @override
-  Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: GdgLogoPainter(animations),
-    );
-  }
+  Widget build(BuildContext context) => CustomPaint(painter: GdgLogoPainter(animations));
 }
 
 class GdgLogoPainter extends CustomPainter {

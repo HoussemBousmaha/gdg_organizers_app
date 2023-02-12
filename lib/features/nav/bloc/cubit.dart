@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gdg_organizers_app/features/events/screens/events_screen.dart';
-import 'package:gdg_organizers_app/features/home/home_screen.dart';
-import 'package:gdg_organizers_app/features/settings/screens/settings_screen.dart';
-import 'package:gdg_organizers_app/features/nav/bloc/states.dart';
 
+import '../../events/screens/events_screen.dart';
+import '../../home/home_screen.dart';
+import '../../settings/screens/settings_screen.dart';
 import '../../tasks/tasks_screen.dart';
+import 'states.dart';
 
 class NavigationCubit extends Cubit<NavigationStates> {
   NavigationCubit() : super(NavigationInitialState());
@@ -14,10 +14,10 @@ class NavigationCubit extends Cubit<NavigationStates> {
   int currentIndex = 0;
 
   List<Widget> screens = [
-    HomeScreen(),
-    TasksScreen(),
-    EventsScreen(),
-    SettingsScreen(),
+    const HomeScreen(),
+    const TasksScreen(),
+    const EventsScreen(),
+    const SettingsScreen(),
   ];
 
   List<String> appBarTitles = [

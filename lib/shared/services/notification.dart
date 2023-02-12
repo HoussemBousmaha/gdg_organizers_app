@@ -4,11 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationServices {
-  static Future<void> _firebaseMessagingBackgroundHandler(
-      RemoteMessage message) async {
+  static Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     await Firebase.initializeApp();
 
-    print('Handling a background message ${message}');
+    print('Handling a background message $message');
   }
 
   static const AndroidNotificationChannel channel = AndroidNotificationChannel(
@@ -18,8 +17,7 @@ class NotificationServices {
     importance: Importance.high,
   );
 
-  static void initializenotification(
-      FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
+  static void initializenotification(FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
     FirebaseMessaging messaging = FirebaseMessaging.instance;
     NotificationSettings settings = await messaging.requestPermission(
       alert: true,
@@ -33,24 +31,17 @@ class NotificationServices {
     await Firebase.initializeApp();
 
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-    await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
-        ?.createNotificationChannel(NotificationServices.channel);
+    await flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(NotificationServices.channel);
 
-    await FirebaseMessaging.instance
-        .setForegroundNotificationPresentationOptions(
+    await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
       alert: true,
       badge: true,
       sound: true,
     );
 
-    AndroidInitializationSettings initializationSettingsAndroid =
-        const AndroidInitializationSettings('ic_launcher');
-    AndroidInitializationSettings initialzationSettingsAndroid =
-        const AndroidInitializationSettings('@mipmap/ic_launcher');
-    InitializationSettings initializationSettings =
-        InitializationSettings(android: initialzationSettingsAndroid);
+    AndroidInitializationSettings initializationSettingsAndroid = const AndroidInitializationSettings('ic_launcher');
+    AndroidInitializationSettings initialzationSettingsAndroid = const AndroidInitializationSettings('@mipmap/ic_launcher');
+    InitializationSettings initializationSettings = InitializationSettings(android: initialzationSettingsAndroid);
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       var notification = message.notification;
@@ -61,13 +52,7 @@ class NotificationServices {
             notification.title,
             notification.body,
             NotificationDetails(
-              android: AndroidNotificationDetails(channel.id, channel.name,
-                  channelDescription: channel.description,
-                  color: Colors.blue,
-                  importance: Importance.max,
-                  icon: "@mipmap/ic_launcher",
-                  visibility: NotificationVisibility.public,
-                  priority: Priority.high),
+              android: AndroidNotificationDetails(channel.id, channel.name, channelDescription: channel.description, color: Colors.blue, importance: Importance.max, icon: "@mipmap/ic_launcher", visibility: NotificationVisibility.public, priority: Priority.high),
             ));
       }
     });
@@ -80,13 +65,7 @@ class NotificationServices {
             notification.title,
             notification.body,
             NotificationDetails(
-              android: AndroidNotificationDetails(channel.id, channel.name,
-                  channelDescription: channel.description,
-                  color: Colors.blue,
-                  importance: Importance.max,
-                  icon: "@mipmap/ic_launcher",
-                  visibility: NotificationVisibility.public,
-                  priority: Priority.high),
+              android: AndroidNotificationDetails(channel.id, channel.name, channelDescription: channel.description, color: Colors.blue, importance: Importance.max, icon: "@mipmap/ic_launcher", visibility: NotificationVisibility.public, priority: Priority.high),
             ));
       }
     });

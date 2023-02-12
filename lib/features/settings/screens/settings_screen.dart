@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gdg_organizers_app/constants/const.dart';
-import 'package:gdg_organizers_app/constants/icon_broken.dart';
-import 'package:gdg_organizers_app/features/settings/screens/editprofilescreen.dart';
-import 'package:gdg_organizers_app/features/settings/widgets/settings_widgets.dart';
-import 'package:gdg_organizers_app/logic/user_bloc/user_bloc.dart';
-import 'package:gdg_organizers_app/shared/widgets/feedback.dart';
-import 'package:gdg_organizers_app/shared/widgets/logout_pop_up.dart';
 
+import '../../../constants/const.dart';
+import '../../../constants/icon_broken.dart';
 import '../../../logic/togglecubit.dart';
+import '../../../logic/user_bloc/user_bloc.dart';
 import '../../../shared/widgets/bug_description.dart';
+import '../../../shared/widgets/feedback.dart';
+import '../../../shared/widgets/logout_pop_up.dart';
+import '../widgets/settings_widgets.dart';
+import 'editprofilescreen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -26,9 +26,7 @@ class SettingsScreen extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          const Text('GENERAL',
-              style: TextStyle(
-                  fontSize: 17, fontWeight: FontWeight.bold, color: kBlue)),
+          const Text('GENERAL', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: kBlue)),
           SettingButton(
               text: 'Account',
               icon: IconBroken.Profile,
@@ -66,9 +64,7 @@ class SettingsScreen extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          const Text('FEEDBACK',
-              style: TextStyle(
-                  fontSize: 17, fontWeight: FontWeight.bold, color: kBlue)),
+          const Text('FEEDBACK', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: kBlue)),
           SettingButton(
               text: 'Report a bug',
               icon: IconBroken.Search,
@@ -169,8 +165,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                           autocorrect: false,
                           obscureText: !state,
                           controller: _currentPasswordController,
-                          onSaved: (newValue) =>
-                              data['newpassword'] = newValue!,
+                          onSaved: (newValue) => data['newpassword'] = newValue!,
                           validator: validatePassword,
                           enableSuggestions: false,
                           decoration: InputDecoration(
@@ -179,31 +174,24 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                               borderSide: BorderSide(
                                 color: Colors.red,
                               ),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
                             ),
                             focusedErrorBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.red,
                               ),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
                             ),
                             suffixIcon: IconButton(
-                              icon: Icon(state
-                                  ? Icons.visibility
-                                  : Icons.visibility_off),
+                              icon: Icon(state ? Icons.visibility : Icons.visibility_off),
                               onPressed: () {
                                 context.read<ToggelCubit>().toggle();
                               },
                             ),
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 15),
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                             border: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.black, width: 5),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide(color: Colors.black, width: 5),
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
                             ),
                           ),
                         );
@@ -233,31 +221,24 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                               borderSide: BorderSide(
                                 color: Colors.red,
                               ),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
                             ),
                             focusedErrorBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.red,
                               ),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
                             ),
                             suffixIcon: IconButton(
-                              icon: Icon(state
-                                  ? Icons.visibility
-                                  : Icons.visibility_off),
+                              icon: Icon(state ? Icons.visibility : Icons.visibility_off),
                               onPressed: () {
                                 context.read<ToggelCubit>().toggle();
                               },
                             ),
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 15),
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                             border: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.black, width: 5),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide(color: Colors.black, width: 5),
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
                             ),
                           ),
                         );
@@ -285,10 +266,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
-                            context.read<UserBloc>().add(
-                                UserEvent.updateUserPassword(
-                                    data['password'],
-                                    data['newpassword']));
+                            context.read<UserBloc>().add(UserEvent.updateUserPassword(data['password'], data['newpassword']));
                             Navigator.pop(context);
                           }
                         },

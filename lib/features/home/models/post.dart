@@ -1,6 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:gdg_organizers_app/models/user/user.dart';
 import 'package:intl/intl.dart';
+
+import '../../../models/user/user.dart';
+
 part 'post.freezed.dart';
 part 'post.g.dart';
 

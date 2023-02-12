@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gdg_organizers_app/constants/const.dart';
-import 'package:gdg_organizers_app/features/auth/login_bloc/login_bloc.dart';
-import 'package:gdg_organizers_app/features/auth/services/authrepo.dart';
-import 'dart:math' as math;
 
+import '../../../constants/const.dart';
 import '../../settings/screens/editprofilescreen.dart';
-import '../services/authapi.dart';
+import '../login_bloc/login_bloc.dart';
 import '../widgets/authwidgets.dart';
 
 class AuthScreen extends StatefulWidget {
-  AuthScreen({super.key});
+  const AuthScreen({super.key});
 
   @override
   State<AuthScreen> createState() => _AuthScreenState();
@@ -28,8 +24,7 @@ class _AuthScreenState extends State<AuthScreen> {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
 
-      context.read<LoginBloc>().add(LoginEvent.login(
-          email: loginData['email']!, password: loginData['password']!));
+      context.read<LoginBloc>().add(LoginEvent.login(email: loginData['email']!, password: loginData['password']!));
     }
   }
 
@@ -126,12 +121,10 @@ class _AuthScreenState extends State<AuthScreen> {
                       children: [
                         const Text(
                           'Welcome',
-                          style: TextStyle(
-                              fontSize: 57, fontWeight: FontWeight.w400),
+                          style: TextStyle(fontSize: 57, fontWeight: FontWeight.w400),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 32, vertical: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 10),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -170,8 +163,7 @@ class _AuthScreenState extends State<AuthScreen> {
                               BlocBuilder<LoginBloc, LoginState>(
                                 builder: (context, state) {
                                   return state.when(
-                                    loading: () =>
-                                        const Center(child: CustomLoader()),
+                                    loading: () => const Center(child: CustomLoader()),
                                     initial: () => LoginButton(
                                       onPressed: () => login(),
                                     ),
@@ -197,8 +189,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           end: Offset(0, 0.0),
                           curve: Curves.bounceIn,
                           child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 22, vertical: 10),
+                            padding: EdgeInsets.symmetric(horizontal: 22, vertical: 10),
                             child: Authpic(),
                           ),
                         ),

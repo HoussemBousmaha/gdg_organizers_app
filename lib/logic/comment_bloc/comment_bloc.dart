@@ -1,13 +1,11 @@
 import 'dart:async';
-import 'dart:ffi';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:gdg_organizers_app/features/auth/services/authapi.dart';
-import 'package:gdg_organizers_app/features/auth/services/authrepo.dart';
-import 'package:gdg_organizers_app/features/events/services/eventapi.dart';
-import 'package:gdg_organizers_app/logic/auth_bloc/auth_bloc.dart';
-import 'package:gdg_organizers_app/models/comments/comment.dart';
+import '../../features/auth/services/authapi.dart';
+import '../../features/events/services/eventapi.dart';
+import '../auth_bloc/auth_bloc.dart';
+import '../../models/comments/comment.dart';
 
 import '../../shared/services/socket_io.dart';
 
@@ -29,10 +27,10 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
   List<Comment> comments = [];
 
   FutureOr<void> _onConnect(_GetComments event) async {
-    emit(CommentState.loading());
+    emit(const CommentState.loading());
     final String? token = await AuthRepo.getToken();
     if (token == null) {
-      emit(CommentState.failure('token not found'));
+      emit(const CommentState.failure('token not found'));
     } else {
       try {
         WebSocketServices.connect(
@@ -42,10 +40,9 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
         WebSocketServices.socket.on('comment', (data) {
           add(_RecieveComment(Comment.fromJson(data)));
         });
-        final List<Comment> newcomments =
-            await EventApi.getComments(token, event.channelId);
+        final List<Comment> newcomments = await EventApi.getComments(token, event.channelId);
         if (newcomments.isEmpty) {
-          emit(CommentState.success([]));
+          emit(const CommentState.success([]));
           return;
         }
         comments = [...newcomments];
@@ -59,10 +56,7 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
 
   FutureOr<void> _onSendComment(_SendComment event) async {
     try {
-      var comment = Comment(
-          content: event.comment,
-          sender: authBloc.user,
-          createdAt: DateTime.now().toIso8601String());
+      var comment = Comment(content: event.comment, sender: authBloc.user, createdAt: DateTime.now().toIso8601String());
       comments = [comment, ...comments];
       emit(CommentState.success(comments));
       WebSocketServices.socket.emit('comment', comment.toJson());

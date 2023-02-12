@@ -1,7 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
-import '../../../constants/const.dart';
 import 'package:dio/dio.dart';
 
 import '../../../shared/services/diohelper.dart';
@@ -37,8 +33,7 @@ class AuthApi {
     );
   }
 
-  static Future<Response> updateUser(
-      String token, Map<String, dynamic> data) async {
+  static Future<Response> updateUser(String token, Map<String, dynamic> data) async {
     print(token);
     return await DioHelper.putData(
       url: '/user/:id',
@@ -47,8 +42,7 @@ class AuthApi {
     );
   }
 
-  static Future<Response> sendFeedback(
-      String token, double rating, String feedback) async {
+  static Future<Response> sendFeedback(String token, double rating, String feedback) async {
     return await DioHelper.postData(
       url: '/user/feedback',
       token: token,
@@ -59,8 +53,7 @@ class AuthApi {
     );
   }
 
-  static Future<Response> updatePassword(
-      String token, String oldpassword, String newpassword) async {
+  static Future<Response> updatePassword(String token, String oldpassword, String newpassword) async {
     return await DioHelper.putData(
       url: '/user/password/:id',
       token: token,

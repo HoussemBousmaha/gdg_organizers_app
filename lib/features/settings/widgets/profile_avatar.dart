@@ -1,7 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:gdg_organizers_app/constants/const.dart';
-import 'package:gdg_organizers_app/features/auth/widgets/authwidgets.dart';
+
+import '../../../constants/const.dart';
+import '../../auth/widgets/authwidgets.dart';
 
 class CoverPhoto extends StatelessWidget {
   const CoverPhoto({
@@ -22,7 +23,7 @@ class CoverPhoto extends StatelessWidget {
     return Container(
       height: showBackButton ? 120 : 40,
       width: showBackButton ? 140 : 40,
-      margin: EdgeInsets.only(top: 5),
+      margin: const EdgeInsets.only(top: 5),
       child: CachedNetworkImage(
         imageUrl: coverPhotoUrl,
         imageBuilder: (context, imageProvider) {
@@ -33,29 +34,16 @@ class CoverPhoto extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.white,
-              border: showBackButton
-                  ? Border.all(
-                      width: 3,
-                      color: Colors.white,
-                    )
-                  : null,
-              image: DecorationImage(
-                image: imageProvider,
-                fit: BoxFit.contain,
-              ),
+              border: showBackButton ? Border.all(width: 3, color: Colors.white) : null,
+              image: DecorationImage(image: imageProvider, fit: BoxFit.contain),
             ),
             child: Align(
               alignment: Alignment.bottomRight,
               child: !hideEditButton
                   ? Container(
-                      margin: const EdgeInsets.only(
-                        left: 30,
-                      ),
+                      margin: const EdgeInsets.only(left: 30),
                       padding: const EdgeInsets.all(5),
-                      decoration: const BoxDecoration(
-                        color: kBlue,
-                        shape: BoxShape.circle,
-                      ),
+                      decoration: const BoxDecoration(color: kBlue, shape: BoxShape.circle),
                       child: SizedBox.fromSize(
                         size: const Size(22, 22),
                         child: IconButton(
@@ -77,33 +65,20 @@ class CoverPhoto extends StatelessWidget {
           );
         },
         progressIndicatorBuilder: (context, url, progress) {
-          return const Center(
-              child: CustomLoader(
-            size: 15,
-          ));
+          return const Center(child: CustomLoader(size: 15));
         },
         errorWidget: (context, url, error) {
           return GestureDetector(
             onTap: () {},
             child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-              ),
+              decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
-                  Icon(
-                    Icons.info_rounded,
-                    color: Colors.black,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Center(
-                    child: Text("Error"),
-                  ),
+                  Icon(Icons.info_rounded, color: Colors.black),
+                  SizedBox(height: 10),
+                  Center(child: Text("Error")),
                 ],
               ),
             ),

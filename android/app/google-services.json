@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "893983178033",
-    "project_id": "gdg-orginazer-rest-api",
-    "storage_bucket": "gdg-orginazer-rest-api.appspot.com"
+    "project_number": "154731306770",
+    "project_id": "gdg-organizers-app",
+    "storage_bucket": "gdg-organizers-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:893983178033:android:601960bfa0f641f6024410",
+        "mobilesdk_app_id": "1:154731306770:android:12071e656114d127a61dcb",
         "android_client_info": {
           "package_name": "com.example.gdg_organizers_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "893983178033-a83e33m65oi5g0mpapo90hf2etui4rlf.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.gdg_organizers_app",
-            "certificate_hash": "449fb76221c7fe977ebd27e23167b9e10c9e9248"
-          }
-        },
-        {
-          "client_id": "893983178033-vk9b80nnaalb6j6ofr7e4qglirvbf992.apps.googleusercontent.com",
+          "client_id": "154731306770-9jsihtim1849qg05f2e4nansb8l55klo.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAv0SCgNDAMJ-Aa-lAuk-X5MeNtctR5tLY"
+          "current_key": "AIzaSyD8e4_DD8M8F5a-_5FY0LZS6AWjIXDCGq4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "893983178033-vk9b80nnaalb6j6ofr7e4qglirvbf992.apps.googleusercontent.com",
+              "client_id": "154731306770-9jsihtim1849qg05f2e4nansb8l55klo.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

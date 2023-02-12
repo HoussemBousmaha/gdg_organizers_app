@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gdg_organizers_app/constants/const.dart';
-import 'package:gdg_organizers_app/logic/user_bloc/user_bloc.dart';
+import '../../constants/const.dart';
+import '../../logic/user_bloc/user_bloc.dart';
 
 class BugDescription extends StatefulWidget {
   const BugDescription({Key? key}) : super(key: key);
@@ -88,8 +88,7 @@ class _BugDescriptionState extends State<BugDescription> {
                         child: TextButton(
                           onPressed: () {
                             if (_controller.text.isNotEmpty) {
-                              context.read<UserBloc>().add(
-                                  UserEvent.sendFeedback(_controller.text, 0));
+                              context.read<UserBloc>().add(UserEvent.sendFeedback(_controller.text, 0));
                               _controller.clear();
                               Navigator.pop(context);
                             }

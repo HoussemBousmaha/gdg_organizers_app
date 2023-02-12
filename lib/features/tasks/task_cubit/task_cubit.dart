@@ -5,8 +5,8 @@ import '../../auth/services/authapi.dart';
 import '../models/task.dart';
 import '../services/tasksapi.dart';
 
-part 'task_state.dart';
 part 'task_cubit.freezed.dart';
+part 'task_state.dart';
 
 class TaskCubit extends Cubit<TaskState> {
   TaskCubit() : super(const TaskState.initial());
@@ -25,9 +25,9 @@ class TaskCubit extends Cubit<TaskState> {
         emit(const TaskState.error('No tasks found'));
         return;
       } else {
-        final doneTasks = tasks.where((element) => element.state  == 'completed').toList();
-        final newTasks = tasks.where((element) => element.state  != 'completed').toList();
-        emit(TaskState.loaded(doneTasks , newTasks));
+        final doneTasks = tasks.where((element) => element.state == 'completed').toList();
+        final newTasks = tasks.where((element) => element.state != 'completed').toList();
+        emit(TaskState.loaded(doneTasks, newTasks));
       }
     } catch (e) {
       emit(TaskState.error(e.toString()));

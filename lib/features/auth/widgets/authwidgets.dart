@@ -1,13 +1,12 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'dart:math' as math;
 
 import '../../../constants/const.dart';
 
 class Authpic extends StatelessWidget {
-  const Authpic({
-    super.key,
-  });
+  const Authpic({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +41,7 @@ class AuthBanner extends StatelessWidget {
       children: [
         Image.asset('$images/$image'),
         const SizedBox(width: 10),
-        Text(title,
-            style: const TextStyle(
-                fontSize: 12,
-                color: kTextLightColor,
-                fontWeight: FontWeight.w400)),
+        Text(title, style: const TextStyle(fontSize: 12, color: kTextLightColor, fontWeight: FontWeight.w400)),
       ],
     );
   }
@@ -73,8 +68,7 @@ class AuthAnimation extends StatefulWidget {
   State<AuthAnimation> createState() => _AuthAnimationState();
 }
 
-class _AuthAnimationState extends State<AuthAnimation>
-    with SingleTickerProviderStateMixin {
+class _AuthAnimationState extends State<AuthAnimation> with SingleTickerProviderStateMixin {
   void repeatOnce() async {
     await _firstcontroller.forward();
   }
@@ -132,15 +126,13 @@ class CustomLoader extends StatefulWidget {
   _CustomLoaderState createState() => _CustomLoaderState();
 }
 
-class _CustomLoaderState extends State<CustomLoader>
-    with SingleTickerProviderStateMixin {
+class _CustomLoaderState extends State<CustomLoader> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   double get size => widget.size;
   @override
   void initState() {
     super.initState();
-    _controller =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+    _controller = AnimationController(vsync: this, duration: const Duration(seconds: 1));
     _controller.repeat(reverse: false);
   }
 
@@ -174,7 +166,7 @@ class CustomCircularLoader extends CustomPainter {
   final Animation<double> animation;
 
   var pi = math.pi;
-  var _epsilon = 0.000001;
+  final _epsilon = 0.000001;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -194,7 +186,7 @@ class CustomCircularLoader extends CustomPainter {
         kBlue.withOpacity(0.2),
         kBlue.withOpacity(0.2),
         kBlue.withOpacity(0.1),
-        Color(0xffEAEFF5),
+        const Color(0xffEAEFF5),
       ],
       stops: const [
         0.0,
@@ -216,7 +208,7 @@ class CustomCircularLoader extends CustomPainter {
         startAngle: 0,
         endAngle: 2 * pi,
         colors: [
-          Color(0xffEAEFF5),
+          const Color(0xffEAEFF5),
           kBlue.withOpacity(0.1),
           kBlue.withOpacity(0.2),
           kBlue.withOpacity(0.4),

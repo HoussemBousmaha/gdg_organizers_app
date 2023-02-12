@@ -1,13 +1,14 @@
 part of '../home_screen.dart';
 
 class PostWidget extends StatelessWidget {
-  const PostWidget(
-      {super.key,
-      required this.name,
-      required this.time,
-      required this.desc,
-      required this.image,
-      required this.profileImage});
+  const PostWidget({
+    super.key,
+    required this.name,
+    required this.time,
+    required this.desc,
+    required this.image,
+    required this.profileImage,
+  });
   final String name;
   final String time;
   final String desc;
@@ -30,30 +31,19 @@ class PostWidget extends StatelessWidget {
                   height: 50,
                   width: 50,
                   decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 1,
-                    ),
+                    border: Border.all(color: Colors.black, width: 1),
                     shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: imageProvider,
-                      fit: BoxFit.cover,
-                    ),
+                    image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
                   ),
                 ),
               ),
-              const SizedBox(
-                width: 10,
-              ),
+              const SizedBox(width: 10),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     name,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                   Text(
                     time,
@@ -66,22 +56,13 @@ class PostWidget extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(
-            height: 7,
-          ),
+          const SizedBox(height: 7),
           Text(
             desc,
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
-          const SizedBox(
-            height: 10,
-          ),
-          AspectRatio(
-            aspectRatio: 1,
-            child: CustomImage(
-              uri: image,
-            ),
-          ),
+          const SizedBox(height: 10),
+          AspectRatio(aspectRatio: 1, child: CustomImage(uri: image)),
         ],
       ),
     );
@@ -131,9 +112,7 @@ class PostShimmer extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 5,
-                  ),
+                  const SizedBox(height: 5),
                   Shimmer.fromColors(
                     baseColor: Colors.grey[300]!,
                     highlightColor: Colors.grey[100]!,
@@ -150,9 +129,7 @@ class PostShimmer extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(
-            height: 7,
-          ),
+          const SizedBox(height: 7),
           Shimmer.fromColors(
             baseColor: Colors.grey[300]!,
             highlightColor: Colors.grey[100]!,
@@ -165,9 +142,7 @@ class PostShimmer extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          const SizedBox(height: 10),
           Shimmer.fromColors(
             baseColor: Colors.grey[300]!,
             highlightColor: Colors.grey[100]!,

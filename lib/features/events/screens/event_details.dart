@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gdg_organizers_app/constants/const.dart';
-import 'package:gdg_organizers_app/features/auth/widgets/authwidgets.dart';
-import 'package:gdg_organizers_app/features/home/home_screen.dart';
-import 'package:gdg_organizers_app/logic/auth_bloc/auth_bloc.dart';
-import 'package:gdg_organizers_app/logic/comment_bloc/comment_bloc.dart';
-import 'package:gdg_organizers_app/shared/widgets/customAppBar.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../constants/const.dart';
+import '../../../logic/auth_bloc/auth_bloc.dart';
+import '../../../logic/comment_bloc/comment_bloc.dart';
 import '../../../models/comments/comment.dart';
-import '../../../shared/services/socket_io.dart';
+import '../../../shared/widgets/custom_app_bar.dart';
+import '../../home/home_screen.dart';
 import '../models/event.dart';
 
 class EventsDetails extends StatefulWidget {
@@ -43,8 +41,7 @@ class _EventsDetailsState extends State<EventsDetails> {
   @override
   void didChangeDependencies() {
     event = ModalRoute.of(context)!.settings.arguments as Event;
-    context.read<CommentBloc>().add(CommentEvent.connect(
-        context.watch<AuthBloc>().user.id ?? '', event.thread ?? ''));
+    context.read<CommentBloc>().add(CommentEvent.connect(context.watch<AuthBloc>().user.id ?? '', event.thread ?? ''));
 
     super.didChangeDependencies();
   }
@@ -97,15 +94,9 @@ class _EventsDetailsState extends State<EventsDetails> {
                             uri: event.image,
                             imageBuilder: (context, imageProvider) {
                               return Container(
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 7),
+                                margin: const EdgeInsets.symmetric(horizontal: 7),
                                 width: 175,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    image: DecorationImage(
-                                        image: imageProvider,
-                                        fit: BoxFit.contain),
-                                    color: Colors.white),
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), image: DecorationImage(image: imageProvider, fit: BoxFit.contain), color: Colors.white),
                               );
                             });
                       })),
@@ -140,26 +131,16 @@ class _EventsDetailsState extends State<EventsDetails> {
                       return state.when(
                           initial: () => const SizedBox.shrink(),
                           failure: (value) => Text(value),
-                          loading: () => Column(
-                              children: List.generate(
-                                  4, (index) => const CommentShimmer())),
+                          loading: () => Column(children: List.generate(4, (index) => const CommentShimmer())),
                           success: (value) => Column(
-                                children: value
-                                    .map((e) => CommentWidget(comment: e))
-                                    .toList(),
+                                children: value.map((e) => CommentWidget(comment: e)).toList(),
                               ),
                           newComment: (List<Comment> comments) => Column(
-                                children: comments
-                                    .map((e) => CommentWidget(comment: e))
-                                    .toList(),
+                                children: comments.map((e) => CommentWidget(comment: e)).toList(),
                               ));
                     })),
           ),
-          const SliverToBoxAdapter(
-            child: SizedBox(
-              height: 50,
-            ),
-          )
+          const SliverToBoxAdapter(child: SizedBox(height: 50))
         ],
       ),
       bottomSheet: Container(
@@ -171,29 +152,28 @@ class _EventsDetailsState extends State<EventsDetails> {
             if (value.isEmpty) {
               return;
             } else {
-              context
-                  .read<CommentBloc>()
-                  .add(CommentEvent.sendComment(textEditingController.text));
+              context.read<CommentBloc>().add(CommentEvent.sendComment(textEditingController.text));
             }
           },
           decoration: InputDecoration(
-              hintText: 'Write a comment',
-              suffixIcon: IconButton(
-                  onPressed: () {
-                    if (textEditingController.text.isEmpty) {
-                      focusNode.unfocus();
+            hintText: 'Write a comment',
+            suffixIcon: IconButton(
+              onPressed: () {
+                if (textEditingController.text.isEmpty) {
+                  focusNode.unfocus();
 
-                      return;
-                    } else {
-                      focusNode.unfocus();
+                  return;
+                } else {
+                  focusNode.unfocus();
 
-                      context.read<CommentBloc>().add(
-                          CommentEvent.sendComment(textEditingController.text));
-                      textEditingController.clear();
-                    }
-                  },
-                  icon: const Icon(Icons.arrow_forward_ios)),
-              border: InputBorder.none),
+                  context.read<CommentBloc>().add(CommentEvent.sendComment(textEditingController.text));
+                  textEditingController.clear();
+                }
+              },
+              icon: const Icon(Icons.arrow_forward_ios),
+            ),
+            border: InputBorder.none,
+          ),
         ),
       ),
     );
@@ -201,10 +181,7 @@ class _EventsDetailsState extends State<EventsDetails> {
 }
 
 class Header extends StatelessWidget {
-  const Header({
-    super.key,
-    required this.event,
-  });
+  const Header({super.key, required this.event});
 
   final Event event;
 
@@ -232,40 +209,44 @@ class Header extends StatelessWidget {
           height: 20,
         ),
         RichText(
-            text: TextSpan(
-                style: const TextStyle(
-                  color: kBlue,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 17,
-                ),
-                text: 'Date   ',
-                children: [
+          text: TextSpan(
+            style: const TextStyle(
+              color: kBlue,
+              fontWeight: FontWeight.w700,
+              fontSize: 17,
+            ),
+            text: 'Date   ',
+            children: [
               TextSpan(
-                  text: '   ${event.datedebut}',
-                  style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      fontWeight: FontWeight.normal))
-            ])),
+                text: '   ${event.datedebut}',
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 15,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+            ],
+          ),
+        ),
         const SizedBox(
           height: 20,
         ),
         RichText(
-            text: TextSpan(
-                style: const TextStyle(
-                  color: Color(0xFF4285F4),
-                  fontWeight: FontWeight.w700,
-                  fontSize: 17,
-                ),
-                text: 'Status   ',
-                children: [
+          text: TextSpan(
+            style: const TextStyle(color: Color(0xFF4285F4), fontWeight: FontWeight.w700, fontSize: 17),
+            text: 'Status   ',
+            children: [
               TextSpan(
-                  text: '   ${event.state}',
-                  style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      fontWeight: FontWeight.normal))
-            ])),
+                text: '   ${event.state}',
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 15,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+            ],
+          ),
+        ),
         const SizedBox(
           height: 20,
         ),
@@ -310,7 +291,7 @@ class CommentWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                comment.sender!.firstname + ' ' + comment.sender!.lastname,
+                '${comment.sender!.firstname} ${comment.sender!.lastname}',
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
                 style: const TextStyle(

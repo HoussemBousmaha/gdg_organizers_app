@@ -5,9 +5,7 @@ import 'package:flame/components.dart';
 
 import '../doodle_dash.dart';
 
-
-abstract class Platform<T> extends SpriteGroupComponent<T>
-    with HasGameRef<DoodleDash>, CollisionCallbacks {
+abstract class Platform<T> extends SpriteGroupComponent<T> with HasGameRef<DoodleDash>, CollisionCallbacks {
   final hitbox = RectangleHitbox();
   bool isMoving = false;
 
@@ -15,12 +13,7 @@ abstract class Platform<T> extends SpriteGroupComponent<T>
   final Vector2 _velocity = Vector2.zero();
   double speed = 35;
 
-  Platform({
-    super.position,
-  }) : super(
-          size: Vector2.all(100),
-          priority: 2,
-        );
+  Platform({super.position}) : super(size: Vector2.all(100), priority: 2);
 
   @override
   Future<void>? onLoad() async {
@@ -73,9 +66,7 @@ class NormalPlatform extends Platform<NormalPlatformState> {
 
     String randSprite = spriteOptions.keys.elementAt(randSpriteIndex);
 
-    sprites = {
-      NormalPlatformState.only: await gameRef.loadSprite('game/$randSprite.png')
-    };
+    sprites = {NormalPlatformState.only: await gameRef.loadSprite('game/$randSprite.png')};
 
     current = NormalPlatformState.only;
 
@@ -94,10 +85,8 @@ class BrokenPlatform extends Platform<BrokenPlatformState> {
     await super.onLoad();
 
     sprites = <BrokenPlatformState, Sprite>{
-      BrokenPlatformState.cracked:
-          await gameRef.loadSprite('game/platform_cracked_monitor.png'),
-      BrokenPlatformState.broken:
-          await gameRef.loadSprite('game/platform_monitor_broken.png'),
+      BrokenPlatformState.cracked: await gameRef.loadSprite('game/platform_cracked_monitor.png'),
+      BrokenPlatformState.broken: await gameRef.loadSprite('game/platform_monitor_broken.png'),
     };
 
     current = BrokenPlatformState.cracked;
@@ -121,10 +110,8 @@ class SpringBoard extends Platform<SpringState> {
     await super.onLoad();
 
     sprites = <SpringState, Sprite>{
-      SpringState.down:
-          await gameRef.loadSprite('game/platform_trampoline_down.png'),
-      SpringState.up:
-          await gameRef.loadSprite('game/platform_trampoline_up.png'),
+      SpringState.down: await gameRef.loadSprite('game/platform_trampoline_down.png'),
+      SpringState.up: await gameRef.loadSprite('game/platform_trampoline_up.png'),
     };
 
     current = SpringState.up;
@@ -133,12 +120,10 @@ class SpringBoard extends Platform<SpringState> {
   }
 
   @override
-  void onCollisionStart(
-      Set<Vector2> intersectionPoints, PositionComponent other) {
+  void onCollisionStart(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollisionStart(intersectionPoints, other);
 
-    bool isCollidingVertically =
-        (intersectionPoints.first.y - intersectionPoints.last.y).abs() < 5;
+    bool isCollidingVertically = (intersectionPoints.first.y - intersectionPoints.last.y).abs() < 5;
 
     if (isCollidingVertically) {
       current = SpringState.down;
@@ -164,8 +149,7 @@ class EnemyPlatform extends Platform<EnemyPlatformState> {
     var enemySprite = randBool ? 'enemy_trash_can' : 'enemy_error';
 
     sprites = <EnemyPlatformState, Sprite>{
-      EnemyPlatformState.only:
-          await gameRef.loadSprite('game/$enemySprite.png'),
+      EnemyPlatformState.only: await gameRef.loadSprite('game/$enemySprite.png'),
     };
 
     current = EnemyPlatformState.only;

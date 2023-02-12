@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:gdg_organizers_app/features/auth/services/authapi.dart';
-import 'package:gdg_organizers_app/logic/auth_bloc/auth_bloc.dart';
-import 'package:gdg_organizers_app/shared/services/diohelper.dart';
 
+import '../../features/auth/services/authapi.dart';
+import '../auth_bloc/auth_bloc.dart';
+
+part 'user_bloc.freezed.dart';
 part 'user_event.dart';
 part 'user_state.dart';
-part 'user_bloc.freezed.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final AuthBloc authBloc;
@@ -17,11 +17,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     this.authBloc,
   ) : super(const _Initial()) {
     on<UserEvent>((event, emit) {
-      event.map(
-          updateUser: _onUpdateUser,
-          updateUserImage: _onUpdateUserImage,
-          updateUserPassword: _onUpadteUserPassword,
-          sendFeedback: _onSendFeedback);
+      event.map(updateUser: _onUpdateUser, updateUserImage: _onUpdateUserImage, updateUserPassword: _onUpadteUserPassword, sendFeedback: _onSendFeedback);
     });
   }
 
@@ -31,8 +27,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       final token = await AuthRepo.getToken();
       print(token);
       if (token != null) {
-        final res =
-            await AuthRepo.sendFeedback(token, event.rating, event.feedback);
+        final res = await AuthRepo.sendFeedback(token, event.rating, event.feedback);
 
         print(res.data);
         if (res.statusCode == 201) {
@@ -92,7 +87,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(const UserState.loading());
       final token = await AuthRepo.getToken();
       if (token != null) {
-        final res = await AuthRepo.updatePassword(token, event.oldpassword , event.newpassword);
+        final res = await AuthRepo.updatePassword(token, event.oldpassword, event.newpassword);
         if (res.statusCode == 200) {
           emit(const UserState.success());
         } else {
@@ -103,6 +98,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       }
     } catch (e) {
       emit(UserState.failure(e.toString()));
-    } catch (e) {}
+    }
   }
 }

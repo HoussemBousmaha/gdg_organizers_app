@@ -5,8 +5,8 @@ import '../../auth/services/authapi.dart';
 import '../models/event.dart';
 import '../services/eventapi.dart';
 
-part 'event_state.dart';
 part 'event_cubit.freezed.dart';
+part 'event_state.dart';
 
 class EventCubit extends Cubit<EventState> {
   EventCubit() : super(const EventState.initial());
@@ -24,10 +24,8 @@ class EventCubit extends Cubit<EventState> {
           emit(const EventState.error('No events found'));
           return;
         } else {
-          final newEvents =
-              events.where((element) => element.state == 'Active').toList();
-          final soonEvents =
-              events.where((element) => element.state == 'Soon').toList();
+          final newEvents = events.where((element) => element.state == 'Active').toList();
+          final soonEvents = events.where((element) => element.state == 'Soon').toList();
           emit(EventState.loaded(newEvents, soonEvents));
         }
       }

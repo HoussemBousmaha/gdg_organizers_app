@@ -104,7 +104,7 @@ class GameOverlayState extends State<GameOverlay> {
                           color: Colors.transparent,
                           elevation: 3.0,
                           shadowColor: kBlue,
-                          child:  Icon(Icons.arrow_right, size: 64),
+                          child: Icon(Icons.arrow_right, size: 64),
                         ),
                       ),
                     ),

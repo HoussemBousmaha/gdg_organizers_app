@@ -1,4 +1,4 @@
-import 'package:gdg_organizers_app/shared/services/diohelper.dart';
+import '../../shared/services/diohelper.dart';
 
 import 'models/post.dart';
 

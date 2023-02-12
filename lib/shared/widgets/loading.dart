@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gdg_organizers_app/shared/widgets/gdgLogo.dart';
+
+import 'gdg_logo.dart';
 
 class Loading extends StatelessWidget {
   const Loading({
@@ -9,11 +10,8 @@ class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.black.withOpacity(0.4),
-        child: const Center(
-          child: GdgLogo(
-            size: 20,
-          ),
-        ));
+      color: Colors.black.withOpacity(0.4),
+      child: const Center(child: GdgLogo(size: 20)),
+    );
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
-import 'package:gdg_organizers_app/constants/const.dart';
-import 'package:gdg_organizers_app/logic/user_bloc/user_bloc.dart';
+import '../../constants/const.dart';
+import '../../logic/user_bloc/user_bloc.dart';
 
 class FeedBackWidget extends StatefulWidget {
   const FeedBackWidget({Key? key}) : super(key: key);

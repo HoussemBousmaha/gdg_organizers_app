@@ -27,16 +27,10 @@ class GameOverOverlay extends StatelessWidget {
             children: [
               Text(
                 'Game Over',
-                style: Theme.of(context)
-                    .textTheme
-                    .displayMedium!
-                    .copyWith(color: Colors.white),
+                style: Theme.of(context).textTheme.displayMedium!.copyWith(color: Colors.white),
               ),
               const WhiteSpace(height: 50),
-              ScoreDisplay(
-                game: game,
-                isLight: true,
-              ),
+              ScoreDisplay(game: game, isLight: true),
               const WhiteSpace(
                 height: 50,
               ),
@@ -49,8 +43,7 @@ class GameOverOverlay extends StatelessWidget {
                   minimumSize: MaterialStateProperty.all(
                     const Size(200, 75),
                   ),
-                  textStyle: MaterialStateProperty.all(
-                      Theme.of(context).textTheme.titleLarge),
+                  textStyle: MaterialStateProperty.all(Theme.of(context).textTheme.titleLarge),
                 ),
                 child: const Text(
                   'Play Again',

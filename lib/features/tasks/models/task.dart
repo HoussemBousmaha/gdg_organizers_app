@@ -1,27 +1,19 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../models/comments/comment.dart';
-part  'task.freezed.dart';
+part 'task.freezed.dart';
 part 'task.g.dart';
-@freezed
 
-class Task with _$Task{
+@freezed
+class Task with _$Task {
   const factory Task({
     required String name,
     required String description,
     String? datedebut,
-    String? datefin , 
+    String? datefin,
     String? duration,
     @Default('incompleted') String? state,
-    String? thread , 
-    
+    String? thread,
+  }) = _Task;
 
-  }) = _Task; 
-
-       factory Task.fromJson(Map<String, dynamic>  json) => _$TaskFromJson(json);
-
+  factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 }
-
-
-
-

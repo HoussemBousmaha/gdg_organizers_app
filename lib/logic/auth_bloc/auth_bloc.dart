@@ -1,10 +1,8 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:gdg_organizers_app/shared/services/notification.dart';
 
 import '../../features/auth/services/authapi.dart';
 import '../../models/user/user.dart';
@@ -16,11 +14,7 @@ part 'auth_bloc.freezed.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(const _Initial()) {
     on<AuthEvent>((event, emit) {
-      event.map(
-          appstarted: _onAppStarted,
-          loggedIn: _onLoggedIn,
-          loggedOut: _onLoggedOut,
-          updateuser: _onUpdateUser);
+      event.map(appstarted: _onAppStarted, loggedIn: _onLoggedIn, loggedOut: _onLoggedOut, updateuser: _onUpdateUser);
     });
   }
 
@@ -50,8 +44,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       emit(const _Loading());
 
-      await AuthRepo.persistData(event.token)
-          .then((value) => setuser(event.data));
+      await AuthRepo.persistData(event.token).then((value) => setuser(event.data));
     } catch (e) {
       print(e);
       emit(const _Unauthenticated());

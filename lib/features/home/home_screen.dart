@@ -1,14 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gdg_organizers_app/features/auth/widgets/authwidgets.dart';
+import '../auth/widgets/authwidgets.dart';
 import 'package:advanced_search/advanced_search.dart';
-import 'package:gdg_organizers_app/features/home/post_cubit/posts_cubit.dart';
+import 'post_cubit/posts_cubit.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../constants/const.dart';
 part 'widgets/post.dart';
-part 'widgets/searchbar.dart';
+part 'widgets/search_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             const Align(
               alignment: Alignment.center,
-              child: searchBar(),
+              child: SearchBar(),
             ),
             const Padding(
               padding: EdgeInsets.only(
@@ -81,10 +81,8 @@ class CustomImage extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: uri,
       imageBuilder: imageBuilder,
-      errorWidget: (context, url, error) =>
-          const Center(child: Icon(Icons.error)),
-      progressIndicatorBuilder: (context, url, progress) =>
-          const Center(child: CustomLoader()),
+      errorWidget: (context, url, error) => const Center(child: Icon(Icons.error)),
+      progressIndicatorBuilder: (context, url, progress) => const Center(child: CustomLoader()),
     );
   }
 }

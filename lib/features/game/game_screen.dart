@@ -1,11 +1,11 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:gdg_organizers_app/features/game/widgets/game_over_overlay.dart';
-import 'package:gdg_organizers_app/features/game/widgets/game_overlay.dart';
-import 'package:gdg_organizers_app/features/game/widgets/main_menu_overlay.dart';
 
 import '../../constants/const.dart';
 import 'doodle_dash.dart';
+import 'widgets/game_over_overlay.dart';
+import 'widgets/game_overlay.dart';
+import 'widgets/main_menu_overlay.dart';
 
 final Game game = DoodleDash();
 
@@ -31,8 +31,7 @@ class _BrainyGameState extends State<BrainyGame> {
               ),
               child: GameWidget(
                 game: game,
-                overlayBuilderMap: <String,
-                    Widget Function(BuildContext, Game)>{
+                overlayBuilderMap: <String, Widget Function(BuildContext, Game)>{
                   'gameOverlay': (context, game) => GameOverlay(game),
                   'mainMenuOverlay': (context, game) => MainMenuOverlay(game),
                   'gameOverOverlay': (context, game) => GameOverOverlay(game),

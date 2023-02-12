@@ -28,9 +28,7 @@ class _MainMenuOverlayState extends State<MainMenuOverlay> {
     return LayoutBuilder(builder: (context, constraints) {
       final characterWidth = constraints.maxWidth / 5;
 
-      final TextStyle titleStyle = (constraints.maxWidth > 830)
-          ? Theme.of(context).textTheme.displayLarge!
-          : Theme.of(context).textTheme.displaySmall!;
+      final TextStyle titleStyle = (constraints.maxWidth > 830) ? Theme.of(context).textTheme.displayLarge! : Theme.of(context).textTheme.displaySmall!;
 
       final bool screenHeightIsSmall = constraints.maxHeight < 760;
 
@@ -50,7 +48,7 @@ class _MainMenuOverlayState extends State<MainMenuOverlay> {
                     textAlign: TextAlign.center,
                   ),
                   const WhiteSpace(),
-                 const  Align(
+                  const Align(
                     alignment: Alignment.center,
                     child: Text(
                       'Select your character:',
@@ -87,11 +85,7 @@ class _MainMenuOverlayState extends State<MainMenuOverlay> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Difficulty:',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(color: Colors.white)),
+                      Text('Difficulty:', style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.white)),
                       LevelPicker(
                         level: game.levelManager.selectedLevel.toDouble(),
                         label: game.levelManager.selectedLevel.toString(),
@@ -114,9 +108,8 @@ class _MainMenuOverlayState extends State<MainMenuOverlay> {
                         minimumSize: MaterialStateProperty.all(
                           const Size(100, 50),
                         ),
-                        backgroundColor: MaterialStatePropertyAll(Colors.white),
-                        textStyle: MaterialStateProperty.all(
-                            Theme.of(context).textTheme.titleLarge),
+                        backgroundColor: const MaterialStatePropertyAll(Colors.white),
+                        textStyle: MaterialStateProperty.all(Theme.of(context).textTheme.titleLarge),
                       ),
                       child: const Text(
                         'Start',
@@ -163,12 +156,7 @@ class LevelPicker extends StatelessWidget {
 }
 
 class CharacterButton extends StatelessWidget {
-  const CharacterButton(
-      {super.key,
-      required this.character,
-      this.selected = false,
-      required this.onSelectChar,
-      required this.characterWidth});
+  const CharacterButton({super.key, required this.character, this.selected = false, required this.onSelectChar, required this.characterWidth});
 
   final Character character;
   final bool selected;
@@ -178,10 +166,7 @@ class CharacterButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      style: (selected)
-          ? ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Colors.white))
-          : null,
+      style: (selected) ? ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.white)) : null,
       onPressed: onSelectChar,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -195,8 +180,7 @@ class CharacterButton extends StatelessWidget {
             const WhiteSpace(height: 18),
             Text(
               character.name,
-              style: TextStyle(
-                  fontSize: 20, color: selected ? kBlue : Colors.white),
+              style: TextStyle(fontSize: 20, color: selected ? kBlue : Colors.white),
             ),
           ],
         ),

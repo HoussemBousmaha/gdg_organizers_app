@@ -7,17 +7,11 @@ import 'package:flame/components.dart';
 
 import '../doodle_dash.dart';
 
-abstract class PowerUp extends SpriteComponent
-    with HasGameRef<DoodleDash>, CollisionCallbacks {
+abstract class PowerUp extends SpriteComponent with HasGameRef<DoodleDash>, CollisionCallbacks {
   final hitbox = RectangleHitbox();
   double get jumpSpeedMultiplier;
 
-  PowerUp({
-    super.position,
-  }) : super(
-          size: Vector2.all(50),
-          priority: 2,
-        );
+  PowerUp({super.position}) : super(size: Vector2.all(50), priority: 2);
 
   @override
   Future<void>? onLoad() async {
@@ -31,9 +25,7 @@ class Rocket extends PowerUp {
   @override
   double get jumpSpeedMultiplier => 3.5;
 
-  Rocket({
-    super.position,
-  });
+  Rocket({super.position});
 
   @override
   Future<void>? onLoad() async {
@@ -47,9 +39,7 @@ class NooglerHat extends PowerUp {
   @override
   double get jumpSpeedMultiplier => 2.5;
 
-  NooglerHat({
-    super.position,
-  });
+  NooglerHat({super.position});
 
   final int activeLengthInMS = 5000;
 

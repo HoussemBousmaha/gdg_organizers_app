@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:gdg_organizers_app/constants/const.dart';
+import '../../constants/const.dart';
 import 'package:http/http.dart' as http;
 
 class DioHelper {
@@ -26,7 +26,6 @@ class DioHelper {
   }) async {
     return await dio.get(url,
         queryParameters: query,
-
         options: Options(
           headers: {
             'authorization': token,
@@ -78,8 +77,7 @@ class DioHelper {
   }
 
   static Future<String> uploadImage(String path, String token) async {
-    http.MultipartRequest req =
-        http.MultipartRequest('PUT', Uri.parse('$uri/user/image/:id'));
+    http.MultipartRequest req = http.MultipartRequest('PUT', Uri.parse('$uri/user/image/:id'));
     req.files.add(await http.MultipartFile.fromPath('images', path));
     req.headers.addAll({
       'authorization': token,

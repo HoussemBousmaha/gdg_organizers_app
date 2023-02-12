@@ -1,6 +1,5 @@
-import 'package:gdg_organizers_app/models/comments/comment.dart';
-import 'package:gdg_organizers_app/shared/services/diohelper.dart';
-
+import '../../../models/comments/comment.dart';
+import '../../../shared/services/diohelper.dart';
 import '../models/event.dart';
 
 class EventApi {
@@ -15,10 +14,8 @@ class EventApi {
     }
   }
 
-  static Future<List<Comment>> getComments(
-      String token, String threadID) async {
-    final res = await DioHelper.getData(
-        url: '/comment/all', query: {'threadID': threadID}, token: token);
+  static Future<List<Comment>> getComments(String token, String threadID) async {
+    final res = await DioHelper.getData(url: '/comment/all', query: {'threadID': threadID}, token: token);
     if (res.statusCode == 200) {
       final comments = res.data['thread']['comments'] as List;
       return comments.map((e) => Comment.fromJson(e)).toList();

@@ -2,27 +2,20 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gdg_organizers_app/constants/const.dart';
-import 'package:gdg_organizers_app/features/settings/widgets/profileAvatare.dart';
-import 'package:gdg_organizers_app/logic/auth_bloc/auth_bloc.dart';
-import 'package:gdg_organizers_app/logic/user_bloc/user_bloc.dart';
-import 'package:gdg_organizers_app/shared/services/diohelper.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../constants/const.dart';
 import '../../constants/icon_broken.dart';
 import '../../features/notification/notification_screen.dart';
+import '../../features/settings/widgets/profile_avatar.dart';
+import '../../logic/auth_bloc/auth_bloc.dart';
 import '../../logic/imagecubit.dart';
-import 'feedback.dart';
+import '../../logic/user_bloc/user_bloc.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  CustomAppBar(
-      {super.key,
-      required this.title,
-      required this.currentIndex,
-      this.showBackButton = false});
+  CustomAppBar({super.key, required this.title, required this.currentIndex, this.showBackButton = false});
   final String title;
   final int currentIndex;
   final bool showBackButton;
@@ -88,8 +81,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         SafeArea(
           child: AnimatedAlign(
             duration: const Duration(milliseconds: 500),
-            alignment:
-                currentIndex < 3 ? Alignment.topRight : Alignment.bottomCenter,
+            alignment: currentIndex < 3 ? Alignment.topRight : Alignment.bottomCenter,
             child: CoverPhoto(
               coverPhotoUrl: context.watch<AuthBloc>().user.image!,
               showCoverPhotoOptions: () {
@@ -116,10 +108,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                                     ),
                                     image: DecorationImage(
                                       image: FileImage(
-                                        File(context
-                                            .read<ImageCubit>()
-                                            .state!
-                                            .path),
+                                        File(context.read<ImageCubit>().state!.path),
                                       ),
                                       fit: BoxFit.cover,
                                     ),
@@ -127,10 +116,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                                 ),
                               if (context.read<ImageCubit>().state == null)
                                 CachedNetworkImage(
-                                  imageUrl:
-                                      context.watch<AuthBloc>().user.image!,
-                                  imageBuilder: (context, imageProvider) =>
-                                      Container(
+                                  imageUrl: context.watch<AuthBloc>().user.image!,
+                                  imageBuilder: (context, imageProvider) => Container(
                                     margin: const EdgeInsets.all(20),
                                     height: 200,
                                     width: double.infinity,
@@ -149,11 +136,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                                 ),
                               ListTile(
                                 onTap: () async {
-                                  _picker
-                                      .pickImage(source: ImageSource.camera)
-                                      .then((value) => context
-                                          .read<ImageCubit>()
-                                          .changeCoverPhoto(value));
+                                  _picker.pickImage(source: ImageSource.camera).then((value) => context.read<ImageCubit>().changeCoverPhoto(value));
                                 },
                                 leading: const Icon(IconBroken.Camera),
                                 title: const Text(
@@ -162,11 +145,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                               ),
                               ListTile(
                                 onTap: () async {
-                                  _picker
-                                      .pickImage(source: ImageSource.gallery)
-                                      .then((value) => context
-                                          .read<ImageCubit>()
-                                          .changeCoverPhoto(value));
+                                  _picker.pickImage(source: ImageSource.gallery).then((value) => context.read<ImageCubit>().changeCoverPhoto(value));
                                 },
                                 leading: const Icon(IconBroken.Image),
                                 title: const Text('Gallery'),
@@ -189,9 +168,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                                     child: TextButton(
                                         onPressed: () async {
                                           if (state != null) {
-                                            context
-                                                .read<UserBloc>()
-                                                .add(UserEvent.updateUserImage(
+                                            context.read<UserBloc>().add(UserEvent.updateUserImage(
                                                   state.path,
                                                 ));
                                             context.read<ImageCubit>().clear();
@@ -254,7 +231,7 @@ class ChooseImage extends StatelessWidget {
     return Container(
       color: Colors.white,
       child: Column(
-        children: [],
+        children: const [],
       ),
     );
   }

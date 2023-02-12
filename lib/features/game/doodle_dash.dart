@@ -12,8 +12,7 @@ import 'sprites/sprites.dart';
 
 enum Character { dash, brainy }
 
-class DoodleDash extends FlameGame
-    with HasKeyboardHandlerComponents, HasCollisionDetection {
+class DoodleDash extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDetection {
   DoodleDash({super.children});
 
   final World _world = World();
@@ -67,11 +66,7 @@ class DoodleDash extends FlameGame
         camera.followComponent(player);
       }
 
-      if (player.position.y >
-          camera.position.y +
-              _world.size.y +
-              player.size.y +
-              screenBufferSpace) {
+      if (player.position.y > camera.position.y + _world.size.y + player.size.y + screenBufferSpace) {
         onLose();
       }
     }
@@ -96,16 +91,13 @@ class DoodleDash extends FlameGame
       0,
       -_world.size.y, // top of screen is 0, so negative is already off screen
       camera.gameSize.x,
-      _world.size.y +
-          screenBufferSpace, // makes sure bottom bound of game is below bottom of screen
+      _world.size.y + screenBufferSpace, // makes sure bottom bound of game is below bottom of screen
     );
     camera.followComponent(player);
 
     player.resetPosition();
 
-    objectManager = ObjectManager(
-        minVerticalDistanceToNextPlatform: levelManager.minDistance,
-        maxVerticalDistanceToNextPlatform: levelManager.maxDistance);
+    objectManager = ObjectManager(minVerticalDistanceToNextPlatform: levelManager.minDistance, maxVerticalDistanceToNextPlatform: levelManager.maxDistance);
 
     add(objectManager);
 
